@@ -37,12 +37,17 @@ public class FilaSenhas {
 	}
 
 	private void inserinaFila(Senha senha, Senha pSenha) {
-		if (senha.getProximaSenha() == null) {
-			//if(pSenha.getSenhaPrioritaria() < senha.getSenhaPrioritaria()){
-				senha.setProximaSenha(pSenha);
-			//}//parei aqui tenho que arruma a prioridade 
+		if (pSenha.getSenhaPrioritaria() < senha.getSenhaPrioritaria()) {
+			pSenha.setProximaSenha(senha);
+			
 		} else {
-			inserinaFila(senha.getProximaSenha(), pSenha);
+			if (senha.getProximaSenha() == null) {
+				// if(){
+				senha.setProximaSenha(pSenha);
+				// }//parei aqui tenho que arruma a prioridade
+			} else {
+				inserinaFila(senha.getProximaSenha(), pSenha);
+			}
 		}
 	}
 }
