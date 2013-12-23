@@ -45,19 +45,13 @@ public class FabricaUsuarioAtendente {
 		fabricaUsuario = new FabricaUsuario();
 		new Thread(fabricaUsuario, "Clientes").start();
 
-//		try {
-//			Thread.sleep(6000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
 		fabricaAtendente = new FabricaAtendente();
 		new Thread(fabricaAtendente, "Atendentes").start();
 
 	}
 
 	public static FabricaUsuarioAtendente getInstance() {
+		
 		if (fabricaUsuarioAtendente == null) {
 			fabricaUsuarioAtendente = new FabricaUsuarioAtendente();
 		}
@@ -114,8 +108,8 @@ public class FabricaUsuarioAtendente {
 							reclamacoes.add(r);
 						}
 						senha++;
-						Boolean atendimentoPrioritario = new Random()
-								.nextBoolean();
+						Integer atendimentoPrioritario = new Random()
+								.nextInt(2);
 						Senha s = new Senha(senha, atendimentoPrioritario);
 						filaSenhas.inserirSenha(s);
 						 new Usuario(painel, reclamacoes, s);
@@ -140,6 +134,12 @@ public class FabricaUsuarioAtendente {
 			// TODO Auto-generated method stub
 			for (int i = 0; i < 6; i++) {
 				addAtendente();
+				try {
+					Thread.sleep(500);// pra da um descanso e um intervalo entre cada criação de atendente
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
 		}

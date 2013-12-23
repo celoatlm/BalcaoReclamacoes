@@ -25,15 +25,23 @@ public class Atendente extends Observable implements Runnable{
 		// TODO Auto-generated method stub
 		while (kill) {
 			if(ativo){
+				
+				String aux = "";
 				for (Reclamacao r : usuario.getReclamacoes()) {
 					try {
-						System.out.println("Usuario: "+usuario.getSenha().getSenha()+ " : atendente: "+nome);
+						aux += " : "+ r.getTempo().toString();
 						Thread.sleep(r.getTempo());
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					
 				}
+				System.out.println("---------"+nome+"---------");
+				System.out.println("Usuario: "+usuario.getSenha().getSenha()+" : "+
+									aux+" : "+usuario.getSenha().getSenhaPrioritaria()+
+									" : "+usuario.getReclamacoes().size());
+				System.out.println("---------"+nome+"---------\n");
 				//filaSenhas = FilaSenhas.getInstance();
 				if(ativo){//essa verificação é nescessaria pois posso desativalo no meio do processo 
 						// de atendimento,
@@ -43,7 +51,7 @@ public class Atendente extends Observable implements Runnable{
 			}
 			while(senha == null && kill){//while para esperar até ter usuario na fila
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(100);
 					//filaSenhas = FilaSenhas.getInstance();
 					senha = filaSenhas.pegaPrimeira();
 				} catch (InterruptedException e) {
@@ -85,7 +93,6 @@ public class Atendente extends Observable implements Runnable{
 		
 		this.ativo = true;
 		this.usuario = usuario;
-		//new Thread(new AtendeUsuario()).start();
 		
 	}
 
@@ -94,16 +101,4 @@ public class Atendente extends Observable implements Runnable{
 		kill = false;
 	}
 	
-	protected class AtendeUsuario implements Runnable {
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
-
-	
-
 }

@@ -1,35 +1,48 @@
 package model;
 
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingDeque;
-
-
 public class FilaSenhas {
-	
+
 	private static FilaSenhas filaSenhas = null;
-	private static Queue<Senha> senhas; 
-	
-	
-	
+	// private static Queue<Senha> senhas;
+	private Senha primeiraSenha = null;
+
 	private FilaSenhas() {
 		// TODO Auto-generated constructor stub
-		senhas = new LinkedBlockingDeque<Senha>();
+		// senhas = new LinkedBlockingDeque<Senha>();
 	}
-	
-	public static FilaSenhas getInstance(){
+
+	public static FilaSenhas getInstance() {
 		if (filaSenhas == null) {
 			filaSenhas = new FilaSenhas();
 		}
 		return filaSenhas;
 	}
-	
-	public synchronized void inserirSenha(Senha senha){
-		senhas.offer(senha);
-	}
-	
-	public synchronized Senha pegaPrimeira(){
-		
-		return senhas.poll();
+
+	public synchronized void inserirSenha(Senha senha) {
+		if (primeiraSenha == null) {
+			primeiraSenha = senha;
+		} else {
+			inserinaFila(primeiraSenha, senha);
+		}
+
+		// senhas.offer(senha);
 	}
 
+	public synchronized Senha pegaPrimeira() {
+		Senha s = primeiraSenha;
+		if (primeiraSenha != null) {
+			primeiraSenha = primeiraSenha.getProximaSenha();
+		}
+		return s;
+	}
+
+	private void inserinaFila(Senha senha, Senha pSenha) {
+		if (senha.getProximaSenha() == null) {
+			//if(pSenha.getSenhaPrioritaria() < senha.getSenhaPrioritaria()){
+				senha.setProximaSenha(pSenha);
+			//}//parei aqui tenho que arruma a prioridade 
+		} else {
+			inserinaFila(senha.getProximaSenha(), pSenha);
+		}
+	}
 }

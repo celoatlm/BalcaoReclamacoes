@@ -2,12 +2,14 @@ package model;
 
 public class Senha {
 	
-	private Integer senha;
-	private Boolean senhaPrioritaria;
+	private Integer senha; //a senha propriamente dita
+	private Integer senhaPrioritaria; //a prioridade 0 para mais prioritaria
+	private Senha proximaSenha;// usada para criar a fila
 	
-	public Senha(Integer senha, Boolean senhaPrioritaria) {
+	public Senha(Integer senha, Integer senhaPrioritaria) {
 		this.senha = senha;
 		this.senhaPrioritaria = senhaPrioritaria;
+		proximaSenha = null;
 	}
 
 	public Integer getSenha() {
@@ -18,13 +20,23 @@ public class Senha {
 		this.senha = senha;
 	}
 
-	public Boolean getSenhaPrioritaria() {
+	public Integer getSenhaPrioritaria() {
 		return senhaPrioritaria;
 	}
 
-	public void setSenhaPrioritaria(Boolean senhaPrioritaria) {
+	public void setSenhaPrioritaria(Integer senhaPrioritaria) {
 		this.senhaPrioritaria = senhaPrioritaria;
 	}
+
+	public Senha getProximaSenha() {
+		return proximaSenha;
+	}
+
+	public void setProximaSenha(Senha proximaSenha) {
+		this.proximaSenha = proximaSenha;
+	}
+	
+	
 	
 	
 	
