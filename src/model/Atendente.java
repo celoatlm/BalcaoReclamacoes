@@ -2,79 +2,71 @@ package model;
 
 import java.util.Observable;
 
-public class Atendente extends Observable implements Runnable{
-
-	private Boolean ativo;
-	private Senha senha;
-	private Usuario usuario;
-	private Boolean kill;
+public class Atendente extends Observable implements Runnable {
+	// Classe Atendente implementa um tipo Runnable
+	private Boolean ativo;// pra manter ativo
+	private Senha senha;// senha que esta executando na vez
+	private Usuario usuario;// usuario que esta no atendimento
+	private Boolean kill;// para matar a thread
 	private FilaSenhas filaSenhas;
 	private String nome;
+	private Boolean chamaNovaSenha;
 
 	public Atendente(String nome) {
-		this.kill = true;
+		kill = true;
 		filaSenhas = FilaSenhas.getInstance();
-		this.senha = filaSenhas.pegaPrimeira();
+		senha = filaSenhas.pegaPrimeira();
 		this.nome = nome;
 		ativo = false;
-		
+		chamaNovaSenha = true;
 	}
-	
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while (kill) {
-			if(ativo){
-				
-				String aux = "";
+		while (kill) {// mantem a thread viva até alguem mata la XD
+			if (ativo) {// pausa a thread sem mata la :D
+
 				for (Reclamacao r : usuario.getReclamacoes()) {
 					try {
-						aux += " : "+ r.getTempo().toString();
 						Thread.sleep(r.getTempo());
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
-				}
-				System.out.println("---------"+nome+"---------");
-				System.out.println("Usuario: "+usuario.getSenha().getSenha()+" : "+
-									aux+" : "+usuario.getSenha().getSenhaPrioritaria()+
-									" : "+usuario.getReclamacoes().size());
-				System.out.println("---------"+nome+"---------\n");
-				//filaSenhas = FilaSenhas.getInstance();
-				if(ativo){//essa verificação é nescessaria pois posso desativalo no meio do processo 
-						// de atendimento,
-							//e o atendente mesmo assim ainda chama um novo usuario
-					senha = filaSenhas.pegaPrimeira();
-				}
+				}System.out.println("Atendente: " +nome+ " : Usuario: "
+						+ usuario.toString());
+				ativo = false;
+				
 			}
-			while(senha == null && kill){//while para esperar até ter usuario na fila
+			if (chamaNovaSenha) {// essa verificação é nescessaria pois posso
+				// desativalo no meio do processo
+				// de atendimento, e o atendente ainda assim
+				// chama um novo usuario (atendente burro)
+				senha = filaSenhas.pegaPrimeira();
+			}
+			while (senha == null && chamaNovaSenha) {// while para esperar até
+														// ter usuario
+														// na fila
 				try {
 					Thread.sleep(100);
-					//filaSenhas = FilaSenhas.getInstance();
 					senha = filaSenhas.pegaPrimeira();
+
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			setMudanca();
-			
+			if (chamaNovaSenha) {
+				setMudanca();
+			}
+
 		}
 	}
-	
-	public void setMudanca(){
+
+	public void setMudanca() {
 		setChanged();
-		notifyObservers();
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
+		notifyObservers(senha);
 	}
 
 	public Senha getSenha() {
@@ -90,15 +82,25 @@ public class Atendente extends Observable implements Runnable{
 	}
 
 	public void setUsuario(Usuario usuario) {
-		
-		this.ativo = true;
+
 		this.usuario = usuario;
-		
+		this.ativo = true;
 	}
 
 	public void removeAtendente() {
-		ativo = false;
 		kill = false;
 	}
-	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void pausaAtendente() {
+		chamaNovaSenha = !chamaNovaSenha;
+	}
+
 }

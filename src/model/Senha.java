@@ -1,7 +1,7 @@
 package model;
 
 public class Senha {
-	
+	//classe Senha que vira um nó da fila 
 	private Integer senha; //a senha propriamente dita
 	private Integer senhaPrioritaria; //a prioridade 0 para mais prioritaria
 	private Senha proximaSenha;// usada para criar a fila

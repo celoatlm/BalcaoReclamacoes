@@ -1,77 +1,78 @@
 package control;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import model.Atendente;
+import model.ConfigFabricaUsuarioAtendente;
 import model.FilaSenhas;
 import model.Painel;
 import model.Reclamacao;
 import model.Senha;
 import model.Usuario;
+import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
+import org.apache.commons.digester3.Digester;
+import org.apache.commons.digester3.xmlrules.FromXmlRulesModule;
+import org.xml.sax.SAXException;
 
 public class FabricaUsuarioAtendente {
 
-	//classe responsavel por fabricar os usuarios e atendentes
-	
-	private Integer colldown;// tempo de intervalo para cada criação dos
-								// usuarios
-	private Boolean ativo;// manter trabalhando ou não
+	// classe responsavel por fabricar os usuarios e atendentes
+
+	private Boolean ativoFabricaUsuario;// manter trabalhando ou não
 	private Boolean kill;// manter ativo ou não
 	private FilaSenhas filaSenhas;
 	private Painel painel;// painel responsavel pela chamada dos usuarios
-	private Integer quantidadeMaximaReclamaca = 4;
-	private Integer quantidadeMinimaReclamacao = 1;
-	private Integer tempoMaximoReclamacao = 4;
-	private Integer tempoMinimoReclamacao = 1;
 	private Integer senha;
 	private static FabricaUsuarioAtendente fabricaUsuarioAtendente = null;
-	private List<Atendente> atendentes;
+	private Map<Integer, Atendente> atendentesMap;
 	private FabricaUsuario fabricaUsuario;
 	private FabricaAtendente fabricaAtendente;
+	private ConfigFabricaUsuarioAtendente configFabricaUsuarioAtendente;
 
 	private FabricaUsuarioAtendente() {
+		// construtor da classe
+		// a chamada do construtor instancia todas a classes nescessarias
+		// mas não start sozinha as fabricas individuais
 
 		filaSenhas = FilaSenhas.getInstance();
-		this.painel = Painel.getInstance();
-		
-		colldown = 1000;
-		ativo = true;
-		senha = 0;
-		this.kill = true;
-		this.atendentes = new ArrayList<>();
+		painel = Painel.getInstance();
 
-		fabricaUsuario = new FabricaUsuario();
-		new Thread(fabricaUsuario, "Clientes").start();
+		ativoFabricaUsuario = true;
+		senha = 0;
+		kill = true;
+		atendentesMap = new HashMap<Integer, Atendente>();
+
+		configFabricaUsuarioAtendente = new ConfigFabricaUsuarioAtendente();
+		recuperaConfig();
 
 		fabricaAtendente = new FabricaAtendente();
-		new Thread(fabricaAtendente, "Atendentes").start();
+		fabricaUsuario = new FabricaUsuario();
 
 	}
 
+	public void pausaFabricaUsuario() {
+		// pausar fabrica de usuario
+		ativoFabricaUsuario = !ativoFabricaUsuario;
+	}
+
+	public void startFabrica() {
+		// startar ambas as fabricas
+		new Thread(fabricaAtendente, "Atendentes").start();
+		new Thread(fabricaUsuario, "Clientes").start();
+	}
+
 	public static FabricaUsuarioAtendente getInstance() {
-		
+		// aff
 		if (fabricaUsuarioAtendente == null) {
 			fabricaUsuarioAtendente = new FabricaUsuarioAtendente();
 		}
 		return FabricaUsuarioAtendente.fabricaUsuarioAtendente;
-	}
-
-	public Integer getColldown() {
-		return colldown;
-	}
-
-	public void setColldown(Integer colldown) {
-		this.colldown = colldown;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	public void addAtendente() {
@@ -79,31 +80,79 @@ public class FabricaUsuarioAtendente {
 	}
 
 	public void removeAtendente(Integer remove) {
-		fabricaAtendente.removeAtendente(remove);
+		System.out.println("----------------- removendo atendente "+remove+"----------------- ");
+		atendentesMap.get(remove).removeAtendente();
+		atendentesMap.remove(remove);
 	}
 
-	public void pausaAtendente(Integer pausa, Boolean a) {
-		fabricaAtendente.pausaAtendente(pausa, a);
+	public void pausaAtendente(Integer pausa) {
+		System.out.println("----------------- parando atendente "+pausa+"----------------- ");
+		atendentesMap.get(pausa).pausaAtendente();
+	}
+	
+	public void setColdownUsuario(String coldownUsuario){
+		configFabricaUsuarioAtendente.setColldownUsuario(coldownUsuario);
+	}
+	
+	public void listaAtendentes(){
+		String aux = "Atendentes";
+		for(Atendente a : atendentesMap.values()){
+			aux += "\n : " + a.getNome();
+		}
+		System.out.println(aux);
+	}
+
+	private void recuperaConfig() {
+		// função para leitura do xml contendo as configurações inicias default
+		final String rulesFileName = "./src/model/xmlrules.xml";
+		String dataFileName = "./src/model/configFabricaUsuarioAtendente.xml";
+
+		Digester digester = newLoader(new FromXmlRulesModule() {
+
+			@Override
+			protected void loadRules() {
+				// TODO Auto-generated method stub
+				loadXMLRules(new File(rulesFileName));
+			}
+		}).newDigester();
+
+		digester.push(configFabricaUsuarioAtendente);
+
+		try {
+			File srcFile = new java.io.File(dataFileName);
+			digester.parse(srcFile);
+		} catch (IOException | SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
 	protected class FabricaUsuario implements Runnable {
-		//classe Thread responsavel pela criação dos usuarios
+		// classe Thread responsavel pela criação dos usuarios
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
 			while (kill) {
-				while (ativo) {
+				while (ativoFabricaUsuario) {
 					try {
-						Integer quantidadeReclamacoes = quantidadeMinimaReclamacao
+						Integer quantidadeReclamacoes = Integer
+								.parseInt(configFabricaUsuarioAtendente
+										.getQuantidadeMinimaReclamacao())
 								+ new Random()
-										.nextInt(quantidadeMaximaReclamaca);
+										.nextInt(Integer
+												.parseInt(configFabricaUsuarioAtendente
+														.getQuantidadeMaximaReclamacao()));
 
 						List<Reclamacao> reclamacoes = new ArrayList<Reclamacao>();
 
 						for (int i = 0; i < quantidadeReclamacoes; i++) {
-							int tempo = (tempoMinimoReclamacao + new Random()
-									.nextInt(tempoMaximoReclamacao)) * 1000;
+							int tempo = (Integer
+									.parseInt(configFabricaUsuarioAtendente
+											.getTempoMinimoReclamacao()) + new Random()
+									.nextInt(Integer
+											.parseInt(configFabricaUsuarioAtendente
+													.getTempoMaximoReclamacao()))) * 1000;
 							Reclamacao r = new Reclamacao(tempo);
 							reclamacoes.add(r);
 						}
@@ -112,9 +161,11 @@ public class FabricaUsuarioAtendente {
 								.nextInt(2);
 						Senha s = new Senha(senha, atendimentoPrioritario);
 						filaSenhas.inserirSenha(s);
-						 new Usuario(painel, reclamacoes, s);
-						Thread.sleep(colldown);
-						
+						new Usuario(painel, reclamacoes, s);
+						Thread.sleep(Integer
+								.parseInt(configFabricaUsuarioAtendente
+										.getColldownUsuario()));
+
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -126,16 +177,18 @@ public class FabricaUsuarioAtendente {
 	}
 
 	protected class FabricaAtendente implements Runnable {
-		//classe Thread responsavel pela criação dos Atendentes
+		// classe Thread responsavel pela criação dos Atendentes
 		private Integer contAtendente = 0;
 
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			for (int i = 0; i < 6; i++) {
+			for (int i = 0; i < Integer.parseInt(configFabricaUsuarioAtendente
+					.getQuantidadeAtendentes()); i++) {
 				addAtendente();
 				try {
-					Thread.sleep(500);// pra da um descanso e um intervalo entre cada criação de atendente
+					Thread.sleep(500);// pra da um descanso e um intervalo entre
+										// cada criação de atendente
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -148,23 +201,11 @@ public class FabricaUsuarioAtendente {
 
 			Atendente atendente = new Atendente(contAtendente.toString());
 			new Thread(atendente, contAtendente.toString()).start();
-			atendentes.add(atendente);
+			//atendentes.add(atendente);
+			atendentesMap.put(contAtendente, atendente);
 			painel.addAtendente(atendente);
 			contAtendente++;
-		
-		}
-
-		protected void removeAtendente(Integer remove) {
-
-			atendentes.remove(remove);
-		}
-
-		protected void pausaAtendente(Integer pausa, Boolean a) {
-
-			atendentes.get(pausa).setAtivo(a);
 
 		}
-
 	}
-
 }

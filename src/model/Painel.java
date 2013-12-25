@@ -9,75 +9,51 @@ import java.util.Observer;
 
 public class Painel extends Observable implements Observer {
 
-	private List<Atendente> atendentes;
-	private Senha senha;
-	private List<Senha> senhas;
+	// classe responsavel por ouvir o chamado dos atendentes e comunicar os
+	// usuarios
+	private List<Senha> senhas;// lista de todas as senha
 	private static Painel painel = null;
-	private Map<Integer, Atendente> mapAtendente;
-	
-	private Painel(){
-		
-		atendentes = new ArrayList<Atendente>();
+	private Map<Integer, Atendente> mapAtendente; // map contendo os atendentes
+													// por senha
+
+	private Painel() {
+
 		senhas = new ArrayList<Senha>();
 		mapAtendente = new HashMap<Integer, Atendente>();
-		
+
 	}
-	
-	public static Painel getInstance(){
-		if(painel == null){
+
+	public static Painel getInstance() {
+		if (painel == null) {
 			painel = new Painel();
 		}
 		return painel;
 	}
-	
-	
-	@Override
-	public void update(Observable atendente, Object arg1) {
-		// TODO Auto-generated method stub
 
-		if(atendente instanceof Atendente){
-			Atendente a = (Atendente)atendente;
-			senha = a.getSenha();
-			senhas.add(senha);
-			mapAtendente.put(senha.getSenha(), a);
+	@Override
+	public void update(Observable atendente, Object senha) {
+		// TODO Auto-generated method stub
+		// função que recebe o chamado de um atendente e chama os usuarios
+		if (atendente instanceof Atendente) {
+			Atendente a = (Atendente) atendente;
+			senhas.add((Senha) senha);
+			mapAtendente.put(((Senha) senha).getSenha(), a);
 			setChanged();
-			notifyObservers();
+			notifyObservers(senha);
 		}
 	}
-	
-	public void addAtendente(Atendente atendente){
-		
+
+	public void addAtendente(Atendente atendente) {
+
 		atendente.addObserver(this);
-		atendentes.add(atendente);
-				
+
 	}
 
-	public void addUsuario(Usuario usuario){
+	public void addUsuario(Usuario usuario) {
 
 		mapAtendente.get(usuario.getSenha().getSenha()).setUsuario(usuario);
 		mapAtendente.remove(usuario.getSenha().getSenha());
-		
-	}	
 
-	public Senha getSenha() {
-		return senha;
 	}
-
-
-	public void setSenha(Senha senha) {
-		this.senha = senha;
-	}
-
-
-	public List<Senha> getSenhas() {
-		return senhas;
-	}
-
-
-	public void setSenhas(List<Senha> senhas) {
-		this.senhas = senhas;
-	}
-	
-	
 
 }

@@ -5,7 +5,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/CLI"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Digester"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Log4J"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SL4J"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

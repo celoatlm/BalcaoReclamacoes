@@ -1,7 +1,7 @@
 package model;
 
 public class Reclamacao {
-
+	//classe simples contendo o tempo da reclamação
 	private Integer tempo;
 
 	public Reclamacao(Integer tempo) {
