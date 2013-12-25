@@ -5,14 +5,14 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Usuario implements Observer {
-	//classe responsavel pela implementação do usuario
-	
-	private Observable painel;//lembrar do padão deprojeto Observer
+	// classe responsavel pela implementação do usuario
+
+	private Observable painel;// lembrar do padão de projeto Observer
 	private Senha senha;
 	private List<Reclamacao> reclamacoes;
 
 	public Usuario(Observable painel, List<Reclamacao> reclamacoes, Senha senha) {
-		//Construtor da classe
+		// Construtor da classe
 		this.painel = painel;
 		this.reclamacoes = reclamacoes;
 		this.senha = senha;
@@ -23,17 +23,15 @@ public class Usuario implements Observer {
 
 	@Override
 	public void update(Observable painel, Object senha) {
-		//função responsavel por receber o aviso do painel
-		//saber quando foi chamado uma nova senha
+		// metodo responsavel por receber o aviso do painel
+		// saber quando foi chamado uma nova senha
 		// TODO Auto-generated method stub
 
 		if (painel instanceof Painel) {
-			Senha s = (Senha)senha;
-			if(s.getSenha() == this.senha.getSenha()){
+			Senha s = (Senha) senha;
+			if (s.getSenha() == this.senha.getSenha()) {
 				((Painel) painel).addUsuario(this);
 			}
-			
-
 		}
 	}
 
@@ -64,7 +62,7 @@ public class Usuario implements Observer {
 		}
 		usuario += " :Reclamações: ";
 		for (Reclamacao r : reclamacoes) {
-			usuario += "-" + r.getTempo() + "-";
+			usuario += + r.getTempo() + " - ";
 		}
 		usuario += ":";
 		return usuario;

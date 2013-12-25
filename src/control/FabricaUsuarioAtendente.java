@@ -18,6 +18,7 @@ import model.Usuario;
 import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.xmlrules.FromXmlRulesModule;
+import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
 public class FabricaUsuarioAtendente {
@@ -34,6 +35,7 @@ public class FabricaUsuarioAtendente {
 	private FabricaUsuario fabricaUsuario;
 	private FabricaAtendente fabricaAtendente;
 	private ConfigFabricaUsuarioAtendente configFabricaUsuarioAtendente;
+	private Logger log;
 
 	private FabricaUsuarioAtendente() {
 		// construtor da classe
@@ -53,7 +55,9 @@ public class FabricaUsuarioAtendente {
 
 		fabricaAtendente = new FabricaAtendente();
 		fabricaUsuario = new FabricaUsuario();
-
+		
+		log = Logger.getLogger(FabricaUsuarioAtendente.class.getName());
+	
 	}
 
 	public void pausaFabricaUsuario() {
@@ -80,13 +84,11 @@ public class FabricaUsuarioAtendente {
 	}
 
 	public void removeAtendente(Integer remove) {
-		System.out.println("----------------- removendo atendente "+remove+"----------------- ");
 		atendentesMap.get(remove).removeAtendente();
 		atendentesMap.remove(remove);
 	}
 
 	public void pausaAtendente(Integer pausa) {
-		System.out.println("----------------- parando atendente "+pausa+"----------------- ");
 		atendentesMap.get(pausa).pausaAtendente();
 	}
 	
@@ -124,6 +126,7 @@ public class FabricaUsuarioAtendente {
 		} catch (IOException | SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 
 	}
@@ -169,6 +172,7 @@ public class FabricaUsuarioAtendente {
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+						log.error(e.getMessage());
 					}
 				}
 			}
@@ -192,6 +196,7 @@ public class FabricaUsuarioAtendente {
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					log.error(e.getMessage());
 				}
 			}
 

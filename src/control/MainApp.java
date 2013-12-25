@@ -12,6 +12,8 @@ import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
+import org.apache.commons.cli.UnrecognizedOptionException;
+import org.apache.log4j.Logger;
 
 public class MainApp {
 
@@ -19,13 +21,13 @@ public class MainApp {
 	private static HelpFormatter formatter;
 	private static FabricaUsuarioAtendente fabricaUsuarioAtendente;
 	private static Boolean exit = true;
-
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		
 		criaOptions();
 		fabricaUsuarioAtendente = FabricaUsuarioAtendente.getInstance();
 		while (exit) {
@@ -41,8 +43,14 @@ public class MainApp {
 
 		CommandLineParser parse = new PosixParser();
 		try {
-			CommandLine cmd = parse.parse(options, commando.split(" "));
-
+			CommandLine cmd = null;
+			try{
+				cmd = parse.parse(options, commando.split(" "));
+			}catch(UnrecognizedOptionException u){
+				String[] aux = {"-error"};
+				cmd = parse.parse(options, aux);
+				Logger.getLogger(MainApp.class.getName()).error(u.getMessage());
+			}
 			if (cmd.hasOption("addAtendente")) {
 				fabricaUsuarioAtendente.addAtendente();
 			}
@@ -75,10 +83,14 @@ public class MainApp {
 			if(cmd.hasOption("coldownUsuario")){
 				fabricaUsuarioAtendente.setColdownUsuario(cmd.getOptionValue("coldownUsuario"));
 			}
+			if(cmd.hasOption("error")){
+				System.out.println("Comando invalido");
+			}
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Logger.getLogger(MainApp.class.getName()).error(e.getMessage());
 		}
 
 	}
@@ -133,6 +145,9 @@ public class MainApp {
 		Option listaSenhas = OptionBuilder.withArgName("listaSenhas")
 				.withDescription("lista todos as Senhas").create("listaSenhas");
 		
+		Option error = OptionBuilder.withArgName("error")
+				.withDescription("").create("error");
+		
 		options = new Options();
 
 		options.addOption(startApp);
@@ -150,6 +165,7 @@ public class MainApp {
 		options.addOption(listaAtendentes);
 		options.addOption(listaSenhas);
 		options.addOption(exit);
+		options.addOption(error);
 
 	}
 

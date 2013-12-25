@@ -2,6 +2,11 @@ package model;
 
 import java.util.Observable;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
+import control.MainApp;
+
 public class Atendente extends Observable implements Runnable {
 	// Classe Atendente implementa um tipo Runnable
 	private Boolean ativo;// pra manter ativo
@@ -11,14 +16,19 @@ public class Atendente extends Observable implements Runnable {
 	private FilaSenhas filaSenhas;
 	private String nome;
 	private Boolean chamaNovaSenha;
+	private static Logger log;
 
 	public Atendente(String nome) {
+		
 		kill = true;
 		filaSenhas = FilaSenhas.getInstance();
 		senha = filaSenhas.pegaPrimeira();
 		this.nome = nome;
 		ativo = false;
 		chamaNovaSenha = true;
+		PropertyConfigurator.configure("./src/log4j.properties");
+		log = Logger.getLogger("Atendentes");
+		
 	}
 
 	@Override
@@ -34,10 +44,12 @@ public class Atendente extends Observable implements Runnable {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}System.out.println("Atendente: " +nome+ " : Usuario: "
-						+ usuario.toString());
+				}
+				//System.out.println("Atendente: " + nome + " : Usuario: "
+				//		+ usuario.toString());
+				log.info(this.toString() + " : Usuario " + usuario.toString());
 				ativo = false;
-				
+
 			}
 			if (chamaNovaSenha) {// essa verificação é nescessaria pois posso
 				// desativalo no meio do processo
@@ -55,6 +67,7 @@ public class Atendente extends Observable implements Runnable {
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					Logger.getLogger(Atendente.class.getName()).error(e.getMessage());
 				}
 			}
 			if (chamaNovaSenha) {
@@ -101,6 +114,13 @@ public class Atendente extends Observable implements Runnable {
 
 	public void pausaAtendente() {
 		chamaNovaSenha = !chamaNovaSenha;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String aux = "Atendente: " + nome;
+		return aux;
 	}
 
 }
