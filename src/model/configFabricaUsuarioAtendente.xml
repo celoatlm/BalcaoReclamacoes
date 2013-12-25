@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <colldownUsuario>1000</colldownUsuario>
+    <quantidadeMinimaReclamacao>1</quantidadeMinimaReclamacao>
+    <quantidadeMaximaReclamacao>4</quantidadeMaximaReclamacao>
+    <tempoMinimoReclamacao>1</tempoMinimoReclamacao>
+    <tempoMaximoReclamacao>4</tempoMaximoReclamacao>
+    <quantidadeAtendentes>6</quantidadeAtendentes>
+</config>
