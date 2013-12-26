@@ -55,9 +55,9 @@ public class FabricaUsuarioAtendente {
 
 		fabricaAtendente = new FabricaAtendente();
 		fabricaUsuario = new FabricaUsuario();
-		
+
 		log = Logger.getLogger(FabricaUsuarioAtendente.class.getName());
-	
+
 	}
 
 	public void pausaFabricaUsuario() {
@@ -91,23 +91,39 @@ public class FabricaUsuarioAtendente {
 	public void pausaAtendente(Integer pausa) {
 		atendentesMap.get(pausa).pausaAtendente();
 	}
-	
-	public void setColdownUsuario(String coldownUsuario){
-		configFabricaUsuarioAtendente.setColldownUsuario(coldownUsuario);
-	}
-	
-	public void listaAtendentes(){
+
+	public void listaAtendentes() {
 		String aux = "Atendentes";
-		for(Atendente a : atendentesMap.values()){
+		for (Atendente a : atendentesMap.values()) {
 			aux += "\n : " + a.getNome();
 		}
 		System.out.println(aux);
 	}
 
+	public void setColldownUsuario(String colldownUsuario) {
+		configFabricaUsuarioAtendente.setColldownUsuario(colldownUsuario);
+	}
+
+	public void setQuantidadeMinimaReclamacoes(String qmr) {
+		configFabricaUsuarioAtendente.setQuantidadeMinimaReclamacao(qmr);
+	}
+
+	public void setQuantidadeMaximaReclamacoes(String qmxr) {
+		configFabricaUsuarioAtendente.setQuantidadeMaximaReclamacao(qmxr);
+	}
+
+	public void setTempoMinimoReclamacoes(String tmr) {
+		configFabricaUsuarioAtendente.setTempoMinimoReclamacao(tmr);
+	}
+
+	public void setTempoMaximoReclamacies(String tmxr) {
+		configFabricaUsuarioAtendente.setTempoMaximoReclamacao(tmxr);
+	}
+
 	private void recuperaConfig() {
 		// função para leitura do xml contendo as configurações inicias default
-		final String rulesFileName = "./src/model/xmlrules.xml";
-		String dataFileName = "./src/model/configFabricaUsuarioAtendente.xml";
+		final String rulesFileName = "./src/xmlrules.xml";
+		String dataFileName = "./src/configFabricaUsuarioAtendente.xml";
 
 		Digester digester = newLoader(new FromXmlRulesModule() {
 
@@ -206,11 +222,12 @@ public class FabricaUsuarioAtendente {
 
 			Atendente atendente = new Atendente(contAtendente.toString());
 			new Thread(atendente, contAtendente.toString()).start();
-			//atendentes.add(atendente);
+			// atendentes.add(atendente);
 			atendentesMap.put(contAtendente, atendente);
 			painel.addAtendente(atendente);
 			contAtendente++;
 
 		}
 	}
+
 }

@@ -54,6 +54,7 @@ public class Usuario implements Observer {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
+		//esse metodo retorna todo o usuario em forma de String
 		String usuario = "Senha: " + senha.getSenha();
 		if (senha.getSenhaPrioritaria() == 0) {
 			usuario += " :senha prioritaria";

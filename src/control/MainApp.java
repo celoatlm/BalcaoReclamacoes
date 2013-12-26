@@ -21,6 +21,7 @@ public class MainApp {
 	private static HelpFormatter formatter;
 	private static FabricaUsuarioAtendente fabricaUsuarioAtendente;
 	private static Boolean exit = true;
+	
 	/**
 	 * @param args
 	 */
@@ -30,12 +31,14 @@ public class MainApp {
 		
 		criaOptions();
 		fabricaUsuarioAtendente = FabricaUsuarioAtendente.getInstance();
+		
 		while (exit) {
 
 			System.out.println("Esperando comando");
 			executaComando(new Scanner(System.in).nextLine());
 
 		}
+		System.exit(0);
 
 	}
 
@@ -80,11 +83,26 @@ public class MainApp {
 			if(cmd.hasOption("listaSenhas")){
 				System.out.println(FilaSenhas.getInstance().toString());
 			}
-			if(cmd.hasOption("coldownUsuario")){
-				fabricaUsuarioAtendente.setColdownUsuario(cmd.getOptionValue("coldownUsuario"));
+			if(cmd.hasOption("colldownUsuario")){
+				fabricaUsuarioAtendente.setColldownUsuario(cmd.getOptionValue("colldownUsuario"));
 			}
 			if(cmd.hasOption("error")){
 				System.out.println("Comando invalido");
+			}
+			if(cmd.hasOption("qmr")){
+				fabricaUsuarioAtendente.setQuantidadeMinimaReclamacoes(cmd.getOptionValue("qmr"));
+			}
+			if(cmd.hasOption("qmxr")){
+				fabricaUsuarioAtendente.setQuantidadeMaximaReclamacoes(cmd.getOptionValue("qmxr"));				
+			}
+			if(cmd.hasOption("tmr")){
+				fabricaUsuarioAtendente.setTempoMinimoReclamacoes(cmd.getOptionValue("tmr"));
+			}
+			if(cmd.hasOption("tmxr")){
+				fabricaUsuarioAtendente.setTempoMaximoReclamacies(cmd.getOptionValue("tmxr"));
+			}
+			if(cmd.hasOption("pfu")){
+				fabricaUsuarioAtendente.pausaFabricaUsuario();
 			}
 
 		} catch (ParseException e) {
@@ -103,31 +121,31 @@ public class MainApp {
 		Option addAtendente = OptionBuilder.withArgName("addAtendente")
 				.withDescription("Adiciona um novo Atendente")
 				.create("addAtendente");
-		Option removeAtendente = OptionBuilder.withArgName("removeAtendente")
+		Option removeAtendente = OptionBuilder.withArgName("atendente")
 				.hasArgs(1).withValueSeparator()
 				.withDescription("remove um Atendente X")
 				.create("removeAtendente");
-		Option pausaAtendente = OptionBuilder.withArgName("pausaAtendente")
+		Option pausaAtendente = OptionBuilder.withArgName("atendente")
 				.hasArgs(2).withValueSeparator()
 				.withDescription("pausa um Atendente X")
 				.create("pausaAtendente");
-		Option coldownUsuario = OptionBuilder.withArgName("coldownUsuario")
+		Option coldownUsuario = OptionBuilder.withArgName("tempo")
 				.hasArgs(1).withValueSeparator()
 				.withDescription("altera o tempo entre criaçao de usuarios")
-				.create("coldownUsuario");
-		Option qmr = OptionBuilder.withArgName("qmr").hasArgs(1)
+				.create("colldownUsuario");
+		Option qmr = OptionBuilder.withArgName("quantidade").hasArgs(1)
 				.withValueSeparator()
 				.withDescription("altera a quantidade minima de reclamações")
 				.create("qmr");
-		Option qmxr = OptionBuilder.withArgName("qmxr").hasArgs(1)
+		Option qmxr = OptionBuilder.withArgName("quantidade").hasArgs(1)
 				.withValueSeparator()
 				.withDescription("altera a quantidade minima de reclamações")
-				.create("coldownUsuario");
-		Option tmr = OptionBuilder.withArgName("tmr").hasArgs(1)
+				.create("qmxr");
+		Option tmr = OptionBuilder.withArgName("tempo").hasArgs(1)
 				.withValueSeparator()
 				.withDescription("altera o tempo minima de reclamações")
 				.create("tmr");
-		Option tmxr = OptionBuilder.withArgName("tmxr").hasArgs(1)
+		Option tmxr = OptionBuilder.withArgName("tempo").hasArgs(1)
 				.withValueSeparator()
 				.withDescription("altera o tempo maximo de reclamações")
 				.create("tmxr");

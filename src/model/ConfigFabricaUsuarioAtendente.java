@@ -1,22 +1,25 @@
 package model;
 
 public class ConfigFabricaUsuarioAtendente {
-	//classe que sera instanciada quando o arquivo xml contendo
-	//as config são carregadas,
-	//e a aqui sera armazenado as config para as fabricas de usuarios e atendentes
-	private String colldownUsuario;
-	private String quantidadeMaximaReclamacao;
-	private String quantidadeMinimaReclamacao;
-	private String tempoMaximoReclamacao;
-	private String tempoMinimoReclamacao;
-	private String quantidadeAtendentes;
+	// classe que sera instanciada quando o arquivo xml contendo
+	// as config são carregadas,
+	// e a aqui sera armazenado as config para as fabricas de usuarios e
+	// atendentes
+	private String colldownUsuario = null;
+	private String quantidadeMaximaReclamacao = null;
+	private String quantidadeMinimaReclamacao = null;
+	private String tempoMaximoReclamacao = null;
+	private String tempoMinimoReclamacao = null;
+	private String quantidadeAtendentes = null;
 
 	public String getColldownUsuario() {
 		return colldownUsuario;
 	}
 
 	public void setColldownUsuario(String colldownUsuario) {
-		this.colldownUsuario = colldownUsuario;
+		if (Integer.parseInt(colldownUsuario) >= 0) {
+			this.colldownUsuario = colldownUsuario;
+		}
 	}
 
 	public String getQuantidadeMaximaReclamacao() {
@@ -24,7 +27,14 @@ public class ConfigFabricaUsuarioAtendente {
 	}
 
 	public void setQuantidadeMaximaReclamacao(String quantidadeMaximaReclamaca) {
-		this.quantidadeMaximaReclamacao = quantidadeMaximaReclamaca;
+		if (this.quantidadeMaximaReclamacao != null) {
+			if (Integer.parseInt(quantidadeMaximaReclamaca) >= Integer
+					.parseInt(this.quantidadeMinimaReclamacao)) {
+				this.quantidadeMaximaReclamacao = quantidadeMaximaReclamaca;
+			}
+		} else {
+			this.quantidadeMaximaReclamacao = quantidadeMaximaReclamaca;
+		}
 	}
 
 	public String getQuantidadeMinimaReclamacao() {
@@ -32,7 +42,14 @@ public class ConfigFabricaUsuarioAtendente {
 	}
 
 	public void setQuantidadeMinimaReclamacao(String quantidadeMinimaReclamacao) {
-		this.quantidadeMinimaReclamacao = quantidadeMinimaReclamacao;
+		if (this.quantidadeMaximaReclamacao != null) {
+			if (Integer.parseInt(this.quantidadeMaximaReclamacao) >= Integer
+					.parseInt(quantidadeMinimaReclamacao)) {
+				this.quantidadeMinimaReclamacao = quantidadeMinimaReclamacao;
+			}
+		} else {
+			this.quantidadeMinimaReclamacao = quantidadeMinimaReclamacao;
+		}
 	}
 
 	public String getTempoMaximoReclamacao() {
@@ -40,7 +57,14 @@ public class ConfigFabricaUsuarioAtendente {
 	}
 
 	public void setTempoMaximoReclamacao(String tempoMaximoReclamacao) {
-		this.tempoMaximoReclamacao = tempoMaximoReclamacao;
+		if (this.tempoMinimoReclamacao != null) {
+			if (Integer.parseInt(tempoMaximoReclamacao) >= Integer
+					.parseInt(this.tempoMinimoReclamacao)) {
+				this.tempoMaximoReclamacao = tempoMaximoReclamacao;
+			}
+		} else {
+			this.tempoMaximoReclamacao = tempoMaximoReclamacao;
+		}
 	}
 
 	public String getTempoMinimoReclamacao() {
@@ -48,7 +72,14 @@ public class ConfigFabricaUsuarioAtendente {
 	}
 
 	public void setTempoMinimoReclamacao(String tempoMinimoReclamacao) {
-		this.tempoMinimoReclamacao = tempoMinimoReclamacao;
+		if (this.tempoMaximoReclamacao != null) {
+			if (Integer.parseInt(this.tempoMaximoReclamacao) >= Integer
+					.parseInt(tempoMinimoReclamacao)) {
+				this.tempoMinimoReclamacao = tempoMinimoReclamacao;
+			}
+		} else {
+			this.tempoMinimoReclamacao = tempoMinimoReclamacao;
+		}
 	}
 
 	public String getQuantidadeAtendentes() {

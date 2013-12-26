@@ -5,8 +5,6 @@ import java.util.Observable;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import control.MainApp;
-
 public class Atendente extends Observable implements Runnable {
 	// Classe Atendente implementa um tipo Runnable
 	private Boolean ativo;// pra manter ativo
@@ -19,7 +17,7 @@ public class Atendente extends Observable implements Runnable {
 	private static Logger log;
 
 	public Atendente(String nome) {
-		
+
 		kill = true;
 		filaSenhas = FilaSenhas.getInstance();
 		senha = filaSenhas.pegaPrimeira();
@@ -28,7 +26,7 @@ public class Atendente extends Observable implements Runnable {
 		chamaNovaSenha = true;
 		PropertyConfigurator.configure("./src/log4j.properties");
 		log = Logger.getLogger("Atendentes");
-		
+
 	}
 
 	@Override
@@ -36,7 +34,6 @@ public class Atendente extends Observable implements Runnable {
 		// TODO Auto-generated method stub
 		while (kill) {// mantem a thread viva até alguem mata la XD
 			if (ativo) {// pausa a thread sem mata la :D
-
 				for (Reclamacao r : usuario.getReclamacoes()) {
 					try {
 						Thread.sleep(r.getTempo());
@@ -45,8 +42,6 @@ public class Atendente extends Observable implements Runnable {
 						e.printStackTrace();
 					}
 				}
-				//System.out.println("Atendente: " + nome + " : Usuario: "
-				//		+ usuario.toString());
 				log.info(this.toString() + " : Usuario " + usuario.toString());
 				ativo = false;
 
@@ -54,7 +49,7 @@ public class Atendente extends Observable implements Runnable {
 			if (chamaNovaSenha) {// essa verificação é nescessaria pois posso
 				// desativalo no meio do processo
 				// de atendimento, e o atendente ainda assim
-				// chama um novo usuario (atendente burro)
+				// chama um novo usuario 
 				senha = filaSenhas.pegaPrimeira();
 			}
 			while (senha == null && chamaNovaSenha) {// while para esperar até
@@ -67,7 +62,8 @@ public class Atendente extends Observable implements Runnable {
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					Logger.getLogger(Atendente.class.getName()).error(e.getMessage());
+					Logger.getLogger(Atendente.class.getName()).error(
+							e.getMessage());
 				}
 			}
 			if (chamaNovaSenha) {
