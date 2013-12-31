@@ -39,6 +39,7 @@ public class Senha implements Comparable<Senha> {
 //			return 1;
 //		}
 //		return 0;
-		return this.senhaPrioritaria - s.getSenhaPrioritaria();
+		//return this.senhaPrioritaria - s.getSenhaPrioritaria();
+		return this.senhaPrioritaria.compareTo(s.senhaPrioritaria);
 	}
 }

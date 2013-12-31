@@ -1,9 +1,14 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+
+import control.CriaLogXML;
+import control.FilaSenhas;
 
 public class Atendente extends Observable implements Runnable {
 	// Classe Atendente implementa um tipo Runnable
@@ -15,7 +20,7 @@ public class Atendente extends Observable implements Runnable {
 	private String nome;
 	private Boolean chamaNovaSenha;
 	private static Logger log;
-
+	
 	public Atendente(String nome) {
 
 		kill = true;
@@ -34,14 +39,19 @@ public class Atendente extends Observable implements Runnable {
 		// TODO Auto-generated method stub
 		while (kill) {// mantem a thread viva até alguem mata la XD
 			if (ativo) {// pausa a thread sem mata la :D
+				List<Integer> listaTempo = new ArrayList<>();
 				for (Reclamacao r : usuario.getReclamacoes()) {
 					try {
 						Thread.sleep(r.getTempo());
+						listaTempo.add(r.getTempo());
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
+				CriaLogXML.getInstance().criaLogXML(new LogAtendente(Integer.parseInt(nome), 
+														senha.getSenha(), listaTempo, 
+														usuario.getSenha().getSenhaPrioritaria()));
 				log.info(this.toString() + " : Usuario " + usuario.toString());
 				ativo = false;
 

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root type="AnchorPane" blendMode="MULTIPLY" prefHeight="680.0" prefWidth="749.0" xmlns:fx="http://javafx.com/fxml" fx:controller="control.ControllerBalcaoJavaFx">
+  <children>
+    <TabPane id="" fx:id="tpPrincipal" layoutX="0.0" layoutY="0.0" prefHeight="680.0" prefWidth="749.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab fx:id="tBalcao" text="Balcao">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+        <Tab fx:id="tConfigs" text="Configs">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <VBox id="VBox" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="611.0" prefWidth="721.0" spacing="5.0">
+                  <children>
+                    <HBox prefHeight="89.0" prefWidth="642.0">
+                      <children>
+                        <Button fx:id="startApp" mnemonicParsing="false" onAction="#startApp" prefHeight="44.0" prefWidth="133.0" text="Start App" HBox.hgrow="ALWAYS">
+                          <HBox.margin>
+                            <Insets bottom="10.0" left="25.0" right="10.0" top="25.0" />
+                          </HBox.margin>
+                        </Button>
+                        <Button fx:id="bAddAtendente" mnemonicParsing="false" onAction="#addAtendente" prefHeight="44.0" prefWidth="134.0" text="Add Atendente" HBox.hgrow="ALWAYS">
+                          <HBox.margin>
+                            <Insets bottom="10.0" left="25.0" right="10.0" top="25.0" />
+                          </HBox.margin>
+                        </Button>
+                      </children>
+                    </HBox>
+                    <VBox id="VBox" alignment="CENTER" spacing="5.0">
+                      <children>
+                        <Label text="Setar Colldown Usuario:" />
+                        <Slider fx:id="sColldownUsuario" blockIncrement="0.0" disable="false" majorTickUnit="5.0" max="10000.0" min="1.0" minorTickCount="1000" showTickLabels="false" showTickMarks="false" snapToTicks="false" value="1.0" />
+                        <Label text="Setar Tempo Minimo Reclamações:" />
+                        <Slider id="sColldownUsuario" fx:id="sTMR" blockIncrement="10.0" majorTickUnit="10.0" max="10.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="false" />
+                        <Label text="Setar Tempo Maximo Reclamações:" />
+                        <Slider id="sColldownUsuario" fx:id="sTMXR" blockIncrement="1.0" majorTickUnit="10.0" max="10.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="false" />
+                        <Label text="Setar Quantidade Minima Reclamações:" />
+                        <Slider id="sColldownUsuario" fx:id="sQMR" blockIncrement="1.0" majorTickUnit="10.0" max="10.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="false" />
+                        <Label text="Setar Quantidade Maxima Reclamações:" />
+                        <Slider id="sColldownUsuario" fx:id="sQMXR" blockIncrement="1.0" majorTickUnit="10.0" max="10.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="false" />
+                      </children>
+                    </VBox>
+                    <HBox prefHeight="100.0" prefWidth="200.0">
+                      <children>
+                        <VBox prefHeight="100.0" prefWidth="360.5">
+                          <children>
+                            <Label prefWidth="149.0" text="Pausar Atendente:" textAlignment="CENTER">
+                              <VBox.margin>
+                                <Insets />
+                              </VBox.margin>
+                            </Label>
+                            <ComboBox prefWidth="144.0">
+                              <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Item 1" />
+                                  <String fx:value="Item 2" />
+                                  <String fx:value="Item 3" />
+                                </FXCollections>
+                              </items>
+                            </ComboBox>
+                            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="144.0" text="Ok" />
+                          </children>
+                        </VBox>
+                        <VBox prefHeight="100.0" prefWidth="361.0">
+                          <children>
+                            <Label prefWidth="116.0" text="Parar Atendente:" />
+                            <ComboBox prefWidth="144.0">
+                              <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Item 1" />
+                                  <String fx:value="Item 2" />
+                                  <String fx:value="Item 3" />
+                                </FXCollections>
+                              </items>
+                            </ComboBox>
+                            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="144.0" text="Ok" />
+                          </children>
+                        </VBox>
+                      </children>
+                    </HBox>
+                  </children>
+                </VBox>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab fx:id="tSobre" text="Sobre">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</fx:root>

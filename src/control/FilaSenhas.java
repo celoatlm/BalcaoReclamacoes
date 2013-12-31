@@ -1,7 +1,9 @@
-package model;
+package control;
 
 import java.util.ArrayList;
 import java.util.concurrent.PriorityBlockingQueue;
+
+import model.Senha;
 
 public class FilaSenhas {
 	// clsse que gerencia a fila de senhas para que se mantenha a ordem da fila

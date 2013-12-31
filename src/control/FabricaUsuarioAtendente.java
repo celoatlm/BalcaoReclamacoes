@@ -10,7 +10,6 @@ import java.util.Random;
 
 import model.Atendente;
 import model.ConfigFabricaUsuarioAtendente;
-import model.FilaSenhas;
 import model.Painel;
 import model.Reclamacao;
 import model.Senha;
@@ -119,6 +118,7 @@ public class FabricaUsuarioAtendente {
 	public void setTempoMaximoReclamacies(String tmxr) {
 		configFabricaUsuarioAtendente.setTempoMaximoReclamacao(tmxr);
 	}
+	
 
 	private void recuperaConfig() {
 		// função para leitura do xml contendo as configurações inicias default
@@ -228,6 +228,10 @@ public class FabricaUsuarioAtendente {
 			contAtendente++;
 
 		}
+	}
+
+	public ConfigFabricaUsuarioAtendente getConfigFabricaUsuarioAtendente() {
+		return configFabricaUsuarioAtendente;
 	}
 
 }
