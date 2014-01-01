@@ -6,100 +6,130 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 
-<fx:root type="AnchorPane" blendMode="MULTIPLY" prefHeight="680.0" prefWidth="749.0" xmlns:fx="http://javafx.com/fxml" fx:controller="control.ControllerBalcaoJavaFx">
+<fx:root type="AnchorPane" blendMode="MULTIPLY" minHeight="749.0" prefHeight="762.9999000000025" prefWidth="1076.0" xmlns:fx="http://javafx.com/fxml" fx:controller="control.ControllerBalcaoJavaFx">
   <children>
-    <TabPane id="" fx:id="tpPrincipal" layoutX="0.0" layoutY="0.0" prefHeight="680.0" prefWidth="749.0" tabClosingPolicy="UNAVAILABLE">
-      <tabs>
-        <Tab fx:id="tBalcao" text="Balcao">
-          <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-          </content>
-        </Tab>
-        <Tab fx:id="tConfigs" text="Configs">
-          <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+    <HBox layoutX="7.0" layoutY="5.0" prefHeight="757.9998779296875" prefWidth="1069.0">
+      <children>
+        <SplitPane fx:id="spPrincipal" dividerPositions="0.30927835051546393" focusTraversable="true" prefHeight="758.0" prefWidth="1069.0">
+          <items>
+            <AnchorPane fx:id="apPainel" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
               <children>
-                <VBox id="VBox" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="611.0" prefWidth="721.0" spacing="5.0">
+                <VBox fx:id="vbPainel" layoutX="14.0" layoutY="8.0" prefHeight="734.0" prefWidth="300.0">
                   <children>
-                    <HBox prefHeight="89.0" prefWidth="642.0">
-                      <children>
-                        <Button fx:id="startApp" mnemonicParsing="false" onAction="#startApp" prefHeight="44.0" prefWidth="133.0" text="Start App" HBox.hgrow="ALWAYS">
-                          <HBox.margin>
-                            <Insets bottom="10.0" left="25.0" right="10.0" top="25.0" />
-                          </HBox.margin>
-                        </Button>
-                        <Button fx:id="bAddAtendente" mnemonicParsing="false" onAction="#addAtendente" prefHeight="44.0" prefWidth="134.0" text="Add Atendente" HBox.hgrow="ALWAYS">
-                          <HBox.margin>
-                            <Insets bottom="10.0" left="25.0" right="10.0" top="25.0" />
-                          </HBox.margin>
-                        </Button>
-                      </children>
-                    </HBox>
-                    <VBox id="VBox" alignment="CENTER" spacing="5.0">
-                      <children>
-                        <Label text="Setar Colldown Usuario:" />
-                        <Slider fx:id="sColldownUsuario" blockIncrement="0.0" disable="false" majorTickUnit="5.0" max="10000.0" min="1.0" minorTickCount="1000" showTickLabels="false" showTickMarks="false" snapToTicks="false" value="1.0" />
-                        <Label text="Setar Tempo Minimo Reclamações:" />
-                        <Slider id="sColldownUsuario" fx:id="sTMR" blockIncrement="10.0" majorTickUnit="10.0" max="10.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="false" />
-                        <Label text="Setar Tempo Maximo Reclamações:" />
-                        <Slider id="sColldownUsuario" fx:id="sTMXR" blockIncrement="1.0" majorTickUnit="10.0" max="10.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="false" />
-                        <Label text="Setar Quantidade Minima Reclamações:" />
-                        <Slider id="sColldownUsuario" fx:id="sQMR" blockIncrement="1.0" majorTickUnit="10.0" max="10.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="false" />
-                        <Label text="Setar Quantidade Maxima Reclamações:" />
-                        <Slider id="sColldownUsuario" fx:id="sQMXR" blockIncrement="1.0" majorTickUnit="10.0" max="10.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="false" />
-                      </children>
-                    </VBox>
-                    <HBox prefHeight="100.0" prefWidth="200.0">
-                      <children>
-                        <VBox prefHeight="100.0" prefWidth="360.5">
+                    <Label fx:id="lSenha" labelFor="$lSenha" text="" textAlignment="CENTER" textFill="#ff3d00">
+                      <font>
+                        <Font size="20.0" />
+                      </font>
+                      <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                      </VBox.margin>
+                    </Label>
+                    <ScrollPane prefHeight="680.0" prefWidth="300.0000999999975">
+                      <content>
+                        <AnchorPane id="Content" fx:id="apspLista" minHeight="0.0" minWidth="0.0" prefHeight="679.0" prefWidth="298.0">
                           <children>
-                            <Label prefWidth="149.0" text="Pausar Atendente:" textAlignment="CENTER">
-                              <VBox.margin>
-                                <Insets />
-                              </VBox.margin>
-                            </Label>
-                            <ComboBox prefWidth="144.0">
-                              <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                  <String fx:value="Item 1" />
-                                  <String fx:value="Item 2" />
-                                  <String fx:value="Item 3" />
-                                </FXCollections>
-                              </items>
-                            </ComboBox>
-                            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="144.0" text="Ok" />
+                            <VBox fx:id="vbLista" layoutX="14.0" layoutY="14.0" prefHeight="658.0" prefWidth="257.0" />
                           </children>
-                        </VBox>
-                        <VBox prefHeight="100.0" prefWidth="361.0">
-                          <children>
-                            <Label prefWidth="116.0" text="Parar Atendente:" />
-                            <ComboBox prefWidth="144.0">
-                              <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                  <String fx:value="Item 1" />
-                                  <String fx:value="Item 2" />
-                                  <String fx:value="Item 3" />
-                                </FXCollections>
-                              </items>
-                            </ComboBox>
-                            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="144.0" text="Ok" />
-                          </children>
-                        </VBox>
-                      </children>
-                    </HBox>
+                        </AnchorPane>
+                      </content>
+                    </ScrollPane>
                   </children>
                 </VBox>
               </children>
             </AnchorPane>
-          </content>
-        </Tab>
-        <Tab fx:id="tSobre" text="Sobre">
-          <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-          </content>
-        </Tab>
-      </tabs>
-    </TabPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="756.0" prefWidth="136.9998779296875">
+              <children>
+                <TabPane id="" fx:id="tpPrincipal" layoutX="0.0" layoutY="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="737.0" tabClosingPolicy="UNAVAILABLE">
+                  <tabs>
+                    <Tab fx:id="tBalcao" text="Balcao">
+                      <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      </content>
+                    </Tab>
+                    <Tab fx:id="tConfigs" text="Configs">
+                      <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="701.0" prefWidth="737.0">
+                          <children>
+                            <VBox id="VBox" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="611.0" prefWidth="721.0" spacing="5.0">
+                              <children>
+                                <HBox prefHeight="89.0" prefWidth="642.0">
+                                  <children>
+                                    <Button fx:id="startApp" mnemonicParsing="false" onAction="#startApp" prefHeight="44.0" prefWidth="133.0" text="Start App" HBox.hgrow="ALWAYS">
+                                      <HBox.margin>
+                                        <Insets bottom="10.0" left="25.0" right="10.0" top="25.0" />
+                                      </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="bAddAtendente" mnemonicParsing="false" onAction="#addAtendente" prefHeight="44.0" prefWidth="134.0" text="Add Atendente" HBox.hgrow="ALWAYS">
+                                      <HBox.margin>
+                                        <Insets bottom="10.0" left="25.0" right="10.0" top="25.0" />
+                                      </HBox.margin>
+                                    </Button>
+                                  </children>
+                                </HBox>
+                                <VBox id="VBox" alignment="CENTER" spacing="5.0">
+                                  <children>
+                                    <Label text="Setar Colldown Usuario:" />
+                                    <Slider fx:id="sColldownUsuario" blockIncrement="1.0" disable="false" majorTickUnit="1000.0" max="10000.0" min="1.0" minorTickCount="1000" showTickLabels="true" showTickMarks="true" snapToTicks="false" value="1.0" />
+                                    <Label text="Setar Tempo Minimo Reclamações:" />
+                                    <Slider id="sColldownUsuario" fx:id="sTMR" blockIncrement="10.0" majorTickUnit="10.0" max="10.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="false" />
+                                    <Label text="Setar Tempo Maximo Reclamações:" />
+                                    <Slider id="sColldownUsuario" fx:id="sTMXR" blockIncrement="1.0" majorTickUnit="10.0" max="10.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="false" />
+                                    <Label text="Setar Quantidade Minima Reclamações:" />
+                                    <Slider id="sColldownUsuario" fx:id="sQMR" blockIncrement="1.0" majorTickUnit="10.0" max="10.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="false" />
+                                    <Label text="Setar Quantidade Maxima Reclamações:" />
+                                    <Slider id="sColldownUsuario" fx:id="sQMXR" blockIncrement="1.0" majorTickUnit="10.0" max="10.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="false" />
+                                  </children>
+                                </VBox>
+                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                  <children>
+                                    <VBox prefHeight="100.0" prefWidth="360.5">
+                                      <children>
+                                        <Label prefWidth="149.0" text="Pausar Atendente:" textAlignment="CENTER">
+                                          <VBox.margin>
+                                            <Insets />
+                                          </VBox.margin>
+                                        </Label>
+                                        <ComboBox fx:id="cbPausaAtendente" prefWidth="144.0">
+                                          <items>
+                                            <FXCollections fx:factory="observableArrayList" />
+                                          </items>
+                                        </ComboBox>
+                                        <Button fx:id="bPausaAtendente" mnemonicParsing="false" onAction="#pausaAtendente" prefHeight="31.0" prefWidth="144.0" text="Ok" />
+                                      </children>
+                                    </VBox>
+                                    <VBox prefHeight="100.0" prefWidth="361.0">
+                                      <children>
+                                        <Label prefWidth="116.0" text="Parar Atendente:" />
+                                        <ComboBox fx:id="cbParaAtendente" prefWidth="144.0">
+                                          <items>
+                                            <FXCollections fx:factory="observableArrayList" />
+                                          </items>
+                                        </ComboBox>
+                                        <Button fx:id="bParaAtendente" mnemonicParsing="false" onAction="#paraAtendente" prefHeight="31.0" prefWidth="144.0" text="Ok" />
+                                      </children>
+                                    </VBox>
+                                  </children>
+                                </HBox>
+                              </children>
+                            </VBox>
+                          </children>
+                        </AnchorPane>
+                      </content>
+                    </Tab>
+                    <Tab fx:id="tSobre" text="Sobre">
+                      <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      </content>
+                    </Tab>
+                  </tabs>
+                </TabPane>
+              </children>
+            </AnchorPane>
+          </items>
+        </SplitPane>
+      </children>
+    </HBox>
   </children>
 </fx:root>

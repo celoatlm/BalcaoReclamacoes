@@ -20,7 +20,7 @@ public class ConfigFabricaUsuarioAtendente {
 	}
 
 	public void setColldownUsuario(String colldownUsuario) {
-		if (Integer.parseInt(colldownUsuario) > 0) {
+		if (Integer.parseInt(colldownUsuario) > 0 && Integer.parseInt(colldownUsuario) < 10001) {
 			this.colldownUsuario = colldownUsuario;
 		}
 	}

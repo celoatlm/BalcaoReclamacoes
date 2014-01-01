@@ -1,22 +1,18 @@
 package control;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
 import java.util.concurrent.PriorityBlockingQueue;
 
 import model.Senha;
 
-public class FilaSenhas {
+public class FilaSenhas extends Observable{
 	// clsse que gerencia a fila de senhas para que se mantenha a ordem da fila
 	// FIFO
 	private static FilaSenhas filaSenhas = null;
-	private PriorityBlockingQueue<Senha> priorityQueueSenhas;// esse tipo de
-																// PriorityQueue
-																// garente
-																// sincronia no
-																// acesso a
-																// variavel
-																// não ta certo
-
+	private PriorityBlockingQueue<Senha> priorityQueueSenhas;
+	
 	private FilaSenhas() {
 		// TODO Auto-generated constructor stub
 		priorityQueueSenhas = new PriorityBlockingQueue<Senha>(30);
@@ -31,10 +27,22 @@ public class FilaSenhas {
 
 	public synchronized void inserirSenha(Senha senha) {
 		priorityQueueSenhas.add(senha);
+		notificaObservers();
 	}
 
 	public synchronized Senha pegaPrimeira() {
-		return priorityQueueSenhas.poll();
+		Senha s = priorityQueueSenhas.poll();
+		notificaObservers();
+		return s;
+	}
+	
+	public synchronized List<Senha> getSenhas(){
+		List<Senha> senhasList = new ArrayList<>(priorityQueueSenhas);
+		return senhasList;
+	}
+	public void notificaObservers(){
+		setChanged();
+		notifyObservers(new ArrayList<Senha>(priorityQueueSenhas));
 	}
 
 	@Override

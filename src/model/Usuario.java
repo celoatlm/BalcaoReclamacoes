@@ -16,7 +16,6 @@ public class Usuario implements Observer {
 		this.painel = painel;
 		this.reclamacoes = reclamacoes;
 		this.senha = senha;
-
 		this.painel.addObserver(this);
 
 	}

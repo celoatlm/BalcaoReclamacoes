@@ -17,17 +17,17 @@ public class Painel extends Observable implements Observer {
 													// por senha
 
 	private Painel() {
-
 		senhas = new ArrayList<Senha>();
 		mapAtendente = new HashMap<Integer, Atendente>();
-
 	}
 
 	public static Painel getInstance() {
 		if (painel == null) {
 			painel = new Painel();
 		}
+		
 		return painel;
+		
 	}
 
 	@Override

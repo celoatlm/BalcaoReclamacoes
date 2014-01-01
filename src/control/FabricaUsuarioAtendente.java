@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Random;
 
 import model.Atendente;
@@ -20,7 +21,7 @@ import org.apache.commons.digester3.xmlrules.FromXmlRulesModule;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
-public class FabricaUsuarioAtendente {
+public class FabricaUsuarioAtendente extends Observable{
 
 	// classe responsavel por fabricar os usuarios e atendentes
 
@@ -56,7 +57,7 @@ public class FabricaUsuarioAtendente {
 		fabricaUsuario = new FabricaUsuario();
 
 		log = Logger.getLogger(FabricaUsuarioAtendente.class.getName());
-
+		
 	}
 
 	public void pausaFabricaUsuario() {
@@ -68,6 +69,7 @@ public class FabricaUsuarioAtendente {
 		// startar ambas as fabricas
 		new Thread(fabricaAtendente, "Atendentes").start();
 		new Thread(fabricaUsuario, "Clientes").start();
+		
 	}
 
 	public static FabricaUsuarioAtendente getInstance() {
@@ -75,6 +77,7 @@ public class FabricaUsuarioAtendente {
 		if (fabricaUsuarioAtendente == null) {
 			fabricaUsuarioAtendente = new FabricaUsuarioAtendente();
 		}
+		
 		return FabricaUsuarioAtendente.fabricaUsuarioAtendente;
 	}
 
@@ -85,10 +88,12 @@ public class FabricaUsuarioAtendente {
 	public void removeAtendente(Integer remove) {
 		atendentesMap.get(remove).removeAtendente();
 		atendentesMap.remove(remove);
+		notificaObservers();
 	}
 
 	public void pausaAtendente(Integer pausa) {
 		atendentesMap.get(pausa).pausaAtendente();
+		notificaObservers();
 	}
 
 	public void listaAtendentes() {
@@ -98,25 +103,34 @@ public class FabricaUsuarioAtendente {
 		}
 		System.out.println(aux);
 	}
+	public List<Atendente> getAtendentes(){
+		List<Atendente> atendentes = new ArrayList<>(atendentesMap.values());
+		return atendentes;
+	}
 
 	public void setColldownUsuario(String colldownUsuario) {
 		configFabricaUsuarioAtendente.setColldownUsuario(colldownUsuario);
+		notificaObservers();
 	}
 
 	public void setQuantidadeMinimaReclamacoes(String qmr) {
 		configFabricaUsuarioAtendente.setQuantidadeMinimaReclamacao(qmr);
+		notificaObservers();
 	}
 
 	public void setQuantidadeMaximaReclamacoes(String qmxr) {
 		configFabricaUsuarioAtendente.setQuantidadeMaximaReclamacao(qmxr);
+		notificaObservers();
 	}
 
 	public void setTempoMinimoReclamacoes(String tmr) {
 		configFabricaUsuarioAtendente.setTempoMinimoReclamacao(tmr);
+		notificaObservers();
 	}
 
 	public void setTempoMaximoReclamacies(String tmxr) {
 		configFabricaUsuarioAtendente.setTempoMaximoReclamacao(tmxr);
+		notificaObservers();
 	}
 	
 
@@ -219,13 +233,14 @@ public class FabricaUsuarioAtendente {
 		}
 
 		protected void addAtendente() {
-
+			
 			Atendente atendente = new Atendente(contAtendente.toString());
 			new Thread(atendente, contAtendente.toString()).start();
 			// atendentes.add(atendente);
 			atendentesMap.put(contAtendente, atendente);
 			painel.addAtendente(atendente);
 			contAtendente++;
+			notificaObservers();
 
 		}
 	}
@@ -233,5 +248,8 @@ public class FabricaUsuarioAtendente {
 	public ConfigFabricaUsuarioAtendente getConfigFabricaUsuarioAtendente() {
 		return configFabricaUsuarioAtendente;
 	}
-
+	private synchronized void notificaObservers(){
+		setChanged();
+		notifyObservers();
+	}
 }
