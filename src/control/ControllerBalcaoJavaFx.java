@@ -1,11 +1,18 @@
 package control;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.apache.log4j.Logger;
+
+import view.PaneAtendente;
+
 import model.Atendente;
+import model.AtendenteGrafico;
 import model.Painel;
 import model.Senha;
 import javafx.application.Platform;
@@ -20,6 +27,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class ControllerBalcaoJavaFx implements Observer {
@@ -64,11 +72,12 @@ public class ControllerBalcaoJavaFx implements Observer {
 	private VBox vbPainel;
 	@FXML
 	private Label lSenha;
-	@FXML 
-	private VBox vbLista;
-	
-	private Observable painel;
+	@FXML
+	private HBox hbUsuarios;
+	@FXML
+	private HBox hbAtendentes;
 
+	private Map<String, PaneAtendente> mapPaneAtendente;
 	private List<Senha> senhas = null;
 
 	@FXML
@@ -76,8 +85,12 @@ public class ControllerBalcaoJavaFx implements Observer {
 
 		FabricaUsuarioAtendente.getInstance().addObserver(this);
 		FilaSenhas.getInstance().addObserver(this);
-		painel = Painel.getInstance();
-		painel.addObserver(this);
+		ObserverAtendenteGui.getInstance().addObserver(this);
+		Painel.getInstance().addObserver(this);
+
+		mapPaneAtendente = new HashMap<String, PaneAtendente>();
+		atualizaPaneAtendentes();
+
 		commando = new String();
 
 		setSlides();
@@ -94,6 +107,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 							commando = "-colldownUsuario "
 									+ getString(sColldownUsuario.getValue());
 							executaCommando(commando);
+							System.out.println(commando);
 						}
 
 					}
@@ -180,13 +194,13 @@ public class ControllerBalcaoJavaFx implements Observer {
 
 	@FXML
 	private void pausaAtendente() {
-		commando = "pausaAtendente " + cbPausaAtendente.getValue();
+		commando = "-pausaAtendente " + cbPausaAtendente.getValue();
 		executaCommando(commando);
 	}
 
 	@FXML
 	private void paraAtendente() {
-		commando = "removeAtendnete " + cbParaAtendente.getValue();
+		commando = "-removeAtendente " + cbParaAtendente.getValue();
 		executaCommando(commando);
 	}
 
@@ -228,20 +242,20 @@ public class ControllerBalcaoJavaFx implements Observer {
 	@Override
 	public void update(Observable observable, Object arg1) {
 		// TODO Auto-generated method stub
+
 		if (observable instanceof FabricaUsuarioAtendente) {
 			atualizaConfigs();
 		}
 		if (observable instanceof FilaSenhas) {
-			int i = vbLista.getChildren().size();
 			Platform.runLater(new Runnable() {
 
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						vbLista.getChildren().clear();
-					}
-				});
-			senhas = new ArrayList<>((List<Senha>)arg1);
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					hbUsuarios.getChildren().clear();
+				}
+			});
+			senhas = new ArrayList<>((List<Senha>) arg1);
 			atualizaPainel();
 		}
 		if (observable instanceof Painel) {
@@ -256,6 +270,12 @@ public class ControllerBalcaoJavaFx implements Observer {
 				}
 			});
 		}
+		if (observable instanceof ObserverAtendenteGui) {
+			atualizaPaneAtendentes();
+			mapPaneAtendente.get(((AtendenteGrafico) arg1).getAtendente())
+					.setAg((AtendenteGrafico) arg1);
+
+		}
 
 	}
 
@@ -268,12 +288,56 @@ public class ControllerBalcaoJavaFx implements Observer {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						//vbPainel.getChildren().clear();
-						vbLista.getChildren().add(
-								new Label(s.getSenha().toString()));
+
+						hbUsuarios.getChildren().add(
+								new Label(s.getSenha().toString() + " : "
+										+ s.getSenhaPrioritaria().toString()));
 					}
 				});
 			}
+		}
+	}
+
+	private void atualizaPaneAtendentes() {
+		List<Atendente> as = FabricaUsuarioAtendente.getInstance()
+				.getAtendentes();
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				hbAtendentes.getChildren().clear();
+			}
+		});
+
+		for (final Atendente a : as) {
+
+			String nome = a.getNome();
+			Boolean ativo = a.getAtivo();
+			try {
+				Senha s = a.getSenha();
+				mapPaneAtendente.put(nome, new PaneAtendente(
+						new AtendenteGrafico(nome, ativo, s.getSenha()
+								.toString(), s.getSenhaPrioritaria())));
+			} catch (NullPointerException n) {
+				mapPaneAtendente.put(nome, new PaneAtendente(
+						new AtendenteGrafico(nome, ativo, "vago ", 2)));
+			}
+
+			Platform.runLater(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					try {
+						hbAtendentes.getChildren().add(
+								mapPaneAtendente.get(a.getNome()));
+					} catch (IllegalArgumentException e) {
+						Logger.getLogger(ControllerBalcaoJavaFx.class.getName()).error(e);
+					}
+
+				}
+			});
 		}
 	}
 

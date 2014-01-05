@@ -21,6 +21,7 @@ public class BalcaoAppJavaFX extends Application implements Runnable{
         
 		
         this.primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
         this.primaryStage.show();
 		
 	}

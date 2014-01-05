@@ -52,6 +52,7 @@ public class CLIComandos {
 			}
 
 			if (cmd.hasOption("removeAtendente")) {
+				
 				fabricaUsuarioAtendente.removeAtendente(Integer.parseInt(cmd
 						.getOptionValue("removeAtendente")));
 			}
@@ -119,7 +120,7 @@ public class CLIComandos {
 				.withDescription("remove um Atendente X")
 				.create("removeAtendente");
 		Option pausaAtendente = OptionBuilder.withArgName("atendente")
-				.hasArgs(2).withValueSeparator()
+				.hasArgs(1).withValueSeparator()
 				.withDescription("pausa um Atendente X")
 				.create("pausaAtendente");
 		Option coldownUsuario = OptionBuilder.withArgName("tempo")

@@ -8,15 +8,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<fx:root type="AnchorPane" blendMode="MULTIPLY" minHeight="749.0" prefHeight="762.9999000000025" prefWidth="1076.0" xmlns:fx="http://javafx.com/fxml" fx:controller="control.ControllerBalcaoJavaFx">
+<fx:root type="AnchorPane" blendMode="MULTIPLY" cache="true" cacheHint="DEFAULT" disable="false" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" mouseTransparent="false" opacity="1.0" prefHeight="-1.0" prefWidth="-1.0" xmlns:fx="http://javafx.com/fxml" fx:controller="control.ControllerBalcaoJavaFx">
   <children>
-    <HBox layoutX="7.0" layoutY="5.0" prefHeight="757.9998779296875" prefWidth="1069.0">
+    <HBox layoutX="7.0" layoutY="5.0" prefHeight="-1.0" prefWidth="-1.0">
       <children>
-        <SplitPane fx:id="spPrincipal" dividerPositions="0.30927835051546393" focusTraversable="true" prefHeight="758.0" prefWidth="1069.0">
+        <SplitPane fx:id="spPrincipal" dividerPositions="0.16776007497656983" focusTraversable="true" prefHeight="758.0" prefWidth="1069.0">
           <items>
             <AnchorPane fx:id="apPainel" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
               <children>
-                <VBox fx:id="vbPainel" layoutX="14.0" layoutY="8.0" prefHeight="734.0" prefWidth="300.0">
+                <VBox fx:id="vbPainel" layoutX="14.0" layoutY="8.0" prefHeight="734.0" prefWidth="148.0">
                   <children>
                     <Label fx:id="lSenha" labelFor="$lSenha" text="" textAlignment="CENTER" textFill="#ff3d00">
                       <font>
@@ -26,33 +26,33 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                       </VBox.margin>
                     </Label>
-                    <ScrollPane prefHeight="680.0" prefWidth="300.0000999999975">
-                      <content>
-                        <AnchorPane id="Content" fx:id="apspLista" minHeight="0.0" minWidth="0.0" prefHeight="679.0" prefWidth="298.0">
-                          <children>
-                            <VBox fx:id="vbLista" layoutX="14.0" layoutY="14.0" prefHeight="658.0" prefWidth="257.0" />
-                          </children>
-                        </AnchorPane>
-                      </content>
-                    </ScrollPane>
                   </children>
                 </VBox>
               </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="756.0" prefWidth="136.9998779296875">
               <children>
-                <TabPane id="" fx:id="tpPrincipal" layoutX="0.0" layoutY="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="737.0" tabClosingPolicy="UNAVAILABLE">
+                <TabPane id="" fx:id="tpPrincipal" layoutX="0.0" layoutY="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="758.0" prefWidth="885.0" tabClosingPolicy="UNAVAILABLE">
                   <tabs>
                     <Tab fx:id="tBalcao" text="Balcao">
                       <content>
-                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <VBox layoutX="14.0" layoutY="14.0" prefHeight="688.0" prefWidth="871.0">
+                              <children>
+                                <HBox fx:id="hbAtendentes" prefHeight="327.0" prefWidth="706.0" />
+                                <HBox id="HBox" fx:id="hbUsuarios" alignment="CENTER" spacing="5.0" />
+                              </children>
+                            </VBox>
+                          </children>
+                        </AnchorPane>
                       </content>
                     </Tab>
                     <Tab fx:id="tConfigs" text="Configs">
                       <content>
                         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="701.0" prefWidth="737.0">
                           <children>
-                            <VBox id="VBox" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="611.0" prefWidth="721.0" spacing="5.0">
+                            <VBox id="VBox" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="689.0" prefWidth="858.0" spacing="5.0">
                               <children>
                                 <HBox prefHeight="89.0" prefWidth="642.0">
                                   <children>
@@ -71,7 +71,7 @@
                                 <VBox id="VBox" alignment="CENTER" spacing="5.0">
                                   <children>
                                     <Label text="Setar Colldown Usuario:" />
-                                    <Slider fx:id="sColldownUsuario" blockIncrement="1.0" disable="false" majorTickUnit="1000.0" max="10000.0" min="1.0" minorTickCount="1000" showTickLabels="true" showTickMarks="true" snapToTicks="false" value="1.0" />
+                                    <Slider fx:id="sColldownUsuario" blockIncrement="1.0" disable="false" majorTickUnit="1000.0" max="10000.0" min="1.0" minorTickCount="100" showTickLabels="true" showTickMarks="true" snapToTicks="false" value="1.0" />
                                     <Label text="Setar Tempo Minimo Reclamações:" />
                                     <Slider id="sColldownUsuario" fx:id="sTMR" blockIncrement="10.0" majorTickUnit="10.0" max="10.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="false" />
                                     <Label text="Setar Tempo Maximo Reclamações:" />

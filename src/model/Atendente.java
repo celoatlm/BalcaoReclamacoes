@@ -9,6 +9,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 import control.CriaLogXML;
 import control.FilaSenhas;
+import control.ObserverAtendenteGui;
 
 public class Atendente extends Observable implements Runnable {
 	// Classe Atendente implementa um tipo Runnable
@@ -39,6 +40,8 @@ public class Atendente extends Observable implements Runnable {
 		// TODO Auto-generated method stub
 		while (kill) {// mantem a thread viva até alguem mata la XD
 			if (ativo) {// pausa a thread sem mata la :D
+				AtendenteGrafico ag = new AtendenteGrafico(nome, ativo, senha.getSenha().toString(), senha.getSenhaPrioritaria());
+				ObserverAtendenteGui.getInstance().setAtendenteGrafico(ag);
 				List<Integer> listaTempo = new ArrayList<>();
 				for (Reclamacao r : usuario.getReclamacoes()) {
 					try {
@@ -53,7 +56,11 @@ public class Atendente extends Observable implements Runnable {
 														senha.getSenha(), listaTempo, 
 														usuario.getSenha().getSenhaPrioritaria()));
 				log.info(this.toString() + " : Usuario " + usuario.toString());
+				
 				ativo = false;
+				ag.setAtivo(ativo);
+				ObserverAtendenteGui.getInstance().setAtendenteGrafico(ag);
+				
 
 			}
 			if (chamaNovaSenha) {// essa verificação é nescessaria pois posso
@@ -120,6 +127,10 @@ public class Atendente extends Observable implements Runnable {
 
 	public void pausaAtendente() {
 		chamaNovaSenha = !chamaNovaSenha;
+	}
+	
+	public Boolean getAtivo(){
+		return ativo;
 	}
 
 	@Override
