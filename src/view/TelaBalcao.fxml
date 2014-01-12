@@ -3,6 +3,7 @@
 <?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -118,9 +119,21 @@
                         </AnchorPane>
                       </content>
                     </Tab>
-                    <Tab fx:id="tSobre" text="Sobre">
+                    <Tab text="Graficos">
                       <content>
-                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane id="Content" fx:id="apGrafico" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <Button fx:id="bGeraGrafico" layoutX="103.0" layoutY="55.0" mnemonicParsing="false" onAction="#geraGraficos" text="Gera Grafico" />
+                            <BarChart fx:id="bcAtendentes" layoutX="33.0" layoutY="133.0" prefHeight="554.0" prefWidth="808.0">
+                              <xAxis>
+                                <CategoryAxis side="BOTTOM" />
+                              </xAxis>
+                              <yAxis>
+                                <NumberAxis side="LEFT" />
+                              </yAxis>
+                            </BarChart>
+                          </children>
+                        </AnchorPane>
                       </content>
                     </Tab>
                   </tabs>

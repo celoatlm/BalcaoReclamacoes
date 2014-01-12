@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 
@@ -20,8 +21,7 @@ public class Atendente extends Observable implements Runnable {
 	private FilaSenhas filaSenhas;
 	private String nome;
 	private Boolean chamaNovaSenha;
-	private static Logger log;
-	
+
 	public Atendente(String nome) {
 
 		kill = true;
@@ -31,7 +31,6 @@ public class Atendente extends Observable implements Runnable {
 		ativo = false;
 		chamaNovaSenha = true;
 		PropertyConfigurator.configure("./src/log4j.properties");
-		log = Logger.getLogger("Atendentes");
 
 	}
 
@@ -40,33 +39,36 @@ public class Atendente extends Observable implements Runnable {
 		// TODO Auto-generated method stub
 		while (kill) {// mantem a thread viva até alguem mata la XD
 			if (ativo) {// pausa a thread sem mata la :D
-				AtendenteGrafico ag = new AtendenteGrafico(nome, ativo, senha.getSenha().toString(), senha.getSenhaPrioritaria());
+				AtendenteGrafico ag = new AtendenteGrafico(nome, ativo, senha
+						.getSenha().toString(), senha.getSenhaPrioritaria());
 				ObserverAtendenteGui.getInstance().setAtendenteGrafico(ag);
-				List<Integer> listaTempo = new ArrayList<>();
+				List<String> listaTempo = new ArrayList<>();
 				for (Reclamacao r : usuario.getReclamacoes()) {
 					try {
 						Thread.sleep(r.getTempo());
-						listaTempo.add(r.getTempo());
+						listaTempo.add(r.getTempo().toString());
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-				CriaLogXML.getInstance().criaLogXML(new LogAtendente(Integer.parseInt(nome), 
-														senha.getSenha(), listaTempo, 
-														usuario.getSenha().getSenhaPrioritaria()));
-				log.info(this.toString() + " : Usuario " + usuario.toString());
-				
+				CriaLogXML.getInstance().criaLogXML(
+						new LogAtendente(nome, senha.getSenha().toString(),
+								listaTempo, usuario.getSenha()
+										.getSenhaPrioritaria().toString(),
+								new Date().getTime()));
+
+				// log.info(this.toString());
+				System.out.println(this.toString());
 				ativo = false;
 				ag.setAtivo(ativo);
 				ObserverAtendenteGui.getInstance().setAtendenteGrafico(ag);
-				
 
 			}
 			if (chamaNovaSenha) {// essa verificação é nescessaria pois posso
 				// desativalo no meio do processo
 				// de atendimento, e o atendente ainda assim
-				// chama um novo usuario 
+				// chama um novo usuario
 				senha = filaSenhas.pegaPrimeira();
 			}
 			while (senha == null && chamaNovaSenha) {// while para esperar até
@@ -99,14 +101,6 @@ public class Atendente extends Observable implements Runnable {
 		return senha;
 	}
 
-	public void setSenha(Senha senha) {
-		this.senha = senha;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
 	public void setUsuario(Usuario usuario) {
 
 		this.usuario = usuario;
@@ -121,22 +115,18 @@ public class Atendente extends Observable implements Runnable {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public void pausaAtendente() {
 		chamaNovaSenha = !chamaNovaSenha;
 	}
-	
-	public Boolean getAtivo(){
+
+	public Boolean getAtivo() {
 		return ativo;
 	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		String aux = "Atendente: " + nome;
+		String aux = "Atendente: " + nome + " " + usuario.toString();
 		return aux;
 	}
 

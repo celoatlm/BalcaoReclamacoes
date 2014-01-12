@@ -19,6 +19,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -76,7 +77,11 @@ public class ControllerBalcaoJavaFx implements Observer {
 	private HBox hbUsuarios;
 	@FXML
 	private HBox hbAtendentes;
-
+	@FXML
+	private Button bGeraGrafico;
+	@FXML 
+	private BarChart<Integer , String> bcAtendentes;
+	
 	private Map<String, PaneAtendente> mapPaneAtendente;
 	private List<Senha> senhas = null;
 
@@ -166,6 +171,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 					}
 				});
 
+		
 		atualizaConfigs();
 	}
 
@@ -219,6 +225,13 @@ public class ControllerBalcaoJavaFx implements Observer {
 	private void atualizaConfigs() {
 		setSlides();
 		atualizaComboBox();
+	}
+	@FXML
+	private void geraGraficos(){
+		
+		new GeraGraficos();
+		
+		
 	}
 
 	private void setSlides() {

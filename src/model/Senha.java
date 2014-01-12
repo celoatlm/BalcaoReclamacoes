@@ -15,31 +15,26 @@ public class Senha implements Comparable<Senha> {
 		return senha;
 	}
 
-	public void setSenha(Integer senha) {
-		this.senha = senha;
-	}
-
 	public Integer getSenhaPrioritaria() {
 		return senhaPrioritaria;
 	}
-
-	public void setSenhaPrioritaria(Integer senhaPrioritaria) {
-		this.senhaPrioritaria = senhaPrioritaria;
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String aux = "Senha: "+senha.toString()+" ";
+		if(senhaPrioritaria == 0){
+			aux += "senha-prioritaria ";
+		}else{
+			aux += "senha-não-prioritaria ";
+		}
+		return aux;
 	}
 
 	@Override
 	public int compareTo(Senha s) {
 		// TODO Auto-generated method stub
 		// esse metodo retorna um int conforme a comparação com outra senha
-		//falar com o professor não ta certo isso aqui 
-//		if (this.senhaPrioritaria < s.getSenhaPrioritaria()) {
-//			return -1;
-//		}
-//		if (this.senhaPrioritaria > s.getSenhaPrioritaria()) {
-//			return 1;
-//		}
-//		return 0;
-		//return this.senhaPrioritaria - s.getSenhaPrioritaria();
 		return this.senhaPrioritaria.compareTo(s.senhaPrioritaria);
 	}
 }

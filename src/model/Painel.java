@@ -25,22 +25,9 @@ public class Painel extends Observable implements Observer {
 		if (painel == null) {
 			painel = new Painel();
 		}
-		
-		return painel;
-		
-	}
 
-	@Override
-	public void update(Observable atendente, Object senha) {
-		// TODO Auto-generated method stub
-		// função que recebe o chamado de um atendente e chama os usuarios
-		if (atendente instanceof Atendente) {
-			Atendente a = (Atendente) atendente;
-			senhas.add((Senha) senha);
-			mapAtendente.put(((Senha) senha).getSenha(), a);
-			setChanged();
-			notifyObservers(senha);
-		}
+		return painel;
+
 	}
 
 	public void addAtendente(Atendente atendente) {
@@ -54,6 +41,19 @@ public class Painel extends Observable implements Observer {
 		mapAtendente.get(usuario.getSenha().getSenha()).setUsuario(usuario);
 		mapAtendente.remove(usuario.getSenha().getSenha());
 
+	}
+
+	@Override
+	public void update(Observable atendente, Object senha) {
+		// TODO Auto-generated method stub
+		// função que recebe o chamado de um atendente e chama os usuarios
+		if (atendente instanceof Atendente) {
+			Atendente a = (Atendente) atendente;
+			senhas.add((Senha) senha);
+			mapAtendente.put(((Senha) senha).getSenha(), a);
+			setChanged();
+			notifyObservers(senha);
+		}
 	}
 
 }

@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 public class MainApp {
 
-	
-	
 	/**
 	 * @param args
 	 */
@@ -13,17 +11,13 @@ public class MainApp {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		//fabricaUsuarioAtendente = FabricaUsuarioAtendente.getInstance();
+		// fabricaUsuarioAtendente = FabricaUsuarioAtendente.getInstance();
 		while (true) {
 
 			System.out.println("Esperando comando");
-			CLIComandos.getInstance().executaComando(new Scanner(System.in).nextLine());
-			
+			CLIComandos.getInstance().executaComando(
+					new Scanner(System.in).nextLine());
 
 		}
-
 	}
-
-	
-
 }

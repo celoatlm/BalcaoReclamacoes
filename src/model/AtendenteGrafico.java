@@ -47,6 +47,4 @@ public class AtendenteGrafico {
 		this.senhaPrioritaria = senhaPrioritaria;
 	}
 	
-	
-
 }

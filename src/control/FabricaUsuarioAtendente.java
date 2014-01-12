@@ -21,7 +21,7 @@ import org.apache.commons.digester3.xmlrules.FromXmlRulesModule;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
-public class FabricaUsuarioAtendente extends Observable{
+public class FabricaUsuarioAtendente extends Observable {
 
 	// classe responsavel por fabricar os usuarios e atendentes
 
@@ -36,6 +36,7 @@ public class FabricaUsuarioAtendente extends Observable{
 	private FabricaAtendente fabricaAtendente;
 	private ConfigFabricaUsuarioAtendente configFabricaUsuarioAtendente;
 	private Logger log;
+	private Boolean ativo;
 
 	private FabricaUsuarioAtendente() {
 		// construtor da classe
@@ -46,6 +47,7 @@ public class FabricaUsuarioAtendente extends Observable{
 		painel = Painel.getInstance();
 
 		ativoFabricaUsuario = true;
+		ativo = true;
 		senha = 0;
 		kill = true;
 		atendentesMap = new HashMap<Integer, Atendente>();
@@ -57,7 +59,7 @@ public class FabricaUsuarioAtendente extends Observable{
 		fabricaUsuario = new FabricaUsuario();
 
 		log = Logger.getLogger(FabricaUsuarioAtendente.class.getName());
-		
+
 	}
 
 	public void pausaFabricaUsuario() {
@@ -67,9 +69,12 @@ public class FabricaUsuarioAtendente extends Observable{
 
 	public void startFabrica() {
 		// startar ambas as fabricas
-		new Thread(fabricaAtendente, "Atendentes").start();
-		new Thread(fabricaUsuario, "Clientes").start();
-		
+		if (ativo) {
+			new Thread(fabricaAtendente, "Atendentes").start();
+			new Thread(fabricaUsuario, "Clientes").start();
+			ativo = false;
+		}
+
 	}
 
 	public static FabricaUsuarioAtendente getInstance() {
@@ -77,7 +82,7 @@ public class FabricaUsuarioAtendente extends Observable{
 		if (fabricaUsuarioAtendente == null) {
 			fabricaUsuarioAtendente = new FabricaUsuarioAtendente();
 		}
-		
+
 		return FabricaUsuarioAtendente.fabricaUsuarioAtendente;
 	}
 
@@ -103,7 +108,8 @@ public class FabricaUsuarioAtendente extends Observable{
 		}
 		System.out.println(aux);
 	}
-	public List<Atendente> getAtendentes(){
+
+	public List<Atendente> getAtendentes() {
 		List<Atendente> atendentes = new ArrayList<>(atendentesMap.values());
 		return atendentes;
 	}
@@ -132,11 +138,10 @@ public class FabricaUsuarioAtendente extends Observable{
 		configFabricaUsuarioAtendente.setTempoMaximoReclamacao(tmxr);
 		notificaObservers();
 	}
-	
 
 	private void recuperaConfig() {
 		// função para leitura do xml contendo as configurações inicias default
-		final String rulesFileName = "./src/xmlrules.xml";
+		final String rulesFileName = "./src/xmlrulesConfig.xml";
 		String dataFileName = "./src/configFabricaUsuarioAtendente.xml";
 
 		Digester digester = newLoader(new FromXmlRulesModule() {
@@ -159,6 +164,16 @@ public class FabricaUsuarioAtendente extends Observable{
 			log.error(e.getMessage());
 		}
 
+	}
+	
+
+	public ConfigFabricaUsuarioAtendente getConfigFabricaUsuarioAtendente() {
+		return configFabricaUsuarioAtendente;
+	}
+
+	private synchronized void notificaObservers() {
+		setChanged();
+		notifyObservers();
 	}
 
 	protected class FabricaUsuario implements Runnable {
@@ -233,7 +248,7 @@ public class FabricaUsuarioAtendente extends Observable{
 		}
 
 		protected void addAtendente() {
-			
+
 			Atendente atendente = new Atendente(contAtendente.toString());
 			new Thread(atendente, contAtendente.toString()).start();
 			// atendentes.add(atendente);
@@ -245,11 +260,4 @@ public class FabricaUsuarioAtendente extends Observable{
 		}
 	}
 
-	public ConfigFabricaUsuarioAtendente getConfigFabricaUsuarioAtendente() {
-		return configFabricaUsuarioAtendente;
-	}
-	private synchronized void notificaObservers(){
-		setChanged();
-		notifyObservers();
-	}
 }

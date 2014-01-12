@@ -38,33 +38,19 @@ public class Usuario implements Observer {
 		return senha;
 	}
 
-	public void setSenha(Senha senha) {
-		this.senha = senha;
-	}
-
 	public List<Reclamacao> getReclamacoes() {
 		return reclamacoes;
-	}
-
-	public void setReclamacoes(List<Reclamacao> reclamacoes) {
-		this.reclamacoes = reclamacoes;
 	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		//esse metodo retorna todo o usuario em forma de String
-		String usuario = "Senha: " + senha.getSenha();
-		if (senha.getSenhaPrioritaria() == 0) {
-			usuario += " :senha prioritaria";
-		} else {
-			usuario += " :senha não prioritaria";
-		}
-		usuario += " :Reclamações: ";
+		String usuario = "Usuario: "+ senha.toString();
+		usuario += " Reclamações: ";
 		for (Reclamacao r : reclamacoes) {
-			usuario += + r.getTempo() + " - ";
+			usuario += + r.getTempo() + " ";
 		}
-		usuario += ":";
 		return usuario;
 	}
 

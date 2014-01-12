@@ -12,10 +12,4 @@ public class Reclamacao {
 		return tempo;
 	}
 
-	public void setTempo(Integer tempo) {
-		this.tempo = tempo;
-	}
-	
-	
-	
 }

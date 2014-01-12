@@ -1,50 +1,88 @@
 package model;
 
 import java.util.List;
-
 public class LogAtendente {
 
-	private Integer atendente;
-	private Integer senha;
-	private List<Integer> tempoSenhas;
-	private Integer prioritaria;
-		
+	//classe criada para os logs dos atendentes
+	
+	private String atendente;
+	private String senha;
+	private List<String> tempoSenhas;
+	private String prioritaria;
+	private Long data;
+	
 	public LogAtendente() {
 	}
-	
-	public LogAtendente(Integer atendente, Integer senha,
-			List<Integer> tempoSenhas, Integer prioritaria) {
+		
+	public LogAtendente(String atendente, String senha,
+			List<String> tempoSenhas, String prioritaria, Long data) {
 		this.atendente = atendente;
 		this.senha = senha;
 		this.tempoSenhas = tempoSenhas;
 		this.prioritaria = prioritaria;
+		this.data = data;
 		
 	}
-	public Integer getAtendente() {
+		
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String aux = "Atendente: "+atendente+ " Usuario:Senha " + senha+ " ";
+		if(prioritaria.equals("0") ){
+			aux += "senha-prioritaria";
+		}else{
+			aux += "senha-não-prioritaria";
+		}
+		for(String i : tempoSenhas){
+			aux += i+" ";
+		}
+		return aux;
+	}
+
+	public String getAtendente() {
 		return atendente;
 	}
-	public void setAtendente(Integer atendente) {
+
+	public void setAtendente(String atendente) {
 		this.atendente = atendente;
 	}
-	public Integer getSenha() {
+
+	public String getSenha() {
 		return senha;
 	}
-	public void setSenha(Integer senha) {
+
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public List<Integer> getTempoSenhas() {
+
+	public List<String> getTempoSenhas() {
 		return tempoSenhas;
 	}
-	public void setTempoSenhas(List<Integer> tempoSenhas) {
+
+	public void setTempoSenhas(List<String> tempoSenhas) {
 		this.tempoSenhas = tempoSenhas;
 	}
-	public Integer getPrioritaria() {
+
+	public String getPrioritaria() {
 		return prioritaria;
 	}
-	public void setPrioritaria(Integer prioritaria) {
+
+	public void setPrioritaria(String prioritaria) {
 		this.prioritaria = prioritaria;
 	}
+	public void addReclamacao(String reclamacao){
+		tempoSenhas.add(reclamacao);
+	}
 	
+	public void stringData(String data){
+		this.data = Long.parseLong(data);
+	}
 	
-	
+	public Long getData() {
+		return data;
+	}
+	public void setData(Long data) {
+		this.data = data;
+	}
+		
 }

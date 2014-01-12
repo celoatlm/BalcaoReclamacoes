@@ -7,7 +7,7 @@ public class ConfigFabricaUsuarioAtendente {
 	// fabricas de usuarios e atendentes,
 	// as variaveis são setadas nullas para que
 	// na primeira vez que ela é carregada na leitura do xml,
-	// não haja comparação entre variaveis nullas;
+	// não haja comparação entre variaveis nulls;
 	private String colldownUsuario = null;
 	private String quantidadeMaximaReclamacao = null;
 	private String quantidadeMinimaReclamacao = null;
@@ -20,7 +20,8 @@ public class ConfigFabricaUsuarioAtendente {
 	}
 
 	public void setColldownUsuario(String colldownUsuario) {
-		if (Integer.parseInt(colldownUsuario) > 0 && Integer.parseInt(colldownUsuario) < 10001) {
+		if (Integer.parseInt(colldownUsuario) > 199
+				&& Integer.parseInt(colldownUsuario) < 10001) {
 			this.colldownUsuario = colldownUsuario;
 		}
 	}
@@ -94,7 +95,10 @@ public class ConfigFabricaUsuarioAtendente {
 	}
 
 	public void setQuantidadeAtendentes(String quantidadeAtendentes) {
-		this.quantidadeAtendentes = quantidadeAtendentes;
+		if (Integer.parseInt(quantidadeAtendentes) > 0
+				&& Integer.parseInt(quantidadeAtendentes) < 11) {
+			this.quantidadeAtendentes = quantidadeAtendentes;
+		}
 	}
 
 }

@@ -96,6 +96,7 @@ public class CLIComandos {
 			}
 			if(cmd.hasOption("startx")){
 				new Thread(new BalcaoAppJavaFX()).start();
+				//Platform.runLater(new BalcaoAppJavaFX());
 				
 			}
 
