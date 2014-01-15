@@ -165,7 +165,6 @@ public class FabricaUsuarioAtendente extends Observable {
 		}
 
 	}
-	
 
 	public ConfigFabricaUsuarioAtendente getConfigFabricaUsuarioAtendente() {
 		return configFabricaUsuarioAtendente;
@@ -209,7 +208,7 @@ public class FabricaUsuarioAtendente extends Observable {
 								.nextInt(2);
 						Senha s = new Senha(senha, atendimentoPrioritario);
 						filaSenhas.inserirSenha(s);
-						new Usuario(painel, reclamacoes, s);
+						new Usuario(reclamacoes, s);
 						Thread.sleep(Integer
 								.parseInt(configFabricaUsuarioAtendente
 										.getColldownUsuario()));

@@ -7,16 +7,17 @@ import java.util.Observer;
 public class Usuario implements Observer {
 	// classe responsavel pela implementação do usuario
 
-	private Observable painel;// lembrar do padão de projeto Observer
+	//private Observable painel;// lembrar do padão de projeto Observer
 	private Senha senha;
 	private List<Reclamacao> reclamacoes;
 
-	public Usuario(Observable painel, List<Reclamacao> reclamacoes, Senha senha) {
+	public Usuario(List<Reclamacao> reclamacoes, Senha senha) {
 		// Construtor da classe
-		this.painel = painel;
+		//this.painel = painel;
 		this.reclamacoes = reclamacoes;
 		this.senha = senha;
-		this.painel.addObserver(this);
+		//this.painel.addObserver(this);
+		Painel.getInstance().addObserver(this);
 
 	}
 
