@@ -13,8 +13,9 @@ public class MainApp {
 
 		// fabricaUsuarioAtendente = FabricaUsuarioAtendente.getInstance();
 		while (true) {
-			////bla bla
-			System.out.println("Esperando comando");
+			///la bla
+			
+			System.out.println("Esperando comando pra muda");
 			CLIComandos.getInstance().executaComando(
 					new Scanner(System.in).nextLine());
 
