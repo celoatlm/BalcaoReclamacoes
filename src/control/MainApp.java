@@ -13,7 +13,7 @@ public class MainApp {
 
 		// fabricaUsuarioAtendente = FabricaUsuarioAtendente.getInstance();
 		while (true) {
-
+			////bla bla
 			System.out.println("Esperando comando");
 			CLIComandos.getInstance().executaComando(
 					new Scanner(System.in).nextLine());
