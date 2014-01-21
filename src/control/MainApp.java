@@ -15,7 +15,7 @@ public class MainApp {
 		while (true) {
 			///la bla
 			
-			System.out.println("Esperando comando pra muda");
+			System.out.println("Esperando comando");
 			CLIComandos.getInstance().executaComando(
 					new Scanner(System.in).nextLine());
 

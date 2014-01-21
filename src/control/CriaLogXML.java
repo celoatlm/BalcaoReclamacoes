@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.LineNumberReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
@@ -24,21 +25,20 @@ public class CriaLogXML {
 	private Logger log = Logger.getLogger(this.getClass().getName());
 
 	private File file;
-	private Boolean existe;
-
+	
 	private CriaLogXML() {
 
 		file = new File("./src/logAtendentes.xml");
-		existe = file.exists();
-		if (!existe) {
+		
+		if (!file.exists()) {
 			try {
+				
 				file.createNewFile();
 				FileWriter fw = new FileWriter(file);
 				BufferedWriter bw = new BufferedWriter(fw);
 				bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 				bw.newLine();
 				bw.write("<logs>");
-
 				bw.close();
 
 			} catch (IOException e) {
@@ -71,17 +71,20 @@ public class CriaLogXML {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
 			
-			String aux = "";
+			String recuperaArquivo = "";//variavel utilizada para recuperar todo o arquivo anterior
+			//LineNumberReader lnr = new LineNumberReader(br);
+			//System.out.println(lnr.getLineNumber());
 			
 			while(br.ready()){
-				aux += br.readLine().replace("</logs>", "");
-				aux += "\n";
+				
+				recuperaArquivo += br.readLine().replace("</logs>", "");
+				recuperaArquivo += "\n";
 			}
 			
 			FileWriter fw = new FileWriter(file);
 			BufferedWriter bw = new BufferedWriter(fw);
 			
-			bw.write(aux + outputWriter.toString()+"</logs>");
+			bw.write(recuperaArquivo + outputWriter.toString()+"</logs>");
 			bw.newLine();
 			bw.close();
 			fw.close();

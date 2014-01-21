@@ -5,6 +5,7 @@ import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import java.io.File;
 import java.io.IOException;
 
+import model.LogAtendente;
 import model.Logs;
 
 import org.apache.commons.digester3.Digester;
@@ -40,6 +41,9 @@ public class GeraGraficos {
 		try {
 			File srcFile = new java.io.File(dataFileName);
 			digester.parse(srcFile);
+			for(LogAtendente la : l.getListaLogAtendentes()){
+				System.out.println(la.getAtendente());
+			}
 		} catch (IOException | SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

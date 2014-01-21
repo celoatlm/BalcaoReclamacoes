@@ -112,7 +112,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 							commando = "-colldownUsuario "
 									+ getString(sColldownUsuario.getValue());
 							executaCommando(commando);
-							System.out.println(commando);
+							//System.out.println(commando);
 						}
 
 					}
@@ -202,12 +202,14 @@ public class ControllerBalcaoJavaFx implements Observer {
 	private void pausaAtendente() {
 		commando = "-pausaAtendente " + cbPausaAtendente.getValue();
 		executaCommando(commando);
+		cbPausaAtendente.setValue("");
 	}
 
 	@FXML
 	private void paraAtendente() {
 		commando = "-removeAtendente " + cbParaAtendente.getValue();
 		executaCommando(commando);
+		cbParaAtendente.setValue("");
 	}
 
 	@FXML
