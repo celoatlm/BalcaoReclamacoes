@@ -7,9 +7,10 @@ public class LogAtendente {
 	
 	private String atendente;
 	private String senha;
-	private List<String> tempoSenhas;
 	private String prioritaria;
 	private Long data;
+	
+	private List<String> tempoSenhas;
 	
 	public LogAtendente() {
 	}

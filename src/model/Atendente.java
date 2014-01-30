@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Observable;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 import control.CriaLogXML;
 import control.FilaSenhas;
@@ -30,7 +29,7 @@ public class Atendente extends Observable implements Runnable {
 		this.nome = nome;
 		ativo = false;
 		chamaNovaSenha = true;
-		PropertyConfigurator.configure("./src/log4j.properties");
+		//PropertyConfigurator.configure("./log4j.properties");
 
 	}
 
@@ -52,13 +51,18 @@ public class Atendente extends Observable implements Runnable {
 						e.printStackTrace();
 					}
 				}
-				CriaLogXML.getInstance().criaLogXML(
+				// CriaLogXML.getInstance().criaLogXML(
+				// new LogAtendente(nome, senha.getSenha().toString(),
+				// listaTempo, usuario.getSenha()
+				// .getSenhaPrioritaria().toString(),
+				// new Date().getTime()));
+
+				// log.info(this.toString());
+				CriaLogXML.getInstance().addLogAtendente(
 						new LogAtendente(nome, senha.getSenha().toString(),
 								listaTempo, usuario.getSenha()
 										.getSenhaPrioritaria().toString(),
 								new Date().getTime()));
-
-				// log.info(this.toString());
 				System.out.println(this.toString());
 				ativo = false;
 				ag.setAtivo(ativo);

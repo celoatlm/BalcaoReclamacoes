@@ -141,8 +141,8 @@ public class FabricaUsuarioAtendente extends Observable {
 
 	private void recuperaConfig() {
 		// função para leitura do xml contendo as configurações inicias default
-		final String rulesFileName = "./src/xmlrulesConfig.xml";
-		String dataFileName = "./src/configFabricaUsuarioAtendente.xml";
+		final String rulesFileName = "./xmlrulesConfig.xml";
+		String dataFileName = "./configFabricaUsuarioAtendente.xml";
 
 		Digester digester = newLoader(new FromXmlRulesModule() {
 
@@ -158,6 +158,7 @@ public class FabricaUsuarioAtendente extends Observable {
 		try {
 			File srcFile = new java.io.File(dataFileName);
 			digester.parse(srcFile);
+			
 		} catch (IOException | SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -14,8 +14,9 @@ public class BalcaoAppJavaFX extends Application implements Runnable {
 	private Boolean ativo = false;
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(final Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
+
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Balcao Reclamações");
 		
@@ -29,7 +30,7 @@ public class BalcaoAppJavaFX extends Application implements Runnable {
 			public void handle(WindowEvent arg0) {
 				// TODO Auto-generated method stub
 				ativo = false;
-				System.out.println("fecho");
+				//System.out.println("fecho");
 			}
 		});
 		primaryStage.setResizable(false);

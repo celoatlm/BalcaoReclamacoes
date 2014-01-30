@@ -30,6 +30,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class ControllerBalcaoJavaFx implements Observer {
 	// classe responsavel por controlar as ações da parte grafica da app
@@ -271,7 +272,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 				}
 			});
 			senhas = new ArrayList<>((List<Senha>) arg1);
-			atualizaPainel();
+			atualizaPainelSenhas();
 		}
 		if (observable instanceof Painel) {
 			final String aux = ((Senha) arg1).getSenha().toString();
@@ -294,23 +295,33 @@ public class ControllerBalcaoJavaFx implements Observer {
 
 	}
 
-	private void atualizaPainel() {
+	private void atualizaPainelSenhas() {
 		// TODO Auto-generated method stub
+		//String aux = "";
 		if (senhas != null) {
+			
 			for (final Senha s : senhas) {
+				//aux+= s.getSenha()+" : " + s.getSenhaPrioritaria()+"\n";
+				
 				Platform.runLater(new Runnable() {
 
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-
-						hbUsuarios.getChildren().add(
-								new Label(s.getSenha().toString() + " : "
-										+ s.getSenhaPrioritaria().toString()));
+						Label l = new Label(s.getSenha().toString() + " : "
+										+ s.getSenhaPrioritaria().toString()); 
+						if(s.getSenhaPrioritaria() == 0){
+							l.setStyle("-fx-background-color: green;");
+						}else{
+							l.setStyle("-fx-background-color: blue;");
+						}
+						l.setFont(new Font(20));
+						hbUsuarios.getChildren().add(l);
 					}
 				});
 			}
 		}
+		//System.out.println(aux);
 	}
 
 	private void atualizaPaneAtendentes() {
@@ -321,7 +332,9 @@ public class ControllerBalcaoJavaFx implements Observer {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				
 				hbAtendentes.getChildren().clear();
+				
 			}
 		});
 

@@ -35,6 +35,12 @@ public class Senha implements Comparable<Senha> {
 	public int compareTo(Senha s) {
 		// TODO Auto-generated method stub
 		// esse metodo retorna um int conforme a comparação com outra senha
-		return this.senhaPrioritaria.compareTo(s.senhaPrioritaria);
+		if(this.senhaPrioritaria == s.getSenhaPrioritaria())
+		{
+			return this.senha.compareTo(s.getSenha());
+		}else{
+			return this.senhaPrioritaria.compareTo(s.senhaPrioritaria);
+		}
+		
 	}
 }

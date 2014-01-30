@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class PaneAtendente extends Pane {
 	// classe utilizada para mostrar o funcionamento do atendente para a parte
@@ -19,19 +20,21 @@ public class PaneAtendente extends Pane {
 	public PaneAtendente(AtendenteGrafico ag) {
 		this.ag = ag;
 		atualizaPane();
-		
+
 	}
 
 	private void atualizaPane() {
+		this.setMaxSize(200, 150);
 		Platform.runLater(new Runnable() {
 
 			@Override
 			public void run() {
 				layout = new VBox();
+
+				lNome = new Label("Atendente: " + ag.getAtendente());
 				
-								lNome = new Label(ag.getAtendente());
-				lSenha = new Label(ag.getSenha());
-				
+				lSenha = new Label("Senha: " + ag.getSenha());
+
 				switch (ag.getSenhaPrioritaria()) {
 				case 0:
 					lSenhaPrioritaria = new Label("senha prioritaria");
@@ -50,12 +53,16 @@ public class PaneAtendente extends Pane {
 					setStyle("-fx-background-color: red;");
 				}
 				
+				lNome.setFont(new Font(20));
+				lSenha.setFont(new Font(15));
+				lSenhaPrioritaria.setFont(new Font(15));
+				
+				layout.setMaxSize(200, 150);
 				layout.getChildren().clear();
 				layout.getChildren().add(lNome);
 				layout.getChildren().add(lSenha);
 				layout.getChildren().add(lSenhaPrioritaria);
-				
-				
+
 				getChildren().add(layout);
 			}
 		});

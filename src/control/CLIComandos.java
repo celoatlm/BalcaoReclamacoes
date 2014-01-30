@@ -1,5 +1,7 @@
 package control;
 
+import java.util.Date;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -98,6 +100,18 @@ public class CLIComandos {
 				new Thread(new BalcaoAppJavaFX()).start();
 				
 			}
+			if(cmd.hasOption("data")){
+				Date d = new Date();
+				String[] data = d.toString().split(" ");
+				for(int  i = 0; i < data.length; i++){
+					System.out.println(data[i]);
+				}
+				String[] aux = data[3].split(":");
+				for(int  i = 0; i < aux.length; i++){
+					System.out.println(aux[i]);
+				}
+				System.out.println(d.toString());
+			}
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -160,6 +174,9 @@ public class CLIComandos {
 		Option error = OptionBuilder.withArgName("error")
 				.withDescription("").create("error");
 		
+		Option data = OptionBuilder.withArgName("data")
+				.withDescription("Data do sistema").create("data");
+		
 		options = new Options();
 
 		options.addOption(startApp);
@@ -177,6 +194,7 @@ public class CLIComandos {
 		options.addOption(listaAtendentes);
 		options.addOption(listaSenhas);
 		options.addOption(exit);
+		options.addOption(data);
 		options.addOption(error);
 
 		
