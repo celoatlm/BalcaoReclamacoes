@@ -91,20 +91,19 @@ public class GeraGraficos {
 	private void mediaAtendimento() {
 		Map<String, Integer> media = new HashMap<String, Integer>();
 		Integer cont = 0;
-		if (dia != null) {
-
+		if (dia != null  && mes != null && ano != null) {
 			for (LogAtendente la : l.getListaLogAtendentes()) {
 				Data d = new Data(la.getData());
-				if (d.getDia() == dia) {
+				if (d.getDia() == dia && d.getMes() == mes && d.getAno() == ano) {
 					media = manipulaMap(media, la.getAtendente());
 					cont++;
 				}
 			}
 		} else {
-			if (mes != null) {
+			if (mes != null  && ano != null) {
 				for (LogAtendente la : l.getListaLogAtendentes()) {
 					Data d = new Data(la.getData());
-					if (d.getMes() == mes) {
+					if (d.getMes() == mes && d.getAno() == ano) {
 						media = manipulaMap(media, la.getAtendente());
 						cont++;
 					}
@@ -133,13 +132,13 @@ public class GeraGraficos {
 	}
 
 	private Map<String, Integer> manipulaMap(Map<String, Integer> media,
-			String atendente) {
-		if (media.get(atendente) == null) {
-			media.put(atendente, 1);
+			String key) {
+		if (media.get(key) == null) {
+			media.put(key, 1);
 		} else {
-			int aux = media.get(atendente) + 1;
-			media.remove(atendente);
-			media.put(atendente, aux);
+			int aux = media.get(key) + 1;
+			media.remove(key);
+			media.put(key, aux);
 		}
 		return media;
 	}
@@ -160,18 +159,35 @@ public class GeraGraficos {
 	}
 
 	private void atendimentosDiarios() {
-		if (dia != null) {
-
+		Map<String, Integer> media = new HashMap<String, Integer>();
+		if (dia != null && mes != null && ano != null) {
+			for(LogAtendente la : l.getListaLogAtendentes()){
+				Data d = new Data(la.getData());
+				if (d.getDia() == dia) {
+					media = manipulaMap(media, d.getDia().toString());
+				}
+			}
 		} else {
-			if (mes != null) {
-
-			} else {
+			if (mes != null && ano != null) {
+				for(LogAtendente la : l.getListaLogAtendentes()){
+					Data d = new Data(la.getData());
+					if (d.getMes() == mes && d.getAno() == ano) {
+						media = manipulaMap(media, d.getDia().toString());
+					}
+				}
+			}else{
 				if (ano != null) {
-
+					for(LogAtendente la : l.getListaLogAtendentes()){
+						Data d = new Data(la.getData());
+						if (d.getAno() == ano) {
+							media = manipulaMap(media, d.getDia().toString()+"/"+d.getMes().toString());
+						}
+					}
 				}
 			}
 
 		}
+		
 	}
 
 	protected class Data {
