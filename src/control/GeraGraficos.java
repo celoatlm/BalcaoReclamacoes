@@ -26,11 +26,12 @@ public class GeraGraficos {
 	private Integer dia;
 	private Integer mes;
 	private Integer ano;
-
+	Map<String, Integer> media;
+	
 	public GeraGraficos() {
 
-		// recuperaDados();
-		new Data(new Date().getTime());
+		recuperaDados();
+		//new Data(new Date().getTime());
 	}
 
 	public GeraGraficos(Integer dia, Integer mes, Integer ano, String opcao) {
@@ -39,6 +40,8 @@ public class GeraGraficos {
 		this.mes = mes;
 		this.dia = dia;
 
+		
+		
 		switch (opcao) {
 		case "ma":
 			mediaAtendimento();
@@ -89,14 +92,17 @@ public class GeraGraficos {
 	}
 
 	private void mediaAtendimento() {
-		Map<String, Integer> media = new HashMap<String, Integer>();
-		Integer cont = 0;
+		media = new HashMap<String, Integer>();
+		Map<String, Integer> cont = new HashMap<String, Integer>();
+		
 		if (dia != null  && mes != null && ano != null) {
 			for (LogAtendente la : l.getListaLogAtendentes()) {
 				Data d = new Data(la.getData());
 				if (d.getDia() == dia && d.getMes() == mes && d.getAno() == ano) {
-					media = manipulaMap(media, la.getAtendente());
-					cont++;
+					for(String tempo: la.getTempoSenhas()){
+						media = manipulaMap(media, la.getAtendente(), Integer.parseInt(tempo));
+					}
+					cont = manipulaMap(cont, la.getAtendente(), 1);
 				}
 			}
 		} else {
@@ -104,8 +110,10 @@ public class GeraGraficos {
 				for (LogAtendente la : l.getListaLogAtendentes()) {
 					Data d = new Data(la.getData());
 					if (d.getMes() == mes && d.getAno() == ano) {
-						media = manipulaMap(media, la.getAtendente());
-						cont++;
+						for(String tempo: la.getTempoSenhas()){
+							media = manipulaMap(media, la.getAtendente(),Integer.parseInt(tempo));
+						}
+						cont = manipulaMap(media, la.getAtendente(), 1);
 					}
 				}
 			} else {
@@ -113,8 +121,10 @@ public class GeraGraficos {
 					for (LogAtendente la : l.getListaLogAtendentes()) {
 						Data d = new Data(la.getData());
 						if (d.getAno() == ano) {
-							media = manipulaMap(media, la.getAtendente());
-							cont++;
+							for(String tempo: la.getTempoSenhas()){
+								media = manipulaMap(media, la.getAtendente(),Integer.parseInt(tempo));
+							}
+							cont = manipulaMap(media, la.getAtendente(), 1);
 						}
 					}
 				}
@@ -122,7 +132,7 @@ public class GeraGraficos {
 		}
 		for(Integer i = 0; i < media.size(); ){
 			if(media.containsKey(i.toString())){
-				Integer valor = media.get(i.toString()) / cont;
+				Integer valor = media.get(i.toString()) / cont.get(i.toString());
 				media.remove(i.toString());
 				media.put(i.toString(), valor);
 			}
@@ -131,40 +141,67 @@ public class GeraGraficos {
 
 	}
 
-	private Map<String, Integer> manipulaMap(Map<String, Integer> media,
-			String key) {
-		if (media.get(key) == null) {
-			media.put(key, 1);
-		} else {
-			int aux = media.get(key) + 1;
-			media.remove(key);
-			media.put(key, aux);
-		}
-		return media;
-	}
-
 	private void mediaReclamacao() {
-		if (dia != null) {
-
+		media = new HashMap<String, Integer>();
+		Map<String, Integer> cont = new HashMap<String, Integer>();
+		
+		if (dia != null && mes != null && ano != null) {
+			for(LogAtendente la : l.getListaLogAtendentes()){
+				Data d = new Data(la.getData());
+				if (d.getDia() == dia && d.getMes() == mes && d.getAno() == ano) {
+					for(String s: la.getTempoSenhas()){
+						media = manipulaMap(media, d.getDia().toString(), Integer.parseInt(s));
+					}
+					cont = manipulaMap(cont, d.getDia().toString() , 1);
+				}
+			}
 		} else {
-			if (mes != null) {
-
+			if (mes != null && ano != null) {
+				for(LogAtendente la : l.getListaLogAtendentes()){
+					Data d = new Data(la.getData());
+					if (d.getDia() == dia && d.getMes() == mes) {
+						for(String s: la.getTempoSenhas()){
+							media = manipulaMap(media, d.getDia().toString(), Integer.parseInt(s));
+						}
+						cont = manipulaMap(cont, d.getDia().toString() , 1);
+					}
+				}
 			} else {
 				if (ano != null) {
-
+					for(LogAtendente la : l.getListaLogAtendentes()){
+						Data d = new Data(la.getData());
+						if (d.getAno() == ano) {
+							for(String s: la.getTempoSenhas()){
+								media = manipulaMap(media, d.getDia().toString()+"/"+d.getMes().toString(),Integer.parseInt(s));
+							}
+							cont = manipulaMap(cont, d.getDia().toString()+"/"+d.getMes().toString() , 1);
+						}
+					}
 				}
 			}
 
 		}
+		for(Integer i = 0; i < media.size(); ){
+			if(media.containsKey(i.toString())){
+				Integer valor = media.get(i.toString()) / cont.get(i.toString());
+				media.remove(i.toString());
+				media.put(i.toString(), valor);
+			}
+			i++;
+		}
 	}
 
 	private void atendimentosDiarios() {
-		Map<String, Integer> media = new HashMap<String, Integer>();
+		media = new HashMap<String, Integer>();
+		Map<String, Integer> cont = new HashMap<String, Integer>();
+		
+		
 		if (dia != null && mes != null && ano != null) {
 			for(LogAtendente la : l.getListaLogAtendentes()){
 				Data d = new Data(la.getData());
 				if (d.getDia() == dia) {
-					media = manipulaMap(media, d.getDia().toString());
+					media = manipulaMap(media, d.getDia().toString(),1);
+					cont = manipulaMap(cont, d.getDia().toString(), 1);
 				}
 			}
 		} else {
@@ -172,7 +209,8 @@ public class GeraGraficos {
 				for(LogAtendente la : l.getListaLogAtendentes()){
 					Data d = new Data(la.getData());
 					if (d.getMes() == mes && d.getAno() == ano) {
-						media = manipulaMap(media, d.getDia().toString());
+						media = manipulaMap(media, d.getDia().toString(),1);
+						cont = manipulaMap(cont, d.getDia().toString(), 1);
 					}
 				}
 			}else{
@@ -180,16 +218,39 @@ public class GeraGraficos {
 					for(LogAtendente la : l.getListaLogAtendentes()){
 						Data d = new Data(la.getData());
 						if (d.getAno() == ano) {
-							media = manipulaMap(media, d.getDia().toString()+"/"+d.getMes().toString());
+							media = manipulaMap(media, d.getDia().toString()+"/"+d.getMes().toString(),1);
+							cont = manipulaMap(cont, d.getDia().toString(), 1);
 						}
 					}
 				}
 			}
 
 		}
+		for(Integer i = 0; i < media.size(); ){
+			if(media.containsKey(i.toString())){
+				Integer valor = media.get(i.toString()) / cont.get(i.toString());
+				media.remove(i.toString());
+				media.put(i.toString(), valor);
+			}
+			i++;
+		}
 		
 	}
+	private Map<String, Integer> manipulaMap(Map<String, Integer> media,
+			String key, Integer quantidade) {
+		if (media.get(key) == null) {
+			media.put(key, 1);
+		} else {
+			int aux = media.get(key) + quantidade;
+			media.remove(key);
+			media.put(key, aux);
+		}
+		return media;
+	}
 
+	public Map<String, Integer> getMapMedia(){
+		return media;
+	}
 	protected class Data {
 
 		private Date data;
@@ -203,7 +264,7 @@ public class GeraGraficos {
 
 			addString(sData);
 			addString(sData[3].split(":"));
-			System.out.println(this.toString());
+			//System.out.println(this.toString());
 		}
 
 		public Data() {
