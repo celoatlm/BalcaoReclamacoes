@@ -29,7 +29,7 @@ public class Atendente extends Observable implements Runnable {
 		this.nome = nome;
 		ativo = false;
 		chamaNovaSenha = true;
-		//PropertyConfigurator.configure("./log4j.properties");
+		// PropertyConfigurator.configure("./log4j.properties");
 
 	}
 
@@ -60,9 +60,9 @@ public class Atendente extends Observable implements Runnable {
 				// log.info(this.toString());
 				CriaLogXML.getInstance().addLogAtendente(
 						new LogAtendente(nome, senha.getSenha().toString(),
-								listaTempo, usuario.getSenha()
-										.getSenhaPrioritaria().toString(),
-								new Date().getTime()));
+								listaTempo,
+								usuario.getSenha().getSenhaPrioritaria()
+										.toString(), new Date().getTime()));
 				System.out.println(this.toString());
 				ativo = false;
 				ag.setAtivo(ativo);

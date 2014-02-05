@@ -1,204 +1,185 @@
   <logs>
     <LogAtendente>
-      <atendente>0</atendente>
-      <data>1391084310317</data>
-      <prioritaria>0</prioritaria>
-      <senha>1</senha>
-      <tempoSenhas>
-        <String>1000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>4</atendente>
-      <data>1391084316177</data>
-      <prioritaria>1</prioritaria>
-      <senha>4</senha>
-      <tempoSenhas>
-        <String>4000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
       <atendente>1</atendente>
-      <data>1391084317274</data>
-      <prioritaria>1</prioritaria>
+      <data>1391622996274</data>
+      <prioritaria>0</prioritaria>
       <senha>2</senha>
       <tempoSenhas>
-        <String>3000</String>
-        <String>4000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084319181</data>
-      <prioritaria>0</prioritaria>
-      <senha>5</senha>
-      <tempoSenhas>
-        <String>2000</String>
-        <String>4000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>0</atendente>
-      <data>1391084319218</data>
-      <prioritaria>0</prioritaria>
-      <senha>7</senha>
-      <tempoSenhas>
-        <String>4000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>0</atendente>
-      <data>1391084321218</data>
-      <prioritaria>0</prioritaria>
-      <senha>12</senha>
-      <tempoSenhas>
-        <String>1000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>3</atendente>
-      <data>1391084322176</data>
-      <prioritaria>0</prioritaria>
-      <senha>6</senha>
-      <tempoSenhas>
-        <String>4000</String>
-        <String>1000</String>
-        <String>3000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>3</atendente>
-      <data>1391084324176</data>
-      <prioritaria>0</prioritaria>
-      <senha>14</senha>
-      <tempoSenhas>
-        <String>2000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>4</atendente>
-      <data>1391084326180</data>
-      <prioritaria>0</prioritaria>
-      <senha>8</senha>
-      <tempoSenhas>
-        <String>3000</String>
-        <String>2000</String>
-        <String>2000</String>
-        <String>3000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>1</atendente>
-      <data>1391084326274</data>
-      <prioritaria>1</prioritaria>
-      <senha>10</senha>
-      <tempoSenhas>
-        <String>4000</String>
-        <String>4000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>0</atendente>
-      <data>1391084327219</data>
-      <prioritaria>0</prioritaria>
-      <senha>13</senha>
-      <tempoSenhas>
-        <String>3000</String>
-        <String>1000</String>
         <String>2000</String>
       </tempoSenhas>
     </LogAtendente>
     <LogAtendente>
       <atendente>2</atendente>
-      <data>1391084327277</data>
-      <prioritaria>1</prioritaria>
-      <senha>9</senha>
-      <tempoSenhas>
-        <String>4000</String>
-        <String>2000</String>
-        <String>4000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084328183</data>
+      <data>1391623000143</data>
       <prioritaria>0</prioritaria>
-      <senha>11</senha>
+      <senha>3</senha>
       <tempoSenhas>
-        <String>1000</String>
-        <String>4000</String>
-        <String>4000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>4</atendente>
-      <data>1391084332181</data>
-      <prioritaria>0</prioritaria>
-      <senha>18</senha>
-      <tempoSenhas>
-        <String>3000</String>
         <String>2000</String>
-        <String>1000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>1</atendente>
-      <data>1391084332276</data>
-      <prioritaria>1</prioritaria>
-      <senha>16</senha>
-      <tempoSenhas>
-        <String>3000</String>
         <String>3000</String>
       </tempoSenhas>
     </LogAtendente>
     <LogAtendente>
       <atendente>3</atendente>
-      <data>1391084333177</data>
+      <data>1391623000146</data>
       <prioritaria>0</prioritaria>
-      <senha>15</senha>
+      <senha>4</senha>
       <tempoSenhas>
-        <String>3000</String>
         <String>2000</String>
+        <String>2000</String>
+      </tempoSenhas>
+    </LogAtendente>
+    <LogAtendente>
+      <atendente>4</atendente>
+      <data>1391623000147</data>
+      <prioritaria>0</prioritaria>
+      <senha>7</senha>
+      <tempoSenhas>
+        <String>1000</String>
+      </tempoSenhas>
+    </LogAtendente>
+    <LogAtendente>
+      <atendente>1</atendente>
+      <data>1391623001076</data>
+      <prioritaria>1</prioritaria>
+      <senha>5</senha>
+      <tempoSenhas>
         <String>4000</String>
       </tempoSenhas>
     </LogAtendente>
     <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084333184</data>
+      <atendente>3</atendente>
+      <data>1391623005150</data>
       <prioritaria>1</prioritaria>
-      <senha>20</senha>
+      <senha>11</senha>
       <tempoSenhas>
         <String>1000</String>
+        <String>1000</String>
+      </tempoSenhas>
+    </LogAtendente>
+    <LogAtendente>
+      <atendente>3</atendente>
+      <data>1391623006151</data>
+      <prioritaria>0</prioritaria>
+      <senha>13</senha>
+      <tempoSenhas>
+        <String>1000</String>
+      </tempoSenhas>
+    </LogAtendente>
+    <LogAtendente>
+      <atendente>2</atendente>
+      <data>1391623007144</data>
+      <prioritaria>1</prioritaria>
+      <senha>8</senha>
+      <tempoSenhas>
+        <String>2000</String>
+        <String>2000</String>
+        <String>3000</String>
+      </tempoSenhas>
+    </LogAtendente>
+    <LogAtendente>
+      <atendente>5</atendente>
+      <data>1391623008147</data>
+      <prioritaria>0</prioritaria>
+      <senha>10</senha>
+      <tempoSenhas>
+        <String>1000</String>
+        <String>4000</String>
+        <String>1000</String>
+      </tempoSenhas>
+    </LogAtendente>
+    <LogAtendente>
+      <atendente>4</atendente>
+      <data>1391623008151</data>
+      <prioritaria>0</prioritaria>
+      <senha>12</senha>
+      <tempoSenhas>
+        <String>2000</String>
+        <String>2000</String>
+      </tempoSenhas>
+    </LogAtendente>
+    <LogAtendente>
+      <atendente>1</atendente>
+      <data>1391623011090</data>
+      <prioritaria>1</prioritaria>
+      <senha>9</senha>
+      <tempoSenhas>
+        <String>1000</String>
+        <String>3000</String>
+        <String>2000</String>
         <String>4000</String>
       </tempoSenhas>
     </LogAtendente>
     <LogAtendente>
       <atendente>0</atendente>
-      <data>1391084337221</data>
+      <data>1391623011145</data>
+      <prioritaria>0</prioritaria>
+      <senha>6</senha>
+      <tempoSenhas>
+        <String>3000</String>
+        <String>3000</String>
+        <String>4000</String>
+        <String>3000</String>
+      </tempoSenhas>
+    </LogAtendente>
+    <LogAtendente>
+      <atendente>2</atendente>
+      <data>1391623013145</data>
+      <prioritaria>0</prioritaria>
+      <senha>15</senha>
+      <tempoSenhas>
+        <String>2000</String>
+        <String>1000</String>
+        <String>3000</String>
+      </tempoSenhas>
+    </LogAtendente>
+    <LogAtendente>
+      <atendente>4</atendente>
+      <data>1391623014152</data>
       <prioritaria>1</prioritaria>
       <senha>17</senha>
       <tempoSenhas>
-        <String>3000</String>
-        <String>1000</String>
-        <String>3000</String>
-        <String>3000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>1</atendente>
-      <data>1391084337277</data>
-      <prioritaria>0</prioritaria>
-      <senha>22</senha>
-      <tempoSenhas>
-        <String>1000</String>
-        <String>1000</String>
         <String>2000</String>
         <String>1000</String>
+        <String>2000</String>
+      </tempoSenhas>
+    </LogAtendente>
+    <LogAtendente>
+      <atendente>3</atendente>
+      <data>1391623018155</data>
+      <prioritaria>0</prioritaria>
+      <senha>14</senha>
+      <tempoSenhas>
+        <String>3000</String>
+        <String>4000</String>
+        <String>2000</String>
+        <String>3000</String>
       </tempoSenhas>
     </LogAtendente>
     <LogAtendente>
       <atendente>1</atendente>
-      <data>1391084338277</data>
+      <data>1391623019091</data>
+      <prioritaria>0</prioritaria>
+      <senha>18</senha>
+      <tempoSenhas>
+        <String>1000</String>
+        <String>4000</String>
+        <String>3000</String>
+      </tempoSenhas>
+    </LogAtendente>
+    <LogAtendente>
+      <atendente>5</atendente>
+      <data>1391623019149</data>
+      <prioritaria>1</prioritaria>
+      <senha>16</senha>
+      <tempoSenhas>
+        <String>4000</String>
+        <String>4000</String>
+        <String>3000</String>
+      </tempoSenhas>
+    </LogAtendente>
+    <LogAtendente>
+      <atendente>1</atendente>
+      <data>1391623020091</data>
       <prioritaria>0</prioritaria>
       <senha>26</senha>
       <tempoSenhas>
@@ -207,345 +188,75 @@
     </LogAtendente>
     <LogAtendente>
       <atendente>2</atendente>
-      <data>1391084339278</data>
-      <prioritaria>1</prioritaria>
-      <senha>19</senha>
-      <tempoSenhas>
-        <String>4000</String>
-        <String>4000</String>
-        <String>4000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084340184</data>
+      <data>1391623023146</data>
       <prioritaria>0</prioritaria>
-      <senha>24</senha>
+      <senha>20</senha>
       <tempoSenhas>
         <String>3000</String>
         <String>4000</String>
+        <String>3000</String>
       </tempoSenhas>
     </LogAtendente>
     <LogAtendente>
       <atendente>3</atendente>
-      <data>1391084341179</data>
+      <data>1391623023156</data>
       <prioritaria>0</prioritaria>
       <senha>23</senha>
       <tempoSenhas>
-        <String>2000</String>
-        <String>1000</String>
-        <String>2000</String>
         <String>3000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>1</atendente>
-      <data>1391084343278</data>
-      <prioritaria>0</prioritaria>
-      <senha>28</senha>
-      <tempoSenhas>
         <String>1000</String>
-        <String>2000</String>
-        <String>2000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>4</atendente>
-      <data>1391084344182</data>
-      <prioritaria>0</prioritaria>
-      <senha>21</senha>
-      <tempoSenhas>
-        <String>2000</String>
-        <String>2000</String>
-        <String>4000</String>
-        <String>4000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084344184</data>
-      <prioritaria>0</prioritaria>
-      <senha>31</senha>
-      <tempoSenhas>
-        <String>2000</String>
-        <String>2000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>1</atendente>
-      <data>1391084345280</data>
-      <prioritaria>0</prioritaria>
-      <senha>34</senha>
-      <tempoSenhas>
-        <String>2000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084346184</data>
-      <prioritaria>0</prioritaria>
-      <senha>36</senha>
-      <tempoSenhas>
-        <String>2000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>4</atendente>
-      <data>1391084347182</data>
-      <prioritaria>0</prioritaria>
-      <senha>35</senha>
-      <tempoSenhas>
-        <String>3000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>0</atendente>
-      <data>1391084347222</data>
-      <prioritaria>0</prioritaria>
-      <senha>25</senha>
-      <tempoSenhas>
-        <String>2000</String>
-        <String>4000</String>
-        <String>4000</String>
+        <String>1000</String>
       </tempoSenhas>
     </LogAtendente>
     <LogAtendente>
       <atendente>3</atendente>
-      <data>1391084349181</data>
-      <prioritaria>0</prioritaria>
-      <senha>33</senha>
-      <tempoSenhas>
-        <String>4000</String>
-        <String>2000</String>
-        <String>2000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084349184</data>
-      <prioritaria>0</prioritaria>
-      <senha>38</senha>
-      <tempoSenhas>
-        <String>3000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>0</atendente>
-      <data>1391084350223</data>
+      <data>1391623024156</data>
       <prioritaria>1</prioritaria>
-      <senha>27</senha>
+      <senha>21</senha>
       <tempoSenhas>
-        <String>1000</String>
-        <String>1000</String>
         <String>1000</String>
       </tempoSenhas>
     </LogAtendente>
     <LogAtendente>
       <atendente>2</atendente>
-      <data>1391084351279</data>
+      <data>1391623025146</data>
       <prioritaria>0</prioritaria>
       <senha>29</senha>
       <tempoSenhas>
         <String>2000</String>
-        <String>4000</String>
-        <String>3000</String>
-        <String>3000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>3</atendente>
-      <data>1391084352183</data>
-      <prioritaria>1</prioritaria>
-      <senha>30</senha>
-      <tempoSenhas>
-        <String>3000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>4</atendente>
-      <data>1391084355185</data>
-      <prioritaria>0</prioritaria>
-      <senha>39</senha>
-      <tempoSenhas>
-        <String>2000</String>
-        <String>2000</String>
-        <String>4000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084355186</data>
-      <prioritaria>1</prioritaria>
-      <senha>32</senha>
-      <tempoSenhas>
-        <String>3000</String>
-        <String>3000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>4</atendente>
-      <data>1391084356185</data>
-      <prioritaria>0</prioritaria>
-      <senha>45</senha>
-      <tempoSenhas>
-        <String>1000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084356186</data>
-      <prioritaria>0</prioritaria>
-      <senha>46</senha>
-      <tempoSenhas>
-        <String>1000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>1</atendente>
-      <data>1391084356284</data>
-      <prioritaria>0</prioritaria>
-      <senha>37</senha>
-      <tempoSenhas>
-        <String>4000</String>
-        <String>2000</String>
-        <String>2000</String>
-        <String>3000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084357186</data>
-      <prioritaria>1</prioritaria>
-      <senha>43</senha>
-      <tempoSenhas>
-        <String>1000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>2</atendente>
-      <data>1391084359279</data>
-      <prioritaria>1</prioritaria>
-      <senha>41</senha>
-      <tempoSenhas>
-        <String>3000</String>
-        <String>2000</String>
-        <String>3000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>3</atendente>
-      <data>1391084360214</data>
-      <prioritaria>0</prioritaria>
-      <senha>44</senha>
-      <tempoSenhas>
-        <String>1000</String>
-        <String>3000</String>
-        <String>3000</String>
-        <String>1000</String>
       </tempoSenhas>
     </LogAtendente>
     <LogAtendente>
       <atendente>0</atendente>
-      <data>1391084360224</data>
-      <prioritaria>1</prioritaria>
-      <senha>40</senha>
-      <tempoSenhas>
-        <String>4000</String>
-        <String>2000</String>
-        <String>4000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>3</atendente>
-      <data>1391084361215</data>
+      <data>1391623025146</data>
       <prioritaria>0</prioritaria>
-      <senha>52</senha>
+      <senha>19</senha>
       <tempoSenhas>
-        <String>1000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>1</atendente>
-      <data>1391084362284</data>
-      <prioritaria>1</prioritaria>
-      <senha>47</senha>
-      <tempoSenhas>
-        <String>1000</String>
         <String>4000</String>
-        <String>1000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084363186</data>
-      <prioritaria>1</prioritaria>
-      <senha>48</senha>
-      <tempoSenhas>
-        <String>1000</String>
-        <String>1000</String>
-        <String>1000</String>
         <String>3000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084364186</data>
-      <prioritaria>1</prioritaria>
-      <senha>53</senha>
-      <tempoSenhas>
-        <String>1000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084366186</data>
-      <prioritaria>0</prioritaria>
-      <senha>56</senha>
-      <tempoSenhas>
-        <String>2000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>2</atendente>
-      <data>1391084366280</data>
-      <prioritaria>0</prioritaria>
-      <senha>50</senha>
-      <tempoSenhas>
-        <String>2000</String>
-        <String>2000</String>
-        <String>3000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>0</atendente>
-      <data>1391084368225</data>
-      <prioritaria>1</prioritaria>
-      <senha>49</senha>
-      <tempoSenhas>
-        <String>2000</String>
         <String>4000</String>
-        <String>2000</String>
-      </tempoSenhas>
-    </LogAtendente>
-    <LogAtendente>
-      <atendente>5</atendente>
-      <data>1391084369187</data>
-      <prioritaria>0</prioritaria>
-      <senha>58</senha>
-      <tempoSenhas>
         <String>3000</String>
       </tempoSenhas>
     </LogAtendente>
     <LogAtendente>
       <atendente>4</atendente>
-      <data>1391084370186</data>
-      <prioritaria>1</prioritaria>
-      <senha>42</senha>
+      <data>1391623026154</data>
+      <prioritaria>0</prioritaria>
+      <senha>22</senha>
       <tempoSenhas>
+        <String>3000</String>
         <String>4000</String>
         <String>4000</String>
-        <String>3000</String>
-        <String>3000</String>
+        <String>1000</String>
+      </tempoSenhas>
+    </LogAtendente>
+    <LogAtendente>
+      <atendente>3</atendente>
+      <data>1391623026156</data>
+      <prioritaria>1</prioritaria>
+      <senha>24</senha>
+      <tempoSenhas>
+        <String>2000</String>
       </tempoSenhas>
     </LogAtendente>
   </logs>

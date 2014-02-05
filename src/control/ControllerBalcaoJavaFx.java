@@ -21,6 +21,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -82,6 +83,16 @@ public class ControllerBalcaoJavaFx implements Observer {
 	private Button bGeraGrafico;
 	@FXML 
 	private BarChart<Integer , String> bcAtendentes;
+	@FXML
+	private ChoiceBox<String> cbOpcaoGrafico;
+	@FXML
+	private ComboBox<String> cbDia;
+	@FXML
+	private ComboBox<String> cbMes;
+	@FXML
+	private ComboBox<String> cbAno;
+	
+	
 	
 	private Map<String, PaneAtendente> mapPaneAtendente;
 	private List<Senha> senhas = null;
@@ -172,10 +183,44 @@ public class ControllerBalcaoJavaFx implements Observer {
 					}
 				});
 
+		criaComboBoxGraficos();
 		
 		atualizaConfigs();
 	}
 
+	public void criaComboBoxGraficos(){
+		
+		cbOpcaoGrafico.getItems().add("Tempo médio de atendimento de cada atendente");
+		cbOpcaoGrafico.getItems().add("Número de atendimentos diários");
+		cbOpcaoGrafico.getItems().add("Número médio de reclamações por cliente");
+		
+		cbDia.getItems().add("");
+		for(Integer i = 1; i < 32 ; i++){
+			cbDia.getItems().add(i.toString());
+		}
+		
+		cbMes.getItems().add("");
+		cbMes.getItems().add("Jan");
+		cbMes.getItems().add("Fev");
+		cbMes.getItems().add("Mar");
+		cbMes.getItems().add("Abr");
+		cbMes.getItems().add("Mai");
+		cbMes.getItems().add("Jun");
+		cbMes.getItems().add("Jul");
+		cbMes.getItems().add("Ago");
+		cbMes.getItems().add("Set");
+		cbMes.getItems().add("Out");
+		cbMes.getItems().add("Nov");
+		cbMes.getItems().add("Dez");
+		
+		cbAno.getItems().add("");
+		
+		for(Integer i = 2014; i < 2021 ; i++){
+			cbAno.getItems().add(i.toString());
+		}
+		
+	} 
+	
 	@FXML
 	public void onCloseTab() {
 
@@ -234,6 +279,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 		
 		new GeraGraficos();
 		
+	//	bcAtendentes = new 
 		
 	}
 
@@ -368,5 +414,6 @@ public class ControllerBalcaoJavaFx implements Observer {
 			});
 		}
 	}
+	
 
 }

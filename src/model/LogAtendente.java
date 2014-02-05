@@ -12,6 +12,8 @@ public class LogAtendente {
 	
 	private List<String> tempoSenhas;
 	
+	//private ArrayList<Reclamacao> reclamacoes;
+	
 	public LogAtendente() {
 	}
 		
@@ -24,6 +26,8 @@ public class LogAtendente {
 		this.data = data;
 		
 	}
+	
+	
 		
 	@Override
 	public String toString() {
@@ -39,6 +43,30 @@ public class LogAtendente {
 		}
 		return aux;
 	}
+
+//	@Override
+//	public String toString() {
+//		// TODO Auto-generated method stub
+//		String aux = "Atendente: "+atendente+ " Usuario:Senha " + senha+ " ";
+//		if(prioritaria.equals("0") ){
+//			aux += "senha-prioritaria";
+//		}else{
+//			aux += "senha-não-prioritaria";
+//		}
+//		for(Reclamacao i : reclamacoes){
+//			aux += i+" ";
+//		}
+//		return aux;
+//	}
+	
+//	public LogAtendente(String atendente, String senha, String prioritaria,
+//		Long data, ArrayList<Reclamacao> reclamacoes) {
+//	this.atendente = atendente;
+//	this.senha = senha;
+//	this.prioritaria = prioritaria;
+//	this.data = data;
+//	this.reclamacoes = reclamacoes;
+//}
 
 	public String getAtendente() {
 		return atendente;
@@ -85,5 +113,17 @@ public class LogAtendente {
 	public void setData(Long data) {
 		this.data = data;
 	}
+
+//	public void addReclamacao(Reclamacao reclamacao){
+//		reclamacoes.add(reclamacao);
+//	}
+//	
+//	public ArrayList<Reclamacao> getReclamacoes() {
+//		return reclamacoes;
+//	}
+//
+//	public void setReclamacoes(ArrayList<Reclamacao> reclamacoes) {
+//		this.reclamacoes = reclamacoes;
+//	}
 		
 }
