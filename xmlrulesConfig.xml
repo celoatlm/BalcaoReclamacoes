@@ -6,37 +6,18 @@
 <digester-rules>
 
 	<pattern value="config">
-
-		<pattern value="colldownUsuario">
-			<call-method-rule methodname="setColldownUsuario"
-				paramcount="0" />
-		</pattern>
-
-		<pattern value="quantidadeMinimaReclamacao">
-			<call-method-rule methodname="setQuantidadeMinimaReclamacao"
-				paramcount="0" />
-		</pattern>
-
-		<pattern value="quantidadeMaximaReclamacao">
-			<call-method-rule methodname="setQuantidadeMaximaReclamacao"
-				paramcount="0" />
-		</pattern>
-
-		<pattern value="tempoMaximoReclamacao">
-			<call-method-rule methodname="setTempoMaximoReclamacao"
-				paramcount="0" />
-		</pattern>
-
-		<pattern value="tempoMinimoReclamacao">
-			<call-method-rule methodname="setTempoMinimoReclamacao"
-				paramcount="0" />
-		</pattern>
-
-		<pattern value="quantidadeAtendentes">
-			<call-method-rule methodname="setQuantidadeAtendentes"
-				paramcount="0" />
-		</pattern>
-
+		<bean-property-setter-rule pattern="colldownUsuario" />
+		
+		<bean-property-setter-rule pattern="quantidadeMinimaReclamacao" />
+		
+		<bean-property-setter-rule pattern="quantidadeMaximaReclamacao" />
+		
+		<bean-property-setter-rule pattern="tempoMaximoReclamacao" />
+		
+		<bean-property-setter-rule pattern="tempoMinimoReclamacao" />
+		
+		<bean-property-setter-rule pattern="quantidadeAtendentes" />
+		
 
 	</pattern>
 

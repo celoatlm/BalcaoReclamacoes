@@ -28,7 +28,7 @@ public class CriaLogXML {
 	private static CriaLogXML criaLogXML = null;
 	private Logger log = Logger.getLogger(this.getClass().getName());
 	private String fileName = "";
-	private Logs logs;
+	private Logs l;
 	private File file;
 
 	private CriaLogXML() {
@@ -37,7 +37,7 @@ public class CriaLogXML {
 		
 		logAtendentes = new ArrayList<LogAtendente>();
 		
-		logs = new Logs();
+		l = new Logs();
 		
 		criaFile();
 	}
@@ -51,7 +51,7 @@ public class CriaLogXML {
 
 	public synchronized void addLogAtendente(LogAtendente logAtendente) {
 		//logAtendentes.add(logAtendente);
-		logs.addLogAtendente(logAtendente);
+		l.addLogAtendente(logAtendente);
 		
 	}
 
@@ -88,10 +88,11 @@ public class CriaLogXML {
 	
 	private void recuperaDados(){
 		
-		final String rulesFileName = "./xmlrulesLogAtendente.xml";
-		
-		Digester digester = newLoader(new FromXmlRulesModule() {
 
+		final String rulesFileName = "./xmlrulesLogAtendente.xml";
+		String dataFileName = "./logAtendentes.xml";
+
+		Digester digester = newLoader(new FromXmlRulesModule() {
 			@Override
 			protected void loadRules() {
 				// TODO Auto-generated method stub
@@ -99,33 +100,21 @@ public class CriaLogXML {
 			}
 		}).newDigester();
 
-		//logs = new Logs();
-		imprimiLogs(logs);
-		Logs l = new Logs();
+		l = new Logs();
 		digester.push(l);
-		logs.getListaLogAtendentes().addAll(l.getListaLogAtendentes());
-		imprimiLogs(logs);
-		
 		try {
-			File srcFile = new java.io.File(fileName);
+			File srcFile = new java.io.File(dataFileName);
 			digester.parse(srcFile);
-			//logAtendentes.addAll((ArrayList<LogAtendente>) l.getListaLogAtendentes());
-			//logAtendentes = ;
 		} catch (IOException | SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Logger.getLogger(GeraGraficos.class.getName()).error(e.getMessage());
+			Logger.getLogger(GeraGraficos.class.getName())
+					.error(e.getMessage());
 		}
 		
 		
 	}
-	private void imprimiLogs(Logs l){
-		System.out.println("#####################");
-		for(LogAtendente lg:l.getListaLogAtendentes()){
-			System.out.println("#####"+lg.getAtendente()+":"+lg.getSenha()+"#####");
-		}
-	}
-
+	
 	protected class GravaLogAtendentes implements Runnable {
 
 		@Override
@@ -144,7 +133,8 @@ public class CriaLogXML {
 							.setAttributesForPrimitives(false);
 					beanWriter.getBindingConfiguration().setMapIDs(false);
 					beanWriter.enablePrettyPrint();
-					beanWriter.write("logs", logs.getListaLogAtendentes());
+					beanWriter.write("logs", l.getListaLogAtendentes());
+					
 					FileReader fr = new FileReader(file);
 					BufferedReader br = new BufferedReader(fr);
 

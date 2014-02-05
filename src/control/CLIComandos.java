@@ -100,6 +100,9 @@ public class CLIComandos {
 				new Thread(new BalcaoAppJavaFX()).start();
 				
 			}
+			if(cmd.hasOption("grafico")){
+				new GeraGraficos();
+			}
 			if(cmd.hasOption("data")){
 				Date d = new Date();
 				String[] data = d.toString().split(" ");
@@ -177,6 +180,9 @@ public class CLIComandos {
 		Option data = OptionBuilder.withArgName("data")
 				.withDescription("Data do sistema").create("data");
 		
+		Option grafico = OptionBuilder.withArgName("grafico")
+				.withDescription("gera grafico para teste")
+				.create("grafico");
 		options = new Options();
 
 		options.addOption(startApp);
@@ -196,6 +202,7 @@ public class CLIComandos {
 		options.addOption(exit);
 		options.addOption(data);
 		options.addOption(error);
+		options.addOption(grafico);
 
 		
 	}

@@ -115,27 +115,32 @@ public class FabricaUsuarioAtendente extends Observable {
 	}
 
 	public void setColldownUsuario(String colldownUsuario) {
-		configFabricaUsuarioAtendente.setColldownUsuario(colldownUsuario);
+		configFabricaUsuarioAtendente.setColldownUsuario(Integer
+				.parseInt(colldownUsuario));
 		notificaObservers();
 	}
 
 	public void setQuantidadeMinimaReclamacoes(String qmr) {
-		configFabricaUsuarioAtendente.setQuantidadeMinimaReclamacao(qmr);
+		configFabricaUsuarioAtendente.setQuantidadeMinimaReclamacao(Integer
+				.parseInt(qmr));
 		notificaObservers();
 	}
 
 	public void setQuantidadeMaximaReclamacoes(String qmxr) {
-		configFabricaUsuarioAtendente.setQuantidadeMaximaReclamacao(qmxr);
+		configFabricaUsuarioAtendente.setQuantidadeMaximaReclamacao(Integer
+				.parseInt(qmxr));
 		notificaObservers();
 	}
 
 	public void setTempoMinimoReclamacoes(String tmr) {
-		configFabricaUsuarioAtendente.setTempoMinimoReclamacao(tmr);
+		configFabricaUsuarioAtendente.setTempoMinimoReclamacao(Integer
+				.parseInt(tmr));
 		notificaObservers();
 	}
 
 	public void setTempoMaximoReclamacies(String tmxr) {
-		configFabricaUsuarioAtendente.setTempoMaximoReclamacao(tmxr);
+		configFabricaUsuarioAtendente.setTempoMaximoReclamacao(Integer
+				.parseInt(tmxr));
 		notificaObservers();
 	}
 
@@ -158,11 +163,11 @@ public class FabricaUsuarioAtendente extends Observable {
 		try {
 			File srcFile = new java.io.File(dataFileName);
 			digester.parse(srcFile);
-			
+
 		} catch (IOException | SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			log.error(e.getMessage());
+			Logger.getLogger(FabricaUsuarioAtendenteTest.class.getName()).error(e.getMessage());
 		}
 
 	}
@@ -184,23 +189,19 @@ public class FabricaUsuarioAtendente extends Observable {
 			while (kill) {
 				while (ativoFabricaUsuario) {
 					try {
-						Integer quantidadeReclamacoes = Integer
-								.parseInt(configFabricaUsuarioAtendente
-										.getQuantidadeMinimaReclamacao())
+						Integer quantidadeReclamacoes = configFabricaUsuarioAtendente
+								.getQuantidadeMinimaReclamacao()
 								+ new Random()
-										.nextInt(Integer
-												.parseInt(configFabricaUsuarioAtendente
-														.getQuantidadeMaximaReclamacao()));
+										.nextInt(configFabricaUsuarioAtendente
+												.getQuantidadeMaximaReclamacao());
 
 						List<Reclamacao> reclamacoes = new ArrayList<Reclamacao>();
 
 						for (int i = 0; i < quantidadeReclamacoes; i++) {
-							int tempo = (Integer
-									.parseInt(configFabricaUsuarioAtendente
-											.getTempoMinimoReclamacao()) + new Random()
-									.nextInt(Integer
-											.parseInt(configFabricaUsuarioAtendente
-													.getTempoMaximoReclamacao()))) * 1000;
+							int tempo = (configFabricaUsuarioAtendente
+									.getTempoMinimoReclamacao() + new Random()
+									.nextInt(configFabricaUsuarioAtendente
+											.getTempoMaximoReclamacao())) * 1000;
 							Reclamacao r = new Reclamacao(tempo);
 							reclamacoes.add(r);
 						}
@@ -210,9 +211,8 @@ public class FabricaUsuarioAtendente extends Observable {
 						Senha s = new Senha(senha, atendimentoPrioritario);
 						filaSenhas.inserirSenha(s);
 						new Usuario(reclamacoes, s);
-						Thread.sleep(Integer
-								.parseInt(configFabricaUsuarioAtendente
-										.getColldownUsuario()));
+						Thread.sleep(configFabricaUsuarioAtendente
+								.getColldownUsuario());
 
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
@@ -232,8 +232,8 @@ public class FabricaUsuarioAtendente extends Observable {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			for (int i = 0; i < Integer.parseInt(configFabricaUsuarioAtendente
-					.getQuantidadeAtendentes()); i++) {
+			for (int i = 0; i < configFabricaUsuarioAtendente
+					.getQuantidadeAtendentes(); i++) {
 				addAtendente();
 				try {
 					Thread.sleep(500);// pra da um descanso e um intervalo entre

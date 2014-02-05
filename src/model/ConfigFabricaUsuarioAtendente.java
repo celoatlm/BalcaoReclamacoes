@@ -8,33 +8,32 @@ public class ConfigFabricaUsuarioAtendente {
 	// as variaveis são setadas nullas para que
 	// na primeira vez que ela é carregada na leitura do xml,
 	// não haja comparação entre variaveis nulls;
-	private String colldownUsuario = null;
-	private String quantidadeMaximaReclamacao = null;
-	private String quantidadeMinimaReclamacao = null;
-	private String tempoMaximoReclamacao = null;
-	private String tempoMinimoReclamacao = null;
-	private String quantidadeAtendentes = null;
+	private Integer colldownUsuario = null;
+	private Integer quantidadeMaximaReclamacao = null;
+	private Integer quantidadeMinimaReclamacao = null;
+	private Integer tempoMaximoReclamacao = null;
+	private Integer tempoMinimoReclamacao = null;
+	private Integer quantidadeAtendentes = null;
 
-	public String getColldownUsuario() {
+	public Integer getColldownUsuario() {
 		return colldownUsuario;
 	}
 
-	public void setColldownUsuario(String colldownUsuario) {
-		if (Integer.parseInt(colldownUsuario) > 199
-				&& Integer.parseInt(colldownUsuario) < 10001) {
+	public void setColldownUsuario(Integer colldownUsuario) {
+		if (colldownUsuario > 199
+				&& colldownUsuario < 10001) {
 			this.colldownUsuario = colldownUsuario;
 		}
 	}
 
-	public String getQuantidadeMaximaReclamacao() {
+	public Integer getQuantidadeMaximaReclamacao() {
 		return quantidadeMaximaReclamacao;
 	}
 
-	public void setQuantidadeMaximaReclamacao(String quantidadeMaximaReclamaca) {
+	public void setQuantidadeMaximaReclamacao(Integer quantidadeMaximaReclamaca) {
 		if (this.quantidadeMaximaReclamacao != null) {
-			if (Integer.parseInt(quantidadeMaximaReclamaca) >= Integer
-					.parseInt(this.quantidadeMinimaReclamacao)
-					&& Integer.parseInt(quantidadeMaximaReclamaca) < 11) {
+			if (quantidadeMaximaReclamaca >= this.quantidadeMinimaReclamacao
+					&& quantidadeMaximaReclamaca < 11) {
 				this.quantidadeMaximaReclamacao = quantidadeMaximaReclamaca;
 			}
 		} else {
@@ -42,15 +41,14 @@ public class ConfigFabricaUsuarioAtendente {
 		}
 	}
 
-	public String getQuantidadeMinimaReclamacao() {
+	public Integer getQuantidadeMinimaReclamacao() {
 		return quantidadeMinimaReclamacao;
 	}
 
-	public void setQuantidadeMinimaReclamacao(String quantidadeMinimaReclamacao) {
+	public void setQuantidadeMinimaReclamacao(Integer quantidadeMinimaReclamacao) {
 		if (this.quantidadeMaximaReclamacao != null) {
-			if (Integer.parseInt(this.quantidadeMaximaReclamacao) >= Integer
-					.parseInt(quantidadeMinimaReclamacao)
-					&& Integer.parseInt(quantidadeMinimaReclamacao) > 0) {
+			if (this.quantidadeMaximaReclamacao >= quantidadeMinimaReclamacao
+					&& quantidadeMinimaReclamacao > 0) {
 				this.quantidadeMinimaReclamacao = quantidadeMinimaReclamacao;
 			}
 		} else {
@@ -58,15 +56,14 @@ public class ConfigFabricaUsuarioAtendente {
 		}
 	}
 
-	public String getTempoMaximoReclamacao() {
+	public Integer getTempoMaximoReclamacao() {
 		return tempoMaximoReclamacao;
 	}
 
-	public void setTempoMaximoReclamacao(String tempoMaximoReclamacao) {
+	public void setTempoMaximoReclamacao(Integer tempoMaximoReclamacao) {
 		if (this.tempoMinimoReclamacao != null) {
-			if (Integer.parseInt(tempoMaximoReclamacao) >= Integer
-					.parseInt(this.tempoMinimoReclamacao)
-					&& Integer.parseInt(tempoMaximoReclamacao) < 11) {
+			if (tempoMaximoReclamacao >= this.tempoMinimoReclamacao
+					&& tempoMaximoReclamacao < 11) {
 				this.tempoMaximoReclamacao = tempoMaximoReclamacao;
 			}
 		} else {
@@ -74,15 +71,14 @@ public class ConfigFabricaUsuarioAtendente {
 		}
 	}
 
-	public String getTempoMinimoReclamacao() {
+	public Integer getTempoMinimoReclamacao() {
 		return tempoMinimoReclamacao;
 	}
 
-	public void setTempoMinimoReclamacao(String tempoMinimoReclamacao) {
+	public void setTempoMinimoReclamacao(Integer tempoMinimoReclamacao) {
 		if (this.tempoMaximoReclamacao != null) {
-			if (Integer.parseInt(this.tempoMaximoReclamacao) >= Integer
-					.parseInt(tempoMinimoReclamacao)
-					&& Integer.parseInt(tempoMinimoReclamacao) > 0) {
+			if (this.tempoMaximoReclamacao >= tempoMinimoReclamacao
+					&& tempoMinimoReclamacao > 0) {
 				this.tempoMinimoReclamacao = tempoMinimoReclamacao;
 			}
 		} else {
@@ -90,13 +86,13 @@ public class ConfigFabricaUsuarioAtendente {
 		}
 	}
 
-	public String getQuantidadeAtendentes() {
+	public Integer getQuantidadeAtendentes() {
 		return quantidadeAtendentes;
 	}
 
-	public void setQuantidadeAtendentes(String quantidadeAtendentes) {
-		if (Integer.parseInt(quantidadeAtendentes) > 0
-				&& Integer.parseInt(quantidadeAtendentes) < 11) {
+	public void setQuantidadeAtendentes(Integer quantidadeAtendentes) {
+		if (quantidadeAtendentes > 0
+				&& quantidadeAtendentes < 11) {
 			this.quantidadeAtendentes = quantidadeAtendentes;
 		}
 	}

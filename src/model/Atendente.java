@@ -51,19 +51,21 @@ public class Atendente extends Observable implements Runnable {
 						e.printStackTrace();
 					}
 				}
-				// CriaLogXML.getInstance().criaLogXML(
-				// new LogAtendente(nome, senha.getSenha().toString(),
-				// listaTempo, usuario.getSenha()
-				// .getSenhaPrioritaria().toString(),
-				// new Date().getTime()));
 
-				// log.info(this.toString());
+//				CriaLogXML.getInstance().addLogAtendente(
+//						new LogAtendente(nome, senha.getSenha().toString(),
+//								listaTempo,
+//								usuario.getSenha().getSenhaPrioritaria()
+//										.toString(), new Date().getTime()));
+				
 				CriaLogXML.getInstance().addLogAtendente(
 						new LogAtendente(nome, senha.getSenha().toString(),
-								listaTempo,
+								(ArrayList<Reclamacao>)usuario.getReclamacoes(),
 								usuario.getSenha().getSenhaPrioritaria()
 										.toString(), new Date().getTime()));
+				
 				System.out.println(this.toString());
+				
 				ativo = false;
 				ag.setAtivo(ativo);
 				ObserverAtendenteGui.getInstance().setAtendenteGrafico(ag);

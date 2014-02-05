@@ -17,10 +17,10 @@ public class ConfigFabricaUsuarioAtendenteTest {
 	public static void setUpBeforeClass() throws Exception {
 		
 		configFabricaUsuarioAtendente = new ConfigFabricaUsuarioAtendente();
-		configFabricaUsuarioAtendente.setQuantidadeMinimaReclamacao("1");
-		configFabricaUsuarioAtendente.setQuantidadeMaximaReclamacao("10");
-		configFabricaUsuarioAtendente.setTempoMaximoReclamacao("10");
-		configFabricaUsuarioAtendente.setTempoMinimoReclamacao("1");
+		configFabricaUsuarioAtendente.setQuantidadeMinimaReclamacao(1);
+		configFabricaUsuarioAtendente.setQuantidadeMaximaReclamacao(10);
+		configFabricaUsuarioAtendente.setTempoMaximoReclamacao(10);
+		configFabricaUsuarioAtendente.setTempoMinimoReclamacao(1);
 	}
 
 	@AfterClass
@@ -39,14 +39,14 @@ public class ConfigFabricaUsuarioAtendenteTest {
 	@Test
 	public void testMaximoSetColldownUsuario() {
 		
-		configFabricaUsuarioAtendente.setColldownUsuario("10001");
+		configFabricaUsuarioAtendente.setColldownUsuario(10001);
 		assertEquals(null,configFabricaUsuarioAtendente.getColldownUsuario());
 		
 	}
 	@Test
 	public void testMinimoSetColldownUsuario() {
 		
-		configFabricaUsuarioAtendente.setColldownUsuario("199");
+		configFabricaUsuarioAtendente.setColldownUsuario(199);
 		assertEquals(null,configFabricaUsuarioAtendente.getColldownUsuario());
 		
 	}
@@ -54,26 +54,26 @@ public class ConfigFabricaUsuarioAtendenteTest {
 	@Test
 	public void testSetQuantidadeMaximaReclamacao() {
 		
-		configFabricaUsuarioAtendente.setQuantidadeMaximaReclamacao("11");
+		configFabricaUsuarioAtendente.setQuantidadeMaximaReclamacao(11);
 		assertEquals("10",configFabricaUsuarioAtendente.getQuantidadeMaximaReclamacao());
 	}
 
 	@Test
 	public void testSetQuantidadeMinimaReclamacao() {
 
-		configFabricaUsuarioAtendente.setQuantidadeMinimaReclamacao("0");
+		configFabricaUsuarioAtendente.setQuantidadeMinimaReclamacao(0);
 		assertEquals("1",configFabricaUsuarioAtendente.getQuantidadeMinimaReclamacao());
 	}
 
 	@Test
 	public void testSetTempoMaximoReclamacao() {
-		configFabricaUsuarioAtendente.setTempoMaximoReclamacao("11");
+		configFabricaUsuarioAtendente.setTempoMaximoReclamacao(11);
 		assertEquals("10", configFabricaUsuarioAtendente.getTempoMaximoReclamacao());
 	}
 
 	@Test
 	public void testSetTempoMinimoReclamacao() {
-		configFabricaUsuarioAtendente.setTempoMinimoReclamacao("0");
+		configFabricaUsuarioAtendente.setTempoMinimoReclamacao(0);
 		assertEquals("1", configFabricaUsuarioAtendente.getTempoMinimoReclamacao());
 	}
 

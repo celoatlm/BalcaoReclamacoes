@@ -29,7 +29,6 @@ public class GeraGraficos {
 	Map<String, Integer> media;
 	
 	public GeraGraficos() {
-
 		recuperaDados();
 		//new Data(new Date().getTime());
 	}
@@ -39,7 +38,7 @@ public class GeraGraficos {
 		this.ano = ano;
 		this.mes = mes;
 		this.dia = dia;
-
+	
 		
 		
 		switch (opcao) {
@@ -64,7 +63,6 @@ public class GeraGraficos {
 		String dataFileName = "./logAtendentes.xml";
 
 		Digester digester = newLoader(new FromXmlRulesModule() {
-
 			@Override
 			protected void loadRules() {
 				// TODO Auto-generated method stub
@@ -73,11 +71,9 @@ public class GeraGraficos {
 		}).newDigester();
 
 		l = new Logs();
-
 		digester.push(l);
-
 		try {
-			File srcFile = new File(dataFileName);
+			File srcFile = new java.io.File(dataFileName);
 			digester.parse(srcFile);
 		} catch (IOException | SAXException e) {
 			// TODO Auto-generated catch block
@@ -85,10 +81,7 @@ public class GeraGraficos {
 			Logger.getLogger(GeraGraficos.class.getName())
 					.error(e.getMessage());
 		}
-		System.out.println("##############");
-		for (LogAtendente lg : l.getListaLogAtendentes()) {
-			System.out.println(lg.getAtendente());
-		}
+		
 	}
 
 	private void mediaAtendimento() {

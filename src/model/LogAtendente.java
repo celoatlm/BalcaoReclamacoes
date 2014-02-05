@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 public class LogAtendente {
 
@@ -12,9 +13,10 @@ public class LogAtendente {
 	
 	private List<String> tempoSenhas;
 	
-	//private ArrayList<Reclamacao> reclamacoes;
+	private ArrayList<Reclamacao> reclamacoes;
 	
 	public LogAtendente() {
+		reclamacoes = new ArrayList<>();
 	}
 		
 	public LogAtendente(String atendente, String senha,
@@ -27,7 +29,15 @@ public class LogAtendente {
 		
 	}
 	
-	
+	public LogAtendente(String atendente, String senha,
+			ArrayList<Reclamacao> reclamacoes, String prioritaria, Long data) {
+		this.atendente = atendente;
+		this.senha = senha;
+		this.reclamacoes = reclamacoes;
+		this.prioritaria = prioritaria;
+		this.data = data;
+		
+	}
 		
 	@Override
 	public String toString() {
@@ -114,16 +124,16 @@ public class LogAtendente {
 		this.data = data;
 	}
 
-//	public void addReclamacao(Reclamacao reclamacao){
-//		reclamacoes.add(reclamacao);
-//	}
-//	
-//	public ArrayList<Reclamacao> getReclamacoes() {
-//		return reclamacoes;
-//	}
-//
-//	public void setReclamacoes(ArrayList<Reclamacao> reclamacoes) {
-//		this.reclamacoes = reclamacoes;
-//	}
+	public void addReclamacao(Reclamacao reclamacao){
+		reclamacoes.add(reclamacao);
+	}
+	
+	public ArrayList<Reclamacao> getReclamacoes() {
+		return reclamacoes;
+	}
+
+	public void setReclamacoes(ArrayList<Reclamacao> reclamacoes) {
+		this.reclamacoes = reclamacoes;
+	}
 		
 }

@@ -2,37 +2,29 @@
  <!DOCTYPE digester-rules PUBLIC
    "-//Apache Commons //DTD digester-rules XML V1.0//EN"
    "http://commons.apache.org/digester/dtds/digester-rules-3.0.dtd">
- 
- <digester-rules>
-   <pattern value="logs">
-     <pattern value="logAtendente">
-         <object-create-rule classname="model.LogAtendente"/>
-         <set-properties-rule/>
-         <set-next-rule methodname="addLogAtendente"/>
-         
-         <pattern value="atendente">
-         <call-method-rule methodname="setAtendente"
-           paramcount="0" />
-       </pattern>
- 
-       <pattern value="data">
-         <call-method-rule methodname="stringData"
-           paramcount="0" />
-       </pattern>
- 
-       <pattern value="prioritaria">
-         <call-method-rule methodname="setPrioritaria"
-           paramcount="0" />
-       </pattern>
- 
-       <pattern value="senha">
-         <call-method-rule methodname="setSenha" paramcount="0" />
-       </pattern>
- 
-       <pattern value="String">
-         <call-method-rule methodname="addReclamacao"
-           paramcount="0" />
-       </pattern>
-     </pattern>
-   </pattern>
- </digester-rules>
+
+<digester-rules>
+<!-- 	<object-create-rule pattern="logs" classname="model.Logs" /> -->
+	<!-- <set-next-rule methodname="addLogAtendente" /> -->
+	<pattern value="logs/LogAtendente">
+		<object-create-rule classname="model.LogAtendente" />
+
+		<bean-property-setter-rule pattern="atendente" />
+		<pattern value="data">
+			<call-method-rule methodname="stringData"
+				paramcount="0" />
+		</pattern>
+		<bean-property-setter-rule pattern="prioritaria" />
+		<bean-property-setter-rule pattern="senha" />
+		<pattern value="reclamacoes">
+			<pattern value="Reclamacao">
+			    <object-create-rule classname="model.Reclamacao" />
+				<bean-property-setter-rule pattern="tempo" />
+				<set-next-rule methodname="addReclamacao" />
+			</pattern>
+		</pattern>
+
+		<set-next-rule methodname="addLogAtendente" />
+	</pattern>
+
+</digester-rules>

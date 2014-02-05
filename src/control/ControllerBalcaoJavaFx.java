@@ -285,19 +285,19 @@ public class ControllerBalcaoJavaFx implements Observer {
 
 	private void setSlides() {
 
-		sColldownUsuario.setValue(Double.parseDouble(FabricaUsuarioAtendente
+		sColldownUsuario.setValue(FabricaUsuarioAtendente
 				.getInstance().getConfigFabricaUsuarioAtendente()
-				.getColldownUsuario()));
-		sTMR.setValue(Double.parseDouble(FabricaUsuarioAtendente.getInstance()
-				.getConfigFabricaUsuarioAtendente().getTempoMinimoReclamacao()));
-		sTMXR.setValue(Double.parseDouble(FabricaUsuarioAtendente.getInstance()
-				.getConfigFabricaUsuarioAtendente().getTempoMaximoReclamacao()));
-		sQMR.setValue(Double.parseDouble(FabricaUsuarioAtendente.getInstance()
+				.getColldownUsuario());
+		sTMR.setValue(FabricaUsuarioAtendente.getInstance()
+				.getConfigFabricaUsuarioAtendente().getTempoMinimoReclamacao());
+		sTMXR.setValue(FabricaUsuarioAtendente.getInstance()
+				.getConfigFabricaUsuarioAtendente().getTempoMaximoReclamacao());
+		sQMR.setValue(FabricaUsuarioAtendente.getInstance()
 				.getConfigFabricaUsuarioAtendente()
-				.getQuantidadeMinimaReclamacao()));
-		sQMXR.setValue(Double.parseDouble(FabricaUsuarioAtendente.getInstance()
+				.getQuantidadeMinimaReclamacao());
+		sQMXR.setValue(FabricaUsuarioAtendente.getInstance()
 				.getConfigFabricaUsuarioAtendente()
-				.getQuantidadeMaximaReclamacao()));
+				.getQuantidadeMaximaReclamacao());
 	}
 
 	@SuppressWarnings("unchecked")
