@@ -134,6 +134,7 @@ public class GeraGraficos {
 			}
 			i++;
 		}
+
 		imprimiMedia();
 	}
 
@@ -177,14 +178,11 @@ public class GeraGraficos {
 			}
 
 		}
-		//arrumar o a key é diferente de i por isso ele não divide 
-		for(Integer i = 0; i < media.size(); ){
-			if(media.containsKey(i.toString())){
-				Integer valor = media.get(i.toString()) / cont.get(i.toString());
-				media.remove(i.toString());
-				media.put(i.toString(), valor);
-			}
-			i++;
+
+		for(String key : media.keySet()){
+			Integer valor = media.get(key) / cont.get(key);
+			media.remove(key);
+			media.put(key, valor);
 		}
 		imprimiMedia();
 	}
@@ -232,6 +230,7 @@ public class GeraGraficos {
 			}
 			i++;
 		}
+
 		imprimiMedia();
 	}
 	private Map<String, Integer> manipulaMap(Map<String, Integer> media,
@@ -245,7 +244,7 @@ public class GeraGraficos {
 		}
 		return media;
 	}
-
+	
 	public Map<String, Integer> getMapMedia(){
 		return media;
 	}
