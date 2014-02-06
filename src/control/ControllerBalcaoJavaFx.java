@@ -200,18 +200,18 @@ public class ControllerBalcaoJavaFx implements Observer {
 		}
 		
 		cbMes.getItems().add("");
-		cbMes.getItems().add("Jan");
-		cbMes.getItems().add("Fev");
-		cbMes.getItems().add("Mar");
-		cbMes.getItems().add("Abr");
-		cbMes.getItems().add("Mai");
-		cbMes.getItems().add("Jun");
-		cbMes.getItems().add("Jul");
-		cbMes.getItems().add("Ago");
-		cbMes.getItems().add("Set");
-		cbMes.getItems().add("Out");
-		cbMes.getItems().add("Nov");
-		cbMes.getItems().add("Dez");
+		cbMes.getItems().add("1");
+		cbMes.getItems().add("2");
+		cbMes.getItems().add("3");
+		cbMes.getItems().add("4");
+		cbMes.getItems().add("5");
+		cbMes.getItems().add("6");
+		cbMes.getItems().add("7");
+		cbMes.getItems().add("8");
+		cbMes.getItems().add("9");
+		cbMes.getItems().add("10");
+		cbMes.getItems().add("11");
+		cbMes.getItems().add("12");
 		
 		cbAno.getItems().add("");
 		
@@ -276,8 +276,22 @@ public class ControllerBalcaoJavaFx implements Observer {
 	}
 	@FXML
 	private void geraGraficos(){
+		//new GeraGraficos();
 		
-		new GeraGraficos();
+		cbOpcaoGrafico.getSelectionModel().getSelectedIndex();
+		ArrayList<String> opcaoGrafico = new ArrayList<>();
+		
+		opcaoGrafico.add(GeraGraficos.MEDIAATENDIMENTO);
+		opcaoGrafico.add(GeraGraficos.ATENDIMENTOSDIARIOS);
+		opcaoGrafico.add(GeraGraficos.MEDIARECLAMACOES);
+		System.out.println(Integer.parseInt(cbDia.getSelectionModel().getSelectedItem())+":"+
+				Integer.parseInt(cbMes.getSelectionModel().getSelectedItem())+":"+
+						Integer.parseInt(cbAno.getSelectionModel().getSelectedItem())+":"+
+				opcaoGrafico.get(cbOpcaoGrafico.getSelectionModel().getSelectedIndex()));
+		GeraGraficos gg = new GeraGraficos(Integer.parseInt(cbDia.getSelectionModel().getSelectedItem()),
+				Integer.parseInt(cbMes.getSelectionModel().getSelectedItem()), 
+						Integer.parseInt(cbAno.getSelectionModel().getSelectedItem()), 
+				opcaoGrafico.get(cbOpcaoGrafico.getSelectionModel().getSelectedIndex()));
 		
 	//	bcAtendentes = new 
 		

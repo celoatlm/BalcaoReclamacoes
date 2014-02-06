@@ -11,6 +11,7 @@ import java.util.Map;
 
 import model.LogAtendente;
 import model.Logs;
+import model.Reclamacao;
 
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.xmlrules.FromXmlRulesModule;
@@ -39,7 +40,7 @@ public class GeraGraficos {
 		this.mes = mes;
 		this.dia = dia;
 	
-		
+		recuperaDados();
 		
 		switch (opcao) {
 		case "ma":
@@ -91,9 +92,11 @@ public class GeraGraficos {
 		if (dia != null  && mes != null && ano != null) {
 			for (LogAtendente la : l.getListaLogAtendentes()) {
 				Data d = new Data(la.getData());
-				if (d.getDia() == dia && d.getMes() == mes && d.getAno() == ano) {
-					for(String tempo: la.getTempoSenhas()){
-						media = manipulaMap(media, la.getAtendente(), Integer.parseInt(tempo));
+				//não sei pq essa bosta não acha isso igual
+				
+				if (d.getDia() == dia && d.getMes() == mes && d.getAno().compareTo(ano) == 0) {
+					for(Reclamacao r: la.getReclamacoes()){
+						media = manipulaMap(media, la.getAtendente(), r.getTempo());
 					}
 					cont = manipulaMap(cont, la.getAtendente(), 1);
 				}
@@ -102,9 +105,9 @@ public class GeraGraficos {
 			if (mes != null  && ano != null) {
 				for (LogAtendente la : l.getListaLogAtendentes()) {
 					Data d = new Data(la.getData());
-					if (d.getMes() == mes && d.getAno() == ano) {
-						for(String tempo: la.getTempoSenhas()){
-							media = manipulaMap(media, la.getAtendente(),Integer.parseInt(tempo));
+					if (d.getMes() == mes && d.getAno().compareTo(ano) == 0) {
+						for(Reclamacao r: la.getReclamacoes()){
+							media = manipulaMap(media, la.getAtendente(),r.getTempo());
 						}
 						cont = manipulaMap(media, la.getAtendente(), 1);
 					}
@@ -113,9 +116,9 @@ public class GeraGraficos {
 				if (ano != null) {
 					for (LogAtendente la : l.getListaLogAtendentes()) {
 						Data d = new Data(la.getData());
-						if (d.getAno() == ano) {
-							for(String tempo: la.getTempoSenhas()){
-								media = manipulaMap(media, la.getAtendente(),Integer.parseInt(tempo));
+						if (d.getAno().compareTo(ano) == 0) {
+							for(Reclamacao r: la.getReclamacoes()){
+								media = manipulaMap(media, la.getAtendente(),r.getTempo());
 							}
 							cont = manipulaMap(media, la.getAtendente(), 1);
 						}
@@ -131,7 +134,7 @@ public class GeraGraficos {
 			}
 			i++;
 		}
-
+		imprimiMedia();
 	}
 
 	private void mediaReclamacao() {
@@ -141,9 +144,9 @@ public class GeraGraficos {
 		if (dia != null && mes != null && ano != null) {
 			for(LogAtendente la : l.getListaLogAtendentes()){
 				Data d = new Data(la.getData());
-				if (d.getDia() == dia && d.getMes() == mes && d.getAno() == ano) {
-					for(String s: la.getTempoSenhas()){
-						media = manipulaMap(media, d.getDia().toString(), Integer.parseInt(s));
+				if (d.getDia() == dia && d.getMes() == mes &&d.getAno().compareTo(ano) == 0) {
+					for(Reclamacao r: la.getReclamacoes()){
+						media = manipulaMap(media, d.getDia().toString(), r.getTempo());
 					}
 					cont = manipulaMap(cont, d.getDia().toString() , 1);
 				}
@@ -152,9 +155,9 @@ public class GeraGraficos {
 			if (mes != null && ano != null) {
 				for(LogAtendente la : l.getListaLogAtendentes()){
 					Data d = new Data(la.getData());
-					if (d.getDia() == dia && d.getMes() == mes) {
-						for(String s: la.getTempoSenhas()){
-							media = manipulaMap(media, d.getDia().toString(), Integer.parseInt(s));
+					if (d.getMes() == mes && d.getAno().compareTo(ano) == 0) {
+						for(Reclamacao r: la.getReclamacoes()){
+							media = manipulaMap(media, d.getDia().toString(),r.getTempo());
 						}
 						cont = manipulaMap(cont, d.getDia().toString() , 1);
 					}
@@ -163,9 +166,9 @@ public class GeraGraficos {
 				if (ano != null) {
 					for(LogAtendente la : l.getListaLogAtendentes()){
 						Data d = new Data(la.getData());
-						if (d.getAno() == ano) {
-							for(String s: la.getTempoSenhas()){
-								media = manipulaMap(media, d.getDia().toString()+"/"+d.getMes().toString(),Integer.parseInt(s));
+						if (d.getAno().compareTo(ano) == 0) {
+							for(Reclamacao r: la.getReclamacoes()){
+								media = manipulaMap(media, d.getDia().toString()+"/"+d.getMes().toString(),r.getTempo());
 							}
 							cont = manipulaMap(cont, d.getDia().toString()+"/"+d.getMes().toString() , 1);
 						}
@@ -174,6 +177,7 @@ public class GeraGraficos {
 			}
 
 		}
+		//arrumar o a key é diferente de i por isso ele não divide 
 		for(Integer i = 0; i < media.size(); ){
 			if(media.containsKey(i.toString())){
 				Integer valor = media.get(i.toString()) / cont.get(i.toString());
@@ -182,6 +186,7 @@ public class GeraGraficos {
 			}
 			i++;
 		}
+		imprimiMedia();
 	}
 
 	private void atendimentosDiarios() {
@@ -201,7 +206,7 @@ public class GeraGraficos {
 			if (mes != null && ano != null) {
 				for(LogAtendente la : l.getListaLogAtendentes()){
 					Data d = new Data(la.getData());
-					if (d.getMes() == mes && d.getAno() == ano) {
+					if (d.getMes() == mes && d.getAno().compareTo(ano) == 0) {
 						media = manipulaMap(media, d.getDia().toString(),1);
 						cont = manipulaMap(cont, d.getDia().toString(), 1);
 					}
@@ -210,7 +215,7 @@ public class GeraGraficos {
 				if (ano != null) {
 					for(LogAtendente la : l.getListaLogAtendentes()){
 						Data d = new Data(la.getData());
-						if (d.getAno() == ano) {
+						if (d.getAno().compareTo(ano) == 0) {
 							media = manipulaMap(media, d.getDia().toString()+"/"+d.getMes().toString(),1);
 							cont = manipulaMap(cont, d.getDia().toString(), 1);
 						}
@@ -227,7 +232,7 @@ public class GeraGraficos {
 			}
 			i++;
 		}
-		
+		imprimiMedia();
 	}
 	private Map<String, Integer> manipulaMap(Map<String, Integer> media,
 			String key, Integer quantidade) {
@@ -244,6 +249,13 @@ public class GeraGraficos {
 	public Map<String, Integer> getMapMedia(){
 		return media;
 	}
+	
+	private void imprimiMedia(){
+		for(Integer i: media.values()){
+			System.out.println(i);
+		}
+	}
+
 	protected class Data {
 
 		private Date data;
@@ -257,7 +269,7 @@ public class GeraGraficos {
 
 			addString(sData);
 			addString(sData[3].split(":"));
-			//System.out.println(this.toString());
+			
 		}
 
 		public Data() {
@@ -334,7 +346,7 @@ public class GeraGraficos {
 
 		public Integer getAno() {
 
-			return Integer.parseInt(alData.get(7));
+			return Integer.parseInt(alData.get(5));
 		}
 
 	}
