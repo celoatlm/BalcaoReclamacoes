@@ -109,7 +109,7 @@ public class GeraGraficos {
 						for(Reclamacao r: la.getReclamacoes()){
 							media = manipulaMap(media, la.getAtendente(),r.getTempo());
 						}
-						cont = manipulaMap(media, la.getAtendente(), 1);
+						cont = manipulaMap(cont, la.getAtendente(), 1);
 					}
 				}
 			} else {
@@ -120,7 +120,7 @@ public class GeraGraficos {
 							for(Reclamacao r: la.getReclamacoes()){
 								media = manipulaMap(media, la.getAtendente(),r.getTempo());
 							}
-							cont = manipulaMap(media, la.getAtendente(), 1);
+							cont = manipulaMap(cont, la.getAtendente(), 1);
 						}
 					}
 				}

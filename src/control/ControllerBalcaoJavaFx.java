@@ -81,8 +81,8 @@ public class ControllerBalcaoJavaFx implements Observer {
 	private HBox hbAtendentes;
 	@FXML
 	private Button bGeraGrafico;
-	@FXML 
-	private BarChart<Integer , String> bcAtendentes;
+	@FXML
+	private BarChart<Integer, String> bcAtendentes;
 	@FXML
 	private ChoiceBox<String> cbOpcaoGrafico;
 	@FXML
@@ -91,9 +91,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 	private ComboBox<String> cbMes;
 	@FXML
 	private ComboBox<String> cbAno;
-	
-	
-	
+
 	private Map<String, PaneAtendente> mapPaneAtendente;
 	private List<Senha> senhas = null;
 
@@ -124,7 +122,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 							commando = "-colldownUsuario "
 									+ getString(sColldownUsuario.getValue());
 							executaCommando(commando);
-							//System.out.println(commando);
+							// System.out.println(commando);
 						}
 
 					}
@@ -184,18 +182,20 @@ public class ControllerBalcaoJavaFx implements Observer {
 				});
 
 		criaComboBoxGraficos();
-		
+
 		atualizaConfigs();
 	}
 
-	public void criaComboBoxGraficos(){
-		
-		cbOpcaoGrafico.getItems().add("Tempo médio de atendimento de cada atendente");
+	public void criaComboBoxGraficos() {
+		//arrumar os combobox para sempre iniciar no espaço vazio
+		cbOpcaoGrafico.getItems().add(
+				"Tempo médio de atendimento de cada atendente");
 		cbOpcaoGrafico.getItems().add("Número de atendimentos diários");
-		cbOpcaoGrafico.getItems().add("Número médio de reclamações por cliente");
-		
+		cbOpcaoGrafico.getItems()
+				.add("Número médio de reclamações por cliente");
+
 		cbDia.getItems().add("");
-		for(Integer i = 1; i < 32 ; i++){
+		for (Integer i = 1; i < 32; i++) {
 			cbDia.getItems().add(i.toString());
 		}
 		
@@ -212,15 +212,15 @@ public class ControllerBalcaoJavaFx implements Observer {
 		cbMes.getItems().add("10");
 		cbMes.getItems().add("11");
 		cbMes.getItems().add("12");
-		
+
 		cbAno.getItems().add("");
-		
-		for(Integer i = 2014; i < 2021 ; i++){
+
+		for (Integer i = 2014; i < 2021; i++) {
 			cbAno.getItems().add(i.toString());
 		}
-		
-	} 
-	
+
+	}
+
 	@FXML
 	public void onCloseTab() {
 
@@ -274,34 +274,50 @@ public class ControllerBalcaoJavaFx implements Observer {
 		setSlides();
 		atualizaComboBox();
 	}
+
 	@FXML
-	private void geraGraficos(){
-		//new GeraGraficos();
-		
+	private void geraGraficos() {
+		// new GeraGraficos();
+
 		cbOpcaoGrafico.getSelectionModel().getSelectedIndex();
 		ArrayList<String> opcaoGrafico = new ArrayList<>();
-		
+
 		opcaoGrafico.add(GeraGraficos.MEDIAATENDIMENTO);
 		opcaoGrafico.add(GeraGraficos.ATENDIMENTOSDIARIOS);
 		opcaoGrafico.add(GeraGraficos.MEDIARECLAMACOES);
-		System.out.println(Integer.parseInt(cbDia.getSelectionModel().getSelectedItem())+":"+
-				Integer.parseInt(cbMes.getSelectionModel().getSelectedItem())+":"+
-						Integer.parseInt(cbAno.getSelectionModel().getSelectedItem())+":"+
-				opcaoGrafico.get(cbOpcaoGrafico.getSelectionModel().getSelectedIndex()));
-		GeraGraficos gg = new GeraGraficos(Integer.parseInt(cbDia.getSelectionModel().getSelectedItem()),
-				Integer.parseInt(cbMes.getSelectionModel().getSelectedItem()), 
-						Integer.parseInt(cbAno.getSelectionModel().getSelectedItem()), 
-				opcaoGrafico.get(cbOpcaoGrafico.getSelectionModel().getSelectedIndex()));
-		
-	//	bcAtendentes = new 
-		
+//		System.out.println(Integer.parseInt(cbDia.getSelectionModel()
+//				.getSelectedItem())
+//				+ ":"
+//				+ Integer.parseInt(cbMes.getSelectionModel().getSelectedItem())
+//				+ ":"
+//				+ Integer.parseInt(cbAno.getSelectionModel().getSelectedItem())
+//				+ ":"
+//				+ opcaoGrafico.get(cbOpcaoGrafico.getSelectionModel()
+//						.getSelectedIndex()));
+		Integer dia = null;
+		if (cbDia.getSelectionModel().getSelectedItem() != "") {
+			dia = Integer.parseInt(cbDia.getSelectionModel().getSelectedItem());
+		}
+		Integer mes = null;
+		if (cbMes.getSelectionModel().getSelectedItem() != "") {
+			mes = Integer.parseInt(cbMes.getSelectionModel().getSelectedItem());
+		}
+		Integer ano = null;
+		if (cbAno.getSelectionModel().getSelectedItem() != "") {
+			ano = Integer.parseInt(cbAno.getSelectionModel().getSelectedItem());
+		}
+		GeraGraficos gg = new GeraGraficos(dia, mes, ano,
+				opcaoGrafico.get(cbOpcaoGrafico.getSelectionModel()
+						.getSelectedIndex()));
+
+		// bcAtendentes = new
+
 	}
 
 	private void setSlides() {
 
-		sColldownUsuario.setValue(FabricaUsuarioAtendente
-				.getInstance().getConfigFabricaUsuarioAtendente()
-				.getColldownUsuario());
+		sColldownUsuario.setValue(FabricaUsuarioAtendente.getInstance()
+				.getConfigFabricaUsuarioAtendente().getColldownUsuario());
 		sTMR.setValue(FabricaUsuarioAtendente.getInstance()
 				.getConfigFabricaUsuarioAtendente().getTempoMinimoReclamacao());
 		sTMXR.setValue(FabricaUsuarioAtendente.getInstance()
@@ -357,22 +373,22 @@ public class ControllerBalcaoJavaFx implements Observer {
 
 	private void atualizaPainelSenhas() {
 		// TODO Auto-generated method stub
-		//String aux = "";
+		// String aux = "";
 		if (senhas != null) {
-			
+
 			for (final Senha s : senhas) {
-				//aux+= s.getSenha()+" : " + s.getSenhaPrioritaria()+"\n";
-				
+				// aux+= s.getSenha()+" : " + s.getSenhaPrioritaria()+"\n";
+
 				Platform.runLater(new Runnable() {
 
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
 						Label l = new Label(s.getSenha().toString() + " : "
-										+ s.getSenhaPrioritaria().toString()); 
-						if(s.getSenhaPrioritaria() == 0){
+								+ s.getSenhaPrioritaria().toString());
+						if (s.getSenhaPrioritaria() == 0) {
 							l.setStyle("-fx-background-color: green;");
-						}else{
+						} else {
 							l.setStyle("-fx-background-color: blue;");
 						}
 						l.setFont(new Font(20));
@@ -381,7 +397,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 				});
 			}
 		}
-		//System.out.println(aux);
+		// System.out.println(aux);
 	}
 
 	private void atualizaPaneAtendentes() {
@@ -392,9 +408,9 @@ public class ControllerBalcaoJavaFx implements Observer {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				
+
 				hbAtendentes.getChildren().clear();
-				
+
 			}
 		});
 
@@ -421,13 +437,13 @@ public class ControllerBalcaoJavaFx implements Observer {
 						hbAtendentes.getChildren().add(
 								mapPaneAtendente.get(a.getNome()));
 					} catch (IllegalArgumentException e) {
-						Logger.getLogger(ControllerBalcaoJavaFx.class.getName()).error(e);
+						Logger.getLogger(ControllerBalcaoJavaFx.class.getName())
+								.error(e);
 					}
 
 				}
 			});
 		}
 	}
-	
 
 }
