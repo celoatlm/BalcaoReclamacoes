@@ -5,6 +5,7 @@ import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -129,7 +130,7 @@ public class GeraGraficos {
 		for(Integer i = 0; i < media.size(); ){
 			if(media.containsKey(i.toString())){
 				Integer valor = media.get(i.toString()) / cont.get(i.toString());
-				media.remove(i.toString());
+				//media.remove(i.toString());
 				media.put(i.toString(), valor);
 			}
 			i++;
@@ -147,7 +148,7 @@ public class GeraGraficos {
 				Data d = new Data(la.getData());
 				if (d.getDia() == dia && d.getMes() == mes &&d.getAno().compareTo(ano) == 0) {
 					for(Reclamacao r: la.getReclamacoes()){
-						media = manipulaMap(media, d.getDia().toString(), r.getTempo());
+						media = manipulaMap(media, d.getDia().toString(),1);
 					}
 					cont = manipulaMap(cont, d.getDia().toString() , 1);
 				}
@@ -158,7 +159,7 @@ public class GeraGraficos {
 					Data d = new Data(la.getData());
 					if (d.getMes() == mes && d.getAno().compareTo(ano) == 0) {
 						for(Reclamacao r: la.getReclamacoes()){
-							media = manipulaMap(media, d.getDia().toString(),r.getTempo());
+							media = manipulaMap(media, d.getDia().toString(),1);
 						}
 						cont = manipulaMap(cont, d.getDia().toString() , 1);
 					}
@@ -169,7 +170,7 @@ public class GeraGraficos {
 						Data d = new Data(la.getData());
 						if (d.getAno().compareTo(ano) == 0) {
 							for(Reclamacao r: la.getReclamacoes()){
-								media = manipulaMap(media, d.getDia().toString()+"/"+d.getMes().toString(),r.getTempo());
+								media = manipulaMap(media, d.getDia().toString()+"/"+d.getMes().toString(),1);
 							}
 							cont = manipulaMap(cont, d.getDia().toString()+"/"+d.getMes().toString() , 1);
 						}
@@ -181,7 +182,7 @@ public class GeraGraficos {
 
 		for(String key : media.keySet()){
 			Integer valor = media.get(key) / cont.get(key);
-			media.remove(key);
+			//media.remove(key);
 			media.put(key, valor);
 		}
 		imprimiMedia();
@@ -225,7 +226,7 @@ public class GeraGraficos {
 		for(Integer i = 0; i < media.size(); ){
 			if(media.containsKey(i.toString())){
 				Integer valor = media.get(i.toString()) / cont.get(i.toString());
-				media.remove(i.toString());
+				//media.remove(i.toString());
 				media.put(i.toString(), valor);
 			}
 			i++;
@@ -239,7 +240,7 @@ public class GeraGraficos {
 			media.put(key, 1);
 		} else {
 			int aux = media.get(key) + quantidade;
-			media.remove(key);
+			//media.remove(key);
 			media.put(key, aux);
 		}
 		return media;
@@ -256,7 +257,9 @@ public class GeraGraficos {
 	}
 
 	protected class Data {
-
+		///eu não conhecia o calendar
+		// fora que tem um framework pra data
+		//eu sei eu sei
 		private Date data;
 		private String[] sData;
 		private ArrayList<String> alData;
@@ -268,6 +271,7 @@ public class GeraGraficos {
 
 			addString(sData);
 			addString(sData[3].split(":"));
+			Calendar c = Calendar.getInstance();
 			
 		}
 

@@ -55,26 +55,27 @@ public class ConfigFabricaUsuarioAtendenteTest {
 	public void testSetQuantidadeMaximaReclamacao() {
 		
 		configFabricaUsuarioAtendente.setQuantidadeMaximaReclamacao(11);
-		assertEquals("10",configFabricaUsuarioAtendente.getQuantidadeMaximaReclamacao());
+		assertEquals(10,(int)configFabricaUsuarioAtendente.getQuantidadeMaximaReclamacao());
 	}
 
 	@Test
 	public void testSetQuantidadeMinimaReclamacao() {
 
 		configFabricaUsuarioAtendente.setQuantidadeMinimaReclamacao(0);
-		assertEquals("1",configFabricaUsuarioAtendente.getQuantidadeMinimaReclamacao());
+		assertEquals(1,(int)configFabricaUsuarioAtendente.getQuantidadeMinimaReclamacao());
+		
 	}
 
 	@Test
 	public void testSetTempoMaximoReclamacao() {
 		configFabricaUsuarioAtendente.setTempoMaximoReclamacao(11);
-		assertEquals("10", configFabricaUsuarioAtendente.getTempoMaximoReclamacao());
+		assertEquals(10, (int)configFabricaUsuarioAtendente.getTempoMaximoReclamacao());
 	}
 
 	@Test
 	public void testSetTempoMinimoReclamacao() {
 		configFabricaUsuarioAtendente.setTempoMinimoReclamacao(0);
-		assertEquals("1", configFabricaUsuarioAtendente.getTempoMinimoReclamacao());
+		assertEquals(1, (int)configFabricaUsuarioAtendente.getTempoMinimoReclamacao());
 	}
 
 }

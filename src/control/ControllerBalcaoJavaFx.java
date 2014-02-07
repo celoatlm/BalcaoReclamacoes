@@ -18,8 +18,14 @@ import model.Senha;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -82,7 +88,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 	@FXML
 	private Button bGeraGrafico;
 	@FXML
-	private BarChart<Integer, String> bcAtendentes;
+	private BarChart<String, Number> bcAtendentes;
 	@FXML
 	private ChoiceBox<String> cbOpcaoGrafico;
 	@FXML
@@ -91,10 +97,12 @@ public class ControllerBalcaoJavaFx implements Observer {
 	private ComboBox<String> cbMes;
 	@FXML
 	private ComboBox<String> cbAno;
+	@FXML 
+	private AnchorPane apGrafico;
 
 	private Map<String, PaneAtendente> mapPaneAtendente;
 	private List<Senha> senhas = null;
-
+	
 	@FXML
 	private void initialize() {
 
@@ -102,7 +110,11 @@ public class ControllerBalcaoJavaFx implements Observer {
 		FilaSenhas.getInstance().addObserver(this);
 		ObserverAtendenteGui.getInstance().addObserver(this);
 		Painel.getInstance().addObserver(this);
-
+		
+		CategoryAxis xAxis = new CategoryAxis();
+		NumberAxis yAxis = new NumberAxis();
+		bcAtendentes = new BarChart<String,Number>(xAxis, yAxis);
+		
 		mapPaneAtendente = new HashMap<String, PaneAtendente>();
 		atualizaPaneAtendentes();
 
@@ -184,6 +196,8 @@ public class ControllerBalcaoJavaFx implements Observer {
 		criaComboBoxGraficos();
 
 		atualizaConfigs();
+		
+		
 	}
 
 	public void criaComboBoxGraficos() {
@@ -194,10 +208,13 @@ public class ControllerBalcaoJavaFx implements Observer {
 		cbOpcaoGrafico.getItems()
 				.add("Número médio de reclamações por cliente");
 
+		cbOpcaoGrafico.getSelectionModel().select(0);
+		
 		cbDia.getItems().add("");
 		for (Integer i = 1; i < 32; i++) {
 			cbDia.getItems().add(i.toString());
 		}
+		cbDia.getSelectionModel().select(0);
 		
 		cbMes.getItems().add("");
 		cbMes.getItems().add("1");
@@ -212,13 +229,14 @@ public class ControllerBalcaoJavaFx implements Observer {
 		cbMes.getItems().add("10");
 		cbMes.getItems().add("11");
 		cbMes.getItems().add("12");
-
+		cbMes.getSelectionModel().select(0);
+		
 		cbAno.getItems().add("");
 
 		for (Integer i = 2014; i < 2021; i++) {
 			cbAno.getItems().add(i.toString());
 		}
-
+		cbAno.getSelectionModel().select(0);
 	}
 
 	@FXML
@@ -275,6 +293,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 		atualizaComboBox();
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@FXML
 	private void geraGraficos() {
 		// new GeraGraficos();
@@ -285,15 +304,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 		opcaoGrafico.add(GeraGraficos.MEDIAATENDIMENTO);
 		opcaoGrafico.add(GeraGraficos.ATENDIMENTOSDIARIOS);
 		opcaoGrafico.add(GeraGraficos.MEDIARECLAMACOES);
-//		System.out.println(Integer.parseInt(cbDia.getSelectionModel()
-//				.getSelectedItem())
-//				+ ":"
-//				+ Integer.parseInt(cbMes.getSelectionModel().getSelectedItem())
-//				+ ":"
-//				+ Integer.parseInt(cbAno.getSelectionModel().getSelectedItem())
-//				+ ":"
-//				+ opcaoGrafico.get(cbOpcaoGrafico.getSelectionModel()
-//						.getSelectedIndex()));
+
 		Integer dia = null;
 		if (cbDia.getSelectionModel().getSelectedItem() != "") {
 			dia = Integer.parseInt(cbDia.getSelectionModel().getSelectedItem());
@@ -306,12 +317,60 @@ public class ControllerBalcaoJavaFx implements Observer {
 		if (cbAno.getSelectionModel().getSelectedItem() != "") {
 			ano = Integer.parseInt(cbAno.getSelectionModel().getSelectedItem());
 		}
-		GeraGraficos gg = new GeraGraficos(dia, mes, ano,
+		final GeraGraficos gg = new GeraGraficos(dia, mes, ano,
 				opcaoGrafico.get(cbOpcaoGrafico.getSelectionModel()
 						.getSelectedIndex()));
 
-		// bcAtendentes = new
-
+		
+		
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				CategoryAxis xAxis = new CategoryAxis();
+				NumberAxis yAxis = new NumberAxis();
+								
+				Series serie = new Series();
+				ArrayList<String> keys = new ArrayList<>(gg.getMapMedia().keySet());
+				ArrayList<Integer> values = new ArrayList<>(gg.getMapMedia().values());
+				
+				for(int i = 0 ; i< values.size();i++){
+					serie.getData().add(new XYChart.Data(keys.get(i), values.get(i)));
+				
+				}
+						
+				
+				bcAtendentes = new BarChart<String,Number>(xAxis, yAxis);
+				
+				bcAtendentes.setTitle(cbOpcaoGrafico.getSelectionModel().getSelectedItem());
+				//obSeries.add(serie);
+				//bcAtendentes.setData(obSeries);
+				bcAtendentes.getData().add(serie);
+				//bcAtendentes.setId("bcAtendentes");
+				System.out.println("era pra te ido");
+				
+			}
+		});
+//		CategoryAxis xAxis = new CategoryAxis();
+//		NumberAxis yAxis = new NumberAxis();
+//		bcAtendentes = new BarChart<String,Number>(xAxis, yAxis);
+		
+//		bcAtendentes.setTitle(cbOpcaoGrafico.getSelectionModel().getSelectedItem());
+//
+//		XYChart.Series serie = new XYChart.Series();
+//		
+//		ArrayList<String> keys = new ArrayList<>(gg.getMapMedia().keySet());
+//		ArrayList<Integer> values = new ArrayList<>(gg.getMapMedia().values());
+//		
+//		for(int i = 0 ; i< values.size();i++){
+//			serie.getData().add(new XYChart.Data(keys.get(i), values.get(i)));
+//			
+//		}
+//		
+//		bcAtendentes.getData().add(serie);
+		
+		
 	}
 
 	private void setSlides() {
