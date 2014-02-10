@@ -150,7 +150,7 @@
                                 <FXCollections fx:factory="observableArrayList" />
                               </items>
                             </ComboBox>
-                            <BarChart fx:id="bcAtendentes" animated="false" layoutX="57.0" layoutY="185.0" prefHeight="487.0" prefWidth="774.0">
+                            <BarChart fx:id="bcAtendentes" layoutX="68.0" layoutY="173.0" prefHeight="499.0" prefWidth="743.0">
                               <xAxis>
                                 <CategoryAxis side="BOTTOM" />
                               </xAxis>

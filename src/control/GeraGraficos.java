@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 import model.LogAtendente;
 import model.Logs;
@@ -259,6 +260,7 @@ public class GeraGraficos {
 	protected class Data {
 		///eu não conhecia o calendar
 		// fora que tem um framework pra data
+		//srrumar para calendar manter os mesmos metodos so mudar a logica
 		//eu sei eu sei
 		private Date data;
 		private String[] sData;
@@ -271,6 +273,7 @@ public class GeraGraficos {
 
 			addString(sData);
 			addString(sData[3].split(":"));
+			
 			Calendar c = Calendar.getInstance();
 			
 		}

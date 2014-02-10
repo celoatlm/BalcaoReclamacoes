@@ -1,8 +1,11 @@
 package control;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -16,14 +19,20 @@ import model.AtendenteGrafico;
 import model.Painel;
 import model.Senha;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.chart.Axis;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
@@ -87,6 +96,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 	private HBox hbAtendentes;
 	@FXML
 	private Button bGeraGrafico;
+
 	@FXML
 	private BarChart<String, Number> bcAtendentes;
 	@FXML
@@ -111,9 +121,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 		ObserverAtendenteGui.getInstance().addObserver(this);
 		Painel.getInstance().addObserver(this);
 		
-		CategoryAxis xAxis = new CategoryAxis();
-		NumberAxis yAxis = new NumberAxis();
-		bcAtendentes = new BarChart<String,Number>(xAxis, yAxis);
+		
 		
 		mapPaneAtendente = new HashMap<String, PaneAtendente>();
 		atualizaPaneAtendentes();
@@ -145,7 +153,6 @@ public class ControllerBalcaoJavaFx implements Observer {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0,
 					Boolean arg1, Boolean arg2) {
-				// TODO Auto-generated method
 				if (arg1) {
 					commando = "-tmr " + getString(sTMR.getValue());
 					executaCommando(commando);
@@ -296,15 +303,13 @@ public class ControllerBalcaoJavaFx implements Observer {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@FXML
 	private void geraGraficos() {
-		// new GeraGraficos();
-
-		cbOpcaoGrafico.getSelectionModel().getSelectedIndex();
+		
 		ArrayList<String> opcaoGrafico = new ArrayList<>();
 
 		opcaoGrafico.add(GeraGraficos.MEDIAATENDIMENTO);
 		opcaoGrafico.add(GeraGraficos.ATENDIMENTOSDIARIOS);
 		opcaoGrafico.add(GeraGraficos.MEDIARECLAMACOES);
-
+		
 		Integer dia = null;
 		if (cbDia.getSelectionModel().getSelectedItem() != "") {
 			dia = Integer.parseInt(cbDia.getSelectionModel().getSelectedItem());
@@ -322,54 +327,77 @@ public class ControllerBalcaoJavaFx implements Observer {
 						.getSelectedIndex()));
 
 		
+		CategoryAxis xAxis = new CategoryAxis();
+		//NumberAxis yAxis = new NumberAxis();
+		bcAtendentes.getData().clear();
+		bcAtendentes.setTitle(cbOpcaoGrafico.getSelectionModel()
+				.getSelectedItem());	
+		//bcAtendentes = new BarChart<>(xAxis, yAxis);
+		//xAxis.setLabel("teste");
+		//yAxis.setLabel("lol2");
+		XYChart.Series serie = new XYChart.Series();
+		//serie.setName("lol");
 		
-		Platform.runLater(new Runnable() {
+		
+		ArrayList<String> keys = new ArrayList<>(gg.getMapMedia().keySet());
+		ArrayList<Integer> values = new ArrayList<>(gg.getMapMedia().values());
+		
+		
+		
+		switch (cbOpcaoGrafico.getSelectionModel()
+						.getSelectedIndex()) {
+		case 0:
+			serie.setName("Atendentes");
+		
+			break;
+		case 1:
+			serie.setName("Dias");
 			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				CategoryAxis xAxis = new CategoryAxis();
-				NumberAxis yAxis = new NumberAxis();
-								
-				Series serie = new Series();
-				ArrayList<String> keys = new ArrayList<>(gg.getMapMedia().keySet());
-				ArrayList<Integer> values = new ArrayList<>(gg.getMapMedia().values());
-				
-				for(int i = 0 ; i< values.size();i++){
-					serie.getData().add(new XYChart.Data(keys.get(i), values.get(i)));
-				
-				}
-						
-				
-				bcAtendentes = new BarChart<String,Number>(xAxis, yAxis);
-				
-				bcAtendentes.setTitle(cbOpcaoGrafico.getSelectionModel().getSelectedItem());
-				//obSeries.add(serie);
-				//bcAtendentes.setData(obSeries);
-				bcAtendentes.getData().add(serie);
-				//bcAtendentes.setId("bcAtendentes");
-				System.out.println("era pra te ido");
-				
-			}
-		});
-//		CategoryAxis xAxis = new CategoryAxis();
-//		NumberAxis yAxis = new NumberAxis();
-//		bcAtendentes = new BarChart<String,Number>(xAxis, yAxis);
+			break;
+		case 2:
+			serie.setName("Dias");
+			break;	
+		default:
+			break;
+		}
+		for(int i = 0 ; i< values.size();i++){
+			serie.getData().add(new XYChart.Data(keys.get(i), values.get(i)));
+			
+			//serie.getChart().getXAxis().setLabel(keys.get(i));
+			//serie.getChart().getYAxis().setLabel(values.get(i).toString());
+			
+		}
+		bcAtendentes.setAnimated(true);
+		bcAtendentes.getData().add(serie);
 		
-//		bcAtendentes.setTitle(cbOpcaoGrafico.getSelectionModel().getSelectedItem());
-//
-//		XYChart.Series serie = new XYChart.Series();
-//		
-//		ArrayList<String> keys = new ArrayList<>(gg.getMapMedia().keySet());
-//		ArrayList<Integer> values = new ArrayList<>(gg.getMapMedia().values());
-//		
-//		for(int i = 0 ; i< values.size();i++){
-//			serie.getData().add(new XYChart.Data(keys.get(i), values.get(i)));
+//		Platform.runLater(new Runnable() {
 //			
-//		}
-//		
-//		bcAtendentes.getData().add(serie);
-		
+//			@Override
+//			public void run() {
+//				// TODO Auto-generated method stub
+//				CategoryAxis xAxis = new CategoryAxis();
+//				NumberAxis yAxis = new NumberAxis();
+//				bcAtendentes.setTitle(cbOpcaoGrafico.getSelectionModel()
+//						.getSelectedItem());	
+//				bcAtendentes = new BarChart<>(xAxis, yAxis);
+//				xAxis.setLabel("teste");
+//				yAxis.setLabel("lol2");
+//				XYChart.Series serie = new XYChart.Series();
+//				serie.setName("lol");
+//				
+//				ArrayList<String> keys = new ArrayList<>(gg.getMapMedia().keySet());
+//				ArrayList<Integer> values = new ArrayList<>(gg.getMapMedia().values());
+//				
+//				for(int i = 0 ; i< values.size();i++){
+//					serie.getData().add(new XYChart.Data(keys.get(i), values.get(i)));
+//				
+//				}
+//						
+//				bcAtendentes.getData().add(serie);
+//			
+//			}
+//		});
+
 		
 	}
 
