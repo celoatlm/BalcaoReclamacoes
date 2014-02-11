@@ -1,7 +1,5 @@
 package control;
 
-import java.util.Date;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -93,29 +91,11 @@ public class CLIComandos {
 			if(cmd.hasOption("tmxr")){
 				fabricaUsuarioAtendente.setTempoMaximoReclamacies(cmd.getOptionValue("tmxr"));
 			}
-			if(cmd.hasOption("pfu")){
-				fabricaUsuarioAtendente.pausaFabricaUsuario();
-			}
 			if(cmd.hasOption("startx")){
 				new Thread(new BalcaoAppJavaFX()).start();
 				
 			}
-			if(cmd.hasOption("grafico")){
-				new GeraGraficos();
-			}
-			if(cmd.hasOption("data")){
-				Date d = new Date();
-				String[] data = d.toString().split(" ");
-				for(int  i = 0; i < data.length; i++){
-					System.out.println(data[i]);
-				}
-				String[] aux = data[3].split(":");
-				for(int  i = 0; i < aux.length; i++){
-					System.out.println(aux[i]);
-				}
-				System.out.println(d.toString());
-			}
-
+						
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -150,7 +130,7 @@ public class CLIComandos {
 				.create("qmr");
 		Option qmxr = OptionBuilder.withArgName("quantidade").hasArgs(1)
 				.withValueSeparator()
-				.withDescription("altera a quantidade minima de reclamações")
+				.withDescription("altera a quantidade maxima de reclamações")
 				.create("qmxr");
 		Option tmr = OptionBuilder.withArgName("tempo").hasArgs(1)
 				.withValueSeparator()
@@ -166,9 +146,6 @@ public class CLIComandos {
 				.withDescription("fecha app").create("exit");
 		Option help = OptionBuilder.withArgName("help")
 				.withDescription("ajuda").create("help");
-		Option pfu = OptionBuilder.withArgName("pfu")
-				.withDescription("pausa a fabrica de usuarios").create("pfu");
-
 		Option listaAtendentes = OptionBuilder.withArgName("listaAtendentes")
 				.withDescription("lista todos os atendentes").create("listaAtendentes");
 		Option listaSenhas = OptionBuilder.withArgName("listaSenhas")
@@ -177,12 +154,6 @@ public class CLIComandos {
 		Option error = OptionBuilder.withArgName("error")
 				.withDescription("").create("error");
 		
-		Option data = OptionBuilder.withArgName("data")
-				.withDescription("Data do sistema").create("data");
-		
-		Option grafico = OptionBuilder.withArgName("grafico")
-				.withDescription("gera grafico para teste")
-				.create("grafico");
 		options = new Options();
 
 		options.addOption(startApp);
@@ -196,13 +167,10 @@ public class CLIComandos {
 		options.addOption(pausaAtendente);
 		options.addOption(startx);
 		options.addOption(help);
-		options.addOption(pfu);
 		options.addOption(listaAtendentes);
 		options.addOption(listaSenhas);
 		options.addOption(exit);
-		options.addOption(data);
 		options.addOption(error);
-		options.addOption(grafico);
 
 		
 	}

@@ -1,11 +1,8 @@
 package control;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -19,22 +16,11 @@ import model.AtendenteGrafico;
 import model.Painel;
 import model.Senha;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.chart.Axis;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -120,8 +106,6 @@ public class ControllerBalcaoJavaFx implements Observer {
 		FilaSenhas.getInstance().addObserver(this);
 		ObserverAtendenteGui.getInstance().addObserver(this);
 		Painel.getInstance().addObserver(this);
-		
-		
 		
 		mapPaneAtendente = new HashMap<String, PaneAtendente>();
 		atualizaPaneAtendentes();
@@ -327,7 +311,7 @@ public class ControllerBalcaoJavaFx implements Observer {
 						.getSelectedIndex()));
 
 		
-		CategoryAxis xAxis = new CategoryAxis();
+		//CategoryAxis xAxis = new CategoryAxis();
 		//NumberAxis yAxis = new NumberAxis();
 		bcAtendentes.getData().clear();
 		bcAtendentes.setTitle(cbOpcaoGrafico.getSelectionModel()
@@ -367,37 +351,8 @@ public class ControllerBalcaoJavaFx implements Observer {
 			//serie.getChart().getYAxis().setLabel(values.get(i).toString());
 			
 		}
-		bcAtendentes.setAnimated(true);
+		//bcAtendentes.setAnimated(true);
 		bcAtendentes.getData().add(serie);
-		
-//		Platform.runLater(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				// TODO Auto-generated method stub
-//				CategoryAxis xAxis = new CategoryAxis();
-//				NumberAxis yAxis = new NumberAxis();
-//				bcAtendentes.setTitle(cbOpcaoGrafico.getSelectionModel()
-//						.getSelectedItem());	
-//				bcAtendentes = new BarChart<>(xAxis, yAxis);
-//				xAxis.setLabel("teste");
-//				yAxis.setLabel("lol2");
-//				XYChart.Series serie = new XYChart.Series();
-//				serie.setName("lol");
-//				
-//				ArrayList<String> keys = new ArrayList<>(gg.getMapMedia().keySet());
-//				ArrayList<Integer> values = new ArrayList<>(gg.getMapMedia().values());
-//				
-//				for(int i = 0 ; i< values.size();i++){
-//					serie.getData().add(new XYChart.Data(keys.get(i), values.get(i)));
-//				
-//				}
-//						
-//				bcAtendentes.getData().add(serie);
-//			
-//			}
-//		});
-
 		
 	}
 

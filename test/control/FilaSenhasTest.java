@@ -23,6 +23,7 @@ public class FilaSenhasTest {
 	
 	private FilaSenhas filaSenhas;
 	private static ArrayList<Senha> senhas;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		

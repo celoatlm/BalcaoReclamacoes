@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Observable;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import control.CriaLogXML;
 import control.FilaSenhas;
@@ -29,7 +30,7 @@ public class Atendente extends Observable implements Runnable {
 		this.nome = nome;
 		ativo = false;
 		chamaNovaSenha = true;
-		// PropertyConfigurator.configure("./log4j.properties");
+		PropertyConfigurator.configure(".src/log4j.properties");
 
 	}
 

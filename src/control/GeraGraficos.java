@@ -5,11 +5,9 @@ import static org.apache.commons.digester3.binder.DigesterLoader.newLoader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
 
 import model.LogAtendente;
 import model.Logs;
@@ -94,8 +92,6 @@ public class GeraGraficos {
 		if (dia != null  && mes != null && ano != null) {
 			for (LogAtendente la : l.getListaLogAtendentes()) {
 				Data d = new Data(la.getData());
-				//não sei pq essa bosta não acha isso igual
-				
 				if (d.getDia() == dia && d.getMes() == mes && d.getAno().compareTo(ano) == 0) {
 					for(Reclamacao r: la.getReclamacoes()){
 						media = manipulaMap(media, la.getAtendente(), r.getTempo());
@@ -107,6 +103,7 @@ public class GeraGraficos {
 			if (mes != null  && ano != null) {
 				for (LogAtendente la : l.getListaLogAtendentes()) {
 					Data d = new Data(la.getData());
+					
 					if (d.getMes() == mes && d.getAno().compareTo(ano) == 0) {
 						for(Reclamacao r: la.getReclamacoes()){
 							media = manipulaMap(media, la.getAtendente(),r.getTempo());
@@ -136,10 +133,9 @@ public class GeraGraficos {
 			}
 			i++;
 		}
-
-		imprimiMedia();
 	}
 
+	@SuppressWarnings("unused")
 	private void mediaReclamacao() {
 		media = new HashMap<String, Integer>();
 		Map<String, Integer> cont = new HashMap<String, Integer>();
@@ -186,7 +182,7 @@ public class GeraGraficos {
 			//media.remove(key);
 			media.put(key, valor);
 		}
-		imprimiMedia();
+		
 	}
 
 	private void atendimentosDiarios() {
@@ -197,7 +193,7 @@ public class GeraGraficos {
 		if (dia != null && mes != null && ano != null) {
 			for(LogAtendente la : l.getListaLogAtendentes()){
 				Data d = new Data(la.getData());
-				if (d.getDia() == dia) {
+				if (d.getDia() == dia && d.getMes() == mes && d.getAno().compareTo(ano) == 0) {
 					media = manipulaMap(media, d.getDia().toString(),1);
 					cont = manipulaMap(cont, d.getDia().toString(), 1);
 				}
@@ -233,7 +229,6 @@ public class GeraGraficos {
 			i++;
 		}
 
-		imprimiMedia();
 	}
 	private Map<String, Integer> manipulaMap(Map<String, Integer> media,
 			String key, Integer quantidade) {
@@ -250,17 +245,10 @@ public class GeraGraficos {
 	public Map<String, Integer> getMapMedia(){
 		return media;
 	}
-	
-	private void imprimiMedia(){
-		for(Integer i: media.values()){
-			System.out.println(i);
-		}
-	}
 
 	protected class Data {
 		///eu não conhecia o calendar
 		// fora que tem um framework pra data
-		//srrumar para calendar manter os mesmos metodos so mudar a logica
 		//eu sei eu sei
 		private Date data;
 		private String[] sData;
@@ -273,8 +261,6 @@ public class GeraGraficos {
 
 			addString(sData);
 			addString(sData[3].split(":"));
-			
-			Calendar c = Calendar.getInstance();
 			
 		}
 

@@ -17,8 +17,6 @@
 		<bean-property-setter-rule pattern="tempoMinimoReclamacao" />
 		
 		<bean-property-setter-rule pattern="quantidadeAtendentes" />
-		
-
 	</pattern>
 
 </digester-rules>

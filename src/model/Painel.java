@@ -14,7 +14,7 @@ public class Painel extends Observable implements Observer {
 	private List<Senha> senhas;// lista de todas as senha
 	private static Painel painel = null;
 	private Map<Integer, Atendente> mapAtendente; // map contendo os atendentes
-													// por senha
+	// por senha
 
 	private Painel() {
 		senhas = new ArrayList<Senha>();

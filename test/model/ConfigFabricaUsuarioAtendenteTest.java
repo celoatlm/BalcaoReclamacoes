@@ -17,6 +17,7 @@ public class ConfigFabricaUsuarioAtendenteTest {
 	public static void setUpBeforeClass() throws Exception {
 		
 		configFabricaUsuarioAtendente = new ConfigFabricaUsuarioAtendente();
+		configFabricaUsuarioAtendente.setColldownUsuario(1000);
 		configFabricaUsuarioAtendente.setQuantidadeMinimaReclamacao(1);
 		configFabricaUsuarioAtendente.setQuantidadeMaximaReclamacao(10);
 		configFabricaUsuarioAtendente.setTempoMaximoReclamacao(10);
@@ -40,14 +41,14 @@ public class ConfigFabricaUsuarioAtendenteTest {
 	public void testMaximoSetColldownUsuario() {
 		
 		configFabricaUsuarioAtendente.setColldownUsuario(10001);
-		assertEquals(null,configFabricaUsuarioAtendente.getColldownUsuario());
+		assertEquals(1000,(int)configFabricaUsuarioAtendente.getColldownUsuario());
 		
 	}
 	@Test
 	public void testMinimoSetColldownUsuario() {
 		
 		configFabricaUsuarioAtendente.setColldownUsuario(199);
-		assertEquals(null,configFabricaUsuarioAtendente.getColldownUsuario());
+		assertEquals(1000,(int)configFabricaUsuarioAtendente.getColldownUsuario());
 		
 	}
 
